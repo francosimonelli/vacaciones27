@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>日本 + Krabi — 25 Ene – 19 Feb 2027 · v15</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#0B141C;
+  --paper-dim:#111E28;
+  --ink:#E7EEF2;
+  --ink-soft:#93A9B5;
+  --ink-faint:#5E7683;
+  --line:rgba(231,238,242,0.10);
+  --line-strong:rgba(231,238,242,0.18);
+  --card:#152230;
+  --deep:#050B10;
+  --deep-text:#E7EEF2;
+  --red:#B5433A;
+  --red-dim:#B5433A1a;
+  --green:#4B6A57;
+  --green-dim:#4B6A571a;
+  --gold:#B4954F;
+  --gold-dim:#B4954F1f;
+  --teal:#2F6E76;
+  --teal-dim:#2F6E761a;
+  --slate:#4A5568;
+  --shadow-sm:0 2px 10px rgba(34,31,28,0.05);
+  --shadow-md:0 10px 34px rgba(34,31,28,0.08);
+  --shadow-lg:0 24px 60px rgba(34,31,28,0.14);
+  --radius:18px;
+  --radius-sm:12px;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:74px;
+}
+h1,h2,h3,h4{
+  font-family:'Shippori Mincho', serif;
+  margin:0;
+  color:var(--ink);
+  letter-spacing:.01em;
+}
+p{margin:0;}
+.mono{font-family:'JetBrains Mono', monospace;}
+img,svg{display:block;max-width:100%;}
+button{font-family:inherit;cursor:pointer;}
+a{color:inherit;}
+::selection{background:var(--red);color:#fff;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+@media(max-width:640px){.wrap{padding:0 18px;}}
+
+/* ---------- TOP NAV ---------- */
+.topnav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(5,11,16,0.82);
+  backdrop-filter:blur(14px) saturate(1.2);
+  border-bottom:1px solid var(--line);
+}
+.topnav-inner{
+  max-width:var(--maxw);margin:0 auto;padding:14px 28px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Shippori Mincho',serif;font-weight:600;font-size:1.05rem;}
+.brand .stamp{
+  width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;
+  font-family:'Zen Kaku Gothic New',sans-serif;
+}
+.navlinks{display:flex;gap:6px;}
+.navlinks button{border:none;background:none;font-family:inherit;
+  font-size:.86rem;color:var(--ink-soft);text-decoration:none;padding:8px 13px;border-radius:99px;
+  transition:.2s;font-weight:500;
+}
+.navlinks button:hover{background:var(--paper-dim);color:var(--ink);}
+.navlinks button.active{background:var(--deep);color:var(--deep-text);}
+@media(max-width:900px){.navlinks{display:none;}}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;padding:64px 0 0;}
+.hero-inner{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:2;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-size:.76rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:var(--red);display:inline-block;}
+.hero h1{
+  font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.02;font-weight:800;
+}
+.hero h1 .accent{color:var(--red);}
+.hero-dates{
+  margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--ink-soft);
+  letter-spacing:.03em;
+}
+.hero-stats{
+  display:flex;gap:0;margin-top:38px;border-top:1px solid var(--line-strong);
+}
+.hero-stat{flex:1;padding:18px 0;border-right:1px solid var(--line-strong);}
+.hero-stat:last-child{border-right:none;}
+.hero-stat b{display:block;font-family:'Shippori Mincho',serif;font-size:1.7rem;font-weight:800;}
+.hero-stat span{font-size:.78rem;color:var(--ink-soft);}
+@media(max-width:640px){.hero-stats{flex-wrap:wrap;}.hero-stat{flex:1 1 50%;border-right:1px solid var(--line-strong);}.hero-stat:nth-child(2n){border-right:none;}}
+
+.skyline{width:100%;height:auto;display:block;margin-top:48px;}
+
+/* ---------- SHOPPING BANNER ---------- */
+.notice{
+  display:flex;gap:14px;align-items:flex-start;background:var(--gold-dim);
+  border:1px solid rgba(180,149,79,0.3);border-radius:var(--radius-sm);
+  padding:16px 18px;margin:20px 0;
+}
+.notice .ico{font-size:1.3rem;line-height:1;}
+.notice b{font-weight:700;}
+.notice p{font-size:.9rem;color:var(--ink-soft);margin-top:2px;}
+
+/* ---------- SECTION HEADERS ---------- */
+.section{padding:78px 0;}
+.section.tight{padding:48px 0;}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:34px;flex-wrap:wrap;}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--ink-faint);letter-spacing:.1em;margin-bottom:8px;display:block;}
+.section-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:700;}
+.section-sub{color:var(--ink-soft);font-size:.95rem;max-width:520px;margin-top:6px;}
+
+/* ---------- RAIL TIMELINE (signature element) ---------- */
+.rail-section{background:var(--deep);color:var(--deep-text);border-radius:28px;margin:0 auto;max-width:calc(var(--maxw) + 56px);position:relative;overflow:hidden;}
+.rail-section .wrap{padding:64px 28px 40px;}
+.rail-section .section-num{color:rgba(250,246,239,0.4);}
+.rail-section .section-head h2{color:var(--deep-text);}
+.rail-section .section-sub{color:rgba(250,246,239,0.55);}
+.rail-scroll{overflow-x:auto;padding:30px 0 18px;scrollbar-width:thin;}
+.rail-track{position:relative;min-width:1500px;height:150px;}
+@media(max-width:900px){
+  .rail-scroll{overflow-x:visible;}
+  .rail-track{min-width:0;height:auto;}
+}
+.rail-line{position:absolute;top:64px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold) 45%,var(--teal) 55%,var(--red) 100%);border-radius:2px;}
+.rail-stops{display:flex;justify-content:space-between;position:relative;}
+.rail-stop{
+  display:flex;flex-direction:column;align-items:center;width:100px;flex-shrink:0;position:relative;
+  cursor:pointer;background:none;border:none;color:inherit;padding:0;
+}
+.rail-stop .dot{
+  width:15px;height:15px;border-radius:50%;background:var(--paper);border:3px solid var(--ink);
+  margin-top:57px;z-index:2;transition:.2s;
+}
+.rail-stop .dot.branch{border-color:var(--teal);}
+.rail-stop:hover .dot{transform:scale(1.3);background:var(--red);}
+.rail-stop .ic{font-size:1.3rem;margin-bottom:2px;}
+.rail-stop .lbl{font-size:.68rem;text-align:center;margin-top:10px;color:rgba(250,246,239,0.72);line-height:1.25;font-weight:500;}
+.rail-stop .lbl b{display:block;color:var(--deep-text);font-weight:700;font-size:.72rem;}
+
+/* mobile vertical rail */
+@media(max-width:900px){
+  .rail-line{display:none;}
+  .rail-stops{flex-direction:column;align-items:flex-start;gap:0;}
+  .rail-stop{flex-direction:row;width:100%;align-items:center;gap:14px;padding:11px 0;text-align:left;}
+  .rail-stop .dot{margin:0;position:relative;}
+  .rail-stop .dot::after{content:"";position:absolute;top:15px;left:6px;width:2px;height:44px;background:rgba(250,246,239,0.25);}
+  .rail-stop:last-child .dot::after{display:none;}
+  .rail-stop .lbl{margin:0;text-align:left;}
+}
+
+/* ---------- FILTERS ---------- */
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:32px;}
+.filter-chip{
+  border:1px solid var(--line-strong);background:var(--card);border-radius:99px;
+  padding:9px 16px;font-size:.83rem;font-weight:500;color:var(--ink-soft);
+  display:flex;align-items:center;gap:7px;transition:.18s;
+}
+.filter-chip:hover{border-color:var(--ink);color:var(--ink);}
+.filter-chip.on{background:var(--deep);border-color:var(--deep);color:var(--deep-text);}
+
+/* ---------- DAY CARDS ---------- */
+.days-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+.day-card{
+  background:var(--card);border-radius:var(--radius);padding:24px;border:1px solid var(--line);
+  box-shadow:var(--shadow-sm);transition:.22s;display:flex;flex-direction:column;gap:12px;position:relative;
+}
+.day-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px);border-color:var(--line-strong);}
+.day-card.travel{background:var(--deep);color:var(--deep-text);border-color:var(--deep);}
+.day-card.travel .day-date,.day-card.travel .day-city{color:rgba(250,246,239,0.6);}
+.day-card.travel .day-title{color:var(--deep-text);}
+.day-card.travel .day-desc{color:rgba(250,246,239,0.68);}
+.day-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.day-date{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:var(--ink-faint);font-weight:600;letter-spacing:.04em;}
+.day-city{font-size:.72rem;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-top:3px;}
+.day-emoji{font-size:1.6rem;}
+.day-title{font-family:'Shippori Mincho',serif;font-size:1.28rem;font-weight:700;line-height:1.25;}
+.day-desc{font-size:.87rem;color:var(--ink-soft);line-height:1.55;}
+.day-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.tag{
+  font-size:.68rem;padding:4px 9px;border-radius:99px;font-weight:600;
+  display:inline-flex;align-items:center;gap:4px;
+}
+.tag.nature{background:var(--green-dim);color:var(--green);}
+.tag.city{background:var(--slate)1a;background:#4A55681a;color:var(--slate);}
+.tag.culture{background:var(--gold-dim);color:#8a6f34;}
+.tag.food{background:var(--red-dim);color:var(--red);}
+.tag.beach{background:var(--teal-dim);color:var(--teal);}
+.tag.shopping{background:#B5433A14;color:#8f362f;}
+.tag.gaming{background:#4A55681a;color:var(--slate);}
+.tag.transport{background:rgba(34,31,28,0.08);color:var(--ink-soft);}
+.tag.onsen{background:var(--teal-dim);color:var(--teal);}
+.day-meta{display:flex;gap:16px;font-size:.78rem;color:var(--ink-faint);margin-top:2px;flex-wrap:wrap;}
+.day-meta span{display:flex;align-items:center;gap:5px;}
+.day-alert{
+  font-size:.8rem;padding:9px 12px;border-radius:10px;background:#FFF4E5;color:#8a5a10;
+  border:1px solid #F2D8A0;font-weight:500;
+}
+.day-food-hint{font-size:.78rem;color:var(--red);font-weight:500;}
+.day-card.travel .day-alert{background:rgba(255,255,255,0.08);color:var(--deep-text);border-color:rgba(255,255,255,0.15);}
+.day-btn{
+  margin-top:auto;background:none;border:none;color:var(--ink);font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;gap:6px;padding:0;align-self:flex-start;border-bottom:1px solid var(--ink);
+  padding-bottom:2px;
+}
+.day-card.travel .day-btn{color:var(--deep-text);border-color:var(--deep-text);}
+
+/* ---------- MODAL ---------- */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(30,42,51,0.55);backdrop-filter:blur(3px);
+  z-index:200;display:none;align-items:flex-start;justify-content:center;padding:5vh 20px;overflow-y:auto;
+}
+.modal-bg.open{display:flex;}
+.modal{
+  background:var(--paper);max-width:640px;width:100%;border-radius:24px;padding:36px;
+  box-shadow:var(--shadow-lg);position:relative;margin:auto 0;
+}
+.modal-close{
+  position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line-strong);
+  background:var(--card);font-size:1.1rem;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);
+}
+.modal-close:hover{background:var(--deep);color:var(--deep-text);}
+.modal .day-date{font-size:.82rem;}
+.modal h3{font-size:1.9rem;margin-top:8px;font-weight:800;}
+.modal .day-tags{margin:16px 0;}
+.modal-section{margin-top:22px;}
+.modal-section h4{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);margin-bottom:10px;font-family:'Zen Kaku Gothic New',sans-serif;font-weight:700;}
+.modal-places{display:flex;flex-wrap:wrap;gap:8px;}
+.modal-places span{background:var(--paper-dim);padding:6px 12px;border-radius:99px;font-size:.82rem;}
+.modal-places.food-places span{background:var(--red-dim);color:var(--red);}
+.modal-desc{font-size:.95rem;line-height:1.7;color:var(--ink);}
+.modal-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.modal-meta-grid div{background:var(--paper-dim);border-radius:12px;padding:12px 14px;}
+.modal-meta-grid label{font-size:.68rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:3px;}
+.modal-meta-grid b{font-size:.92rem;}
+
+/* ---------- MAP ---------- */
+#map{height:480px;border-radius:var(--radius);box-shadow:var(--shadow-sm);border:1px solid var(--line);z-index:1;}
+.map-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:16px;font-size:.82rem;color:var(--ink-soft);}
+.map-legend span{display:flex;align-items:center;gap:6px;}
+.leg-dot{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+/* ---------- FLIGHTS ---------- */
+.flight-group{margin-bottom:38px;}
+.flight-group h3{font-size:1.05rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:9px;}
+.flight-group h3 .fl-badge{font-size:.68rem;padding:4px 10px;border-radius:99px;font-weight:700;letter-spacing:.03em;}
+.badge-intl{background:var(--slate)1a;background:#4A55681a;color:var(--slate);}
+.badge-jp{background:var(--red-dim);color:var(--red);}
+.badge-th{background:var(--teal-dim);color:var(--teal);}
+.flight-card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 26px;
+  display:flex;align-items:center;gap:24px;box-shadow:var(--shadow-sm);margin-bottom:12px;flex-wrap:wrap;
+}
+.flight-num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:.92rem;background:var(--paper-dim);padding:6px 11px;border-radius:8px;flex-shrink:0;}
+.flight-route{display:flex;align-items:center;gap:14px;flex:1;min-width:220px;}
+.flight-endpoint{text-align:center;}
+.flight-endpoint b{font-family:'JetBrains Mono',monospace;font-size:1.35rem;display:block;}
+.flight-endpoint span{font-size:.72rem;color:var(--ink-faint);}
+.flight-arrow{flex:1;position:relative;height:1px;background:var(--line-strong);min-width:50px;}
+.flight-arrow::after{content:"✈";position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-size:.85rem;color:var(--red);}
+.flight-plus{font-size:.65rem;vertical-align:super;color:var(--red);}
+.flight-details{display:flex;gap:18px;font-size:.78rem;color:var(--ink-soft);flex-wrap:wrap;}
+.flight-details b{color:var(--ink);}
+.flight-date-badge{font-size:.75rem;color:var(--ink-faint);margin-left:auto;font-weight:600;}
+
+/* ---------- RESERVATIONS ---------- */
+.res-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:640px){.res-list{grid-template-columns:1fr;}}
+.res-item{
+  display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);
+  border-radius:12px;padding:14px 16px;font-size:.9rem;transition:.18s;
+}
+.res-item.done{opacity:.5;}
+.res-check{
+  width:22px;height:22px;border-radius:6px;border:2px solid var(--line-strong);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:.8rem;color:transparent;transition:.15s;
+}
+.res-item.done .res-check{background:var(--green);border-color:var(--green);color:#fff;}
+.res-item span.txt{flex:1;}
+.res-item .tag-region{font-size:.68rem;color:var(--ink-faint);}
+
+/* ---------- WEATHER ---------- */
+.weather-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;}
+.weather-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;}
+.weather-card .wico{font-size:1.6rem;}
+.weather-card h4{font-family:'Shippori Mincho',serif;font-size:1.15rem;margin:10px 0 4px;font-weight:700;}
+.weather-card p{font-size:.85rem;color:var(--ink-soft);line-height:1.5;}
+.weather-alerts{margin-top:44px;}
+.walert{
+  display:flex;gap:14px;background:#FFF4E5;border:1px solid #F2D8A0;border-radius:14px;padding:16px 20px;margin-bottom:12px;
+}
+.walert b{display:block;font-size:.9rem;margin-bottom:2px;}
+.walert p{font-size:.83rem;color:#8a5a10;}
+
+/* ---------- FOOTER ---------- */
+footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8rem;}
+
+/* ---------- MOBILE BOTTOM NAV ---------- */
+.bottomnav{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(5,11,16,0.92);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line-strong);padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+}
+@media(max-width:900px){.bottomnav{display:flex;justify-content:space-around;}}
+.bottomnav button{border:none;background:none;font-family:inherit;
+  display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--ink-faint);
+  font-size:.62rem;font-weight:600;padding:4px 6px;
+}
+.bottomnav button .bi{font-size:1.15rem;}
+.bottomnav button.active{color:var(--red);}
+
+
+/* ---------- STAYS ---------- */
+.stay-summary{display:flex;gap:0;margin-bottom:26px;border:1px solid var(--line-strong);border-radius:var(--radius-sm);background:var(--card);overflow:hidden;}
+.stay-summary div{flex:1;padding:16px 20px;border-right:1px solid var(--line-strong);}
+.stay-summary div:last-child{border-right:none;}
+.stay-summary b{display:block;font-family:'Shippori Mincho',serif;font-size:1.5rem;font-weight:800;}
+.stay-summary span{font-size:.76rem;color:var(--ink-soft);}
+@media(max-width:640px){.stay-summary{flex-wrap:wrap;}.stay-summary div{flex:1 1 50%;border-bottom:1px solid var(--line-strong);}}
+.stay-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:22px;}
+.stay-tools button{background:var(--card);color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;padding:7px 14px;font-size:.82rem;font-weight:600;}
+.stay-tools button:hover{border-color:var(--ink);}
+.stay-tools button.primary{background:var(--red);border-color:var(--red);color:#fff;}
+.stay-tools button.primary:hover{filter:brightness(1.1);border-color:var(--red);}
+.stay-tools .note b{color:var(--gold);font-weight:700;display:block;margin-top:2px;}
+.stay-tools .note{font-size:.76rem;color:var(--ink-faint);flex:1 1 220px;}
+.stay-block{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;transition:.18s;}
+.stay-block.booked{border-color:rgba(75,106,87,.75);}
+.stay-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.stay-head h3{font-size:1.25rem;font-weight:700;}
+.stay-dates{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--ink-soft);}
+.stay-badge{font-size:.68rem;font-weight:700;padding:4px 10px;border-radius:99px;background:var(--gold-dim);color:var(--gold);}
+.stay-badge.opt{background:var(--teal-dim);color:#6fb3bb;}
+.stay-badge.ok{background:var(--green-dim);color:#7fb394;}
+.stay-note{font-size:.84rem;color:var(--ink-soft);line-height:1.55;margin-top:10px;}
+.stay-note b{color:var(--ink);}
+.stay-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
+.stay-links a{font-size:.78rem;font-weight:600;text-decoration:none;padding:6px 12px;border-radius:99px;background:var(--paper-dim);border:1px solid var(--line);color:var(--ink-soft);transition:.15s;}
+.stay-links a:hover{color:var(--ink);border-color:var(--line-strong);}
+.stay-cands{margin-top:16px;display:flex;flex-direction:column;gap:8px;}
+.cand{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--paper-dim);border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-size:.88rem;}
+.cand.booked{border-color:rgba(75,106,87,.75);background:var(--green-dim);}
+.cand .c-name{font-weight:700;flex:1 1 180px;}
+.cand .c-name a{text-decoration:underline;text-underline-offset:3px;}
+.cand .c-zone{font-size:.74rem;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:3px 10px;white-space:nowrap;}
+.cand .c-price{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--ink-soft);}
+.cand .c-notes{flex:1 1 100%;font-size:.78rem;color:var(--ink-soft);}
+.cand select,.stay-form input{background:var(--paper);color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;padding:7px 10px;font-family:inherit;font-size:.82rem;}
+.cand .c-del{border:none;background:none;color:var(--ink-faint);font-size:1rem;padding:2px 6px;}
+.cand .c-del:hover{color:var(--red);}
+.cand .c-edit{border:1px solid var(--line-strong);background:var(--card);color:var(--ink);border-radius:7px;padding:5px 9px;font-size:.78rem;}
+.cand .c-edit:hover{border-color:var(--red);}
+.stay-edit-form{display:flex;gap:8px;flex-wrap:wrap;flex:1 1 100%;padding-top:8px;border-top:1px solid var(--line);}
+.stay-edit-form input{background:var(--paper);color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;padding:7px 10px;font-family:inherit;font-size:.82rem;flex:1 1 130px;min-width:0;}
+.stay-edit-form .f-url,.stay-edit-form .f-notes{flex:2 1 200px;}
+.stay-edit-form .f-price{flex:0 1 110px;}
+.stay-edit-form .f-total{flex:0 1 150px;}
+.stay-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.stay-form input{flex:1 1 130px;min-width:0;}
+.stay-form input.f-url{flex:2 1 200px;}
+.stay-form input.f-price{flex:0 1 110px;}
+.stay-form input.f-total{flex:0 1 150px;}
+.stay-form input.f-notes{flex:2 1 200px;}
+.stay-form button{background:var(--deep);color:var(--deep-text);border:1px solid var(--line-strong);border-radius:8px;padding:7px 16px;font-size:.82rem;font-weight:700;}
+.stay-form button:hover{background:var(--red);border-color:var(--red);}
+
+/* scrollbars */
+.rail-scroll::-webkit-scrollbar{height:6px;}
+.rail-scroll::-webkit-scrollbar-thumb{background:rgba(250,246,239,0.25);border-radius:3px;}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <div class="brand"><span class="stamp">日</span>旅 · Japan+Krabi · v15</div>
+    <div class="navlinks">
+      <button type="button" data-nav="home">Home</button>
+      <button type="button" data-nav="timeline">Timeline</button>
+      <button type="button" data-nav="days">Días</button>
+      <button type="button" data-nav="map-section">Mapa</button>
+      <button type="button" data-nav="flights">Vuelos</button>
+      <button type="button" data-nav="stays">Alojamientos</button>
+      <button type="button" data-nav="reservations">Reservas</button>
+      <button type="button" data-nav="weather">Clima</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="home">
+  <div class="hero-inner">
+    <span class="eyebrow">26 días · Ida y vuelta desde Buenos Aires</span>
+    <h1>🇯🇵 Japan <span class="accent">+</span> 🇹🇭 Krabi</h1>
+    <p class="hero-dates">25 JAN — 19 FEB 2027</p>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><b>26</b><span>días de viaje (25 ene–19 feb)</span></div>
+      <div class="hero-stat"><b>3</b><span>zonas principales</span></div>
+      <div class="hero-stat"><b>8</b><span>vuelos confirmados</span></div>
+      <div class="hero-stat"><b>4</b><span>bloques: Tokyo · Krabi · Kansai · Tokyo</span></div>
+    </div>
+
+    <svg class="skyline" viewBox="0 0 1180 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 220 L0 150 L40 150 L40 120 L70 120 L70 160 L110 160 L110 100 L140 100 L140 170 L190 170 L190 90 L230 90 L230 175 L280 175 L280 60 L330 60 L330 180 L390 180 L390 130 L430 130 L430 190 L500 190 L560 40 L620 190 L680 175 L680 140 L720 140 L720 195 L780 195 L780 110 L820 110 L820 200 L880 200 L880 150 L920 150 L920 205 L980 205 L980 90 L1030 90 L1030 210 L1090 210 L1090 160 L1130 160 L1130 215 L1180 215 L1180 220 Z" fill="var(--ink)" opacity="0.9"/>
+      <path d="M500 190 L560 40 L620 190 Z" fill="var(--ink)"/>
+      <path d="M560 40 L546 84 L574 84 Z" fill="var(--paper)" opacity="0.55"/>
+      <circle cx="560" cy="40" r="0" />
+    </svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="notice">
+    <span class="ico">🛍️</span>
+    <div><b>Compras grandes: dejar para el final del viaje.</b><p>Ropa y regalos, idealmente el 17 de febrero en Tokyo. Si el Fuji se mueve al 17 por clima, repartir compras entre la tarde del 15 y la mañana del 18. Antes de Krabi, solo compras chicas o necesarias.</p></div>
+  </div>
+</div>
+
+<!-- ============ RAIL TIMELINE ============ -->
+<section class="section tight" id="timeline">
+  <div class="wrap">
+    <div class="rail-section">
+      <div class="wrap">
+        <span class="section-num">01 — RECORRIDO</span>
+        <div class="section-head"><h2>La línea del viaje</h2></div>
+        <p class="section-sub">Cada parada es clickeable y te lleva a ese tramo del itinerario. La rama celeste marca el desvío a Tailandia.</p>
+        <div class="rail-scroll">
+          <div class="rail-track">
+            <div class="rail-line"></div>
+            <div class="rail-stops" id="railStops"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DAYS ============ -->
+<section class="section" id="days">
+  <div class="wrap">
+    <span class="section-num">02 — ITINERARIO</span>
+    <div class="section-head">
+      <div><h2>Día a día</h2><p class="section-sub">Filtrá por lo que quieras ver ese día. Cada tarjeta tiene el detalle completo.</p></div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="days-grid" id="daysGrid"></div>
+  </div>
+</section>
+
+<!-- ============ MAP ============ -->
+<section class="section" id="map-section">
+  <div class="wrap">
+    <span class="section-num">03 — MAPA</span>
+    <div class="section-head"><h2>Dónde queda todo</h2><p class="section-sub">Click en un marcador para ir directo a ese día.</p></div>
+    <div id="mapNote" style="padding:28px;text-align:center;opacity:.7">El mapa no está disponible en esta versión compartida.</div>
+    <div class="map-legend">
+      <span><i class="leg-dot" style="background:var(--red)"></i> Japón</span>
+      <span><i class="leg-dot" style="background:var(--teal)"></i> Tailandia</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FLIGHTS ============ -->
+<section class="section" id="flights">
+  <div class="wrap">
+    <span class="section-num">04 — VUELOS</span>
+    <div class="section-head"><h2>Flight tracker</h2><p class="section-sub">Los 8 tramos confirmados, tal como fueron reservados.</p></div>
+    <div id="flightsWrap"></div>
+  </div>
+</section>
+
+<!-- ============ STAYS ============ -->
+<section class="section" id="stays">
+  <div class="wrap">
+    <span class="section-num">05 — ALOJAMIENTOS</span>
+    <div class="section-head"><h2>Dónde dormir</h2><p class="section-sub">Un bloque por zona con las noches ya calculadas. Cargá opciones, marcalas como idea, preseleccionada o reservada. Se guarda en este navegador; para dejarlo dentro del archivo y compartirlo, usá «Guardar en el HTML».</p></div>
+    <div class="stay-summary" id="staySummary"></div>
+    <div class="stay-tools">
+      <button type="button" id="staySaveHtml" class="primary">💾 Guardar en el HTML</button>
+      <button type="button" id="stayExport">Exportar datos</button>
+      <button type="button" id="stayImport">Importar datos</button>
+      <input type="file" id="stayImportFile" accept=".json,application/json" hidden>
+      <span class="note">«Guardar en el HTML» descarga una copia de este archivo con los alojamientos y el checklist adentro: es la que tenés que compartir (reemplaza a la anterior). Exportar/Importar sirve para pasar los datos a otro navegador. <b id="staySaveState"></b></span>
+    </div>
+    <div id="stayBlocks"></div>
+  </div>
+</section>
+
+<!-- ============ RESERVATIONS ============ -->
+<section class="section" id="reservations">
+  <div class="wrap">
+    <span class="section-num">06 — RESERVAS</span>
+    <div class="section-head"><h2>Checklist</h2><p class="section-sub">Se guarda automáticamente en este navegador y se incluye al usar «Guardar en el HTML» en Alojamientos.</p></div>
+    <div class="res-list" id="resList"></div>
+  </div>
+</section>
+
+<!-- ============ WEATHER ============ -->
+<section class="section" id="weather">
+  <div class="wrap">
+    <span class="section-num">07 — CLIMA</span>
+    <div class="section-head"><h2>Condiciones por zona</h2><p class="section-sub">Sin API en vivo — referencia general para planificar.</p></div>
+    <div class="weather-grid" id="weatherGrid"></div>
+    <div class="weather-alerts" id="weatherAlerts"></div>
+  </div>
+</section>
+
+<footer class="wrap">día a día armado a mano · Buenos Aires → Tokyo/Fuji → Krabi → Kyoto → Nagano → Tokyo → Buenos Aires</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<nav class="bottomnav">
+  <button type="button" data-nav="home"><span class="bi">🏠</span>Home</button>
+  <button type="button" data-nav="timeline"><span class="bi">🧭</span>Ruta</button>
+  <button type="button" data-nav="days"><span class="bi">📅</span>Días</button>
+  <button type="button" data-nav="map-section"><span class="bi">🗺️</span>Mapa</button>
+  <button type="button" data-nav="flights"><span class="bi">✈️</span>Vuelos</button>
+  <button type="button" data-nav="stays"><span class="bi">🛏️</span>Hotel</button>
+  <button type="button" data-nav="reservations"><span class="bi">✅</span>Reservas</button>
+</nav>
+
+<script>
+const PRISTINE_HTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+/* =======================================================
+   DATA
+======================================================= */
+const CATS = {
+  nature:{label:'Naturaleza',icon:'🌲'},
+  city:{label:'Ciudad',icon:'🏙️'},
+  culture:{label:'Cultura',icon:'⛩️'},
+  food:{label:'Comida',icon:'🍜'},
+  beach:{label:'Playa',icon:'🏖️'},
+  shopping:{label:'Compras',icon:'🛍️'},
+  gaming:{label:'Gaming/anime',icon:'🎮'},
+  transport:{label:'Transporte',icon:'🚆'},
+  onsen:{label:'Onsen',icon:'♨️'}
+};
+
+const DAYS = [
+  {id:'0127',date:'27 ENE',city:'TOKYO',emoji:'🛬',title:'Llegada a Tokyo',
+   cats:['transport','food'],time:'Llegada Haneda 16:40',
+   places:['Inmigración','Traslado al hotel','Cena','Paseo tranquilo por el barrio'],
+   desc:'Primer contacto con Japón. Después del vuelo larguísimo no hacemos turismo intenso: llegar, comer algo y empezar a ubicarnos.',
+   food:['Izakaya cerca del hotel para una cena liviana','Onigiri o ramen rápido si llegan muy cansados'],
+   walk:'Baja',dur:'Medio día',res:'Hotel Tokyo',lat:35.5494,lng:139.7798},
+
+  {id:'0128',date:'28 ENE',city:'TOKYO',emoji:'⛩️',title:'Asakusa + Ueno + Ameyoko',
+   cats:['culture','city'],time:'Día completo',
+   places:['Senso-ji','Kaminarimon','Nakamise-dori','Ueno Park','Ameyoko'],
+   desc:'Tokyo tradicional y liviano después del vuelo: templos y calles antiguas en Asakusa, y seguimos por Ueno y Ameyoko. Akihabara pasa al final del viaje, junto a las compras.',
+   food:['Namiki Yabusoba — soba centenaria junto a Senso-ji','Izuei — anguila (unagi) con más de 100 años, en Ueno','Ameyoko — puestos callejeros para picar entre Ueno y Okachimachi'],
+   walk:'Media',dur:'Día completo',res:'—',lat:35.7148,lng:139.7967},
+
+  {id:'0129',date:'29 ENE',city:'TOKYO',emoji:'🌆',title:'Meiji Jingu + Harajuku + Shibuya',
+   cats:['nature','city','culture'],time:'Día completo · atardecer en Shibuya Sky',
+   places:['Meiji Jingu','Bosque de Yoyogi','Harajuku / Takeshita Street','Omotesando','Shibuya Crossing','Hachiko','Shibuya Sky (atardecer)'],
+   desc:'Contraste entre naturaleza y Tokyo hiperurbano. Empezamos caminando por un santuario rodeado de bosque y terminamos en el caos de Shibuya, con la posibilidad de ver la ciudad desde Shibuya Sky al atardecer.',
+   food:['Uogashi Nihon-Ichi — sushi de pie en Shibuya','Kiwamiya — hamburg steak estilo Fukuoka, cerca de Harajuku/Parco','Negibouzu — izakaya clásico en Harajuku para cerrar el día'],
+   walk:'Alta',dur:'Día completo',res:'Shibuya Sky',lat:35.6598,lng:139.7006},
+
+  {id:'0130',date:'30 ENE',city:'TOKYO → KAWAGUCHIKO',emoji:'🗻',title:'Monte Fuji + Lake Kawaguchi',
+   cats:['nature','transport'],time:'Excursión de día completo desde Tokyo · salida temprano',
+   places:['Lake Kawaguchi','Miradores del Monte Fuji','Chureito Pagoda si el acceso y el tiempo lo permiten','Paseo junto al lago'],
+   desc:'Excursión de día completo al Fuji desde la base de Tokyo. Mirar el pronóstico 2–3 días antes: si el Fuji no se ve, intercambiar con el 31 ENE, que queda libre de repuesto.',
+   food:['Houtou Fudou — hoto, el plato de fideos típico de Yamanashi','Fuji Tempura Idaten — tempura'],
+   walk:'Media',dur:'Día completo',res:'Transporte Tokyo ↔ Kawaguchiko',alert:'🗻 Plan A: Fuji el 30 ENE. Plan B: pasarlo al 31 ENE si el pronóstico mejora.',lat:35.5019,lng:138.7636},
+
+  {id:'0131',date:'31 ENE',city:'TOKYO',emoji:'🌤️',title:'Día de repuesto del Fuji / Tokyo libre',
+   cats:['city','food'],time:'Día flexible',
+   places:['Si el Fuji se movió a hoy: excursión a Kawaguchiko','Si no: Shinjuku Gyoen, Ginza o Tsukiji Outer Market','Opcional: teamLab (reservar)'],
+   desc:'Día de repuesto por clima para el Fuji. Si el 30 ENE salió bien, queda libre para pasear por Tokyo sin apuro.',
+   food:['Tsukiji Outer Market — desayuno de mariscos y tamagoyaki (opcional)'],
+   walk:'Media',dur:'Día flexible',res:'teamLab (opcional)',lat:35.6852,lng:139.7100},
+
+  {id:'0201',date:'1 FEB',city:'TOKYO',emoji:'☕',title:'Día colchón en Tokyo antes del vuelo',
+   cats:['city','food'],time:'Día libre · salida a Haneda por la noche',
+   places:['Descansar y ordenar el equipaje','Paseo corto por el barrio o actividad urbana opcional','Retirar / reorganizar equipaje','Cena temprana','Traslado a Haneda para el vuelo de las 00:20 del 2 FEB'],
+   desc:'Día liviano antes del vuelo nocturno a Tailandia. Pueden pasear por Tokyo, pero no conviene programar una excursión lejana. La reserva de hotel debería permitir usar la habitación durante el día y salir por la noche: por ejemplo, checkout el 2 FEB, aunque no se duerma esa noche.',
+   food:['Comer cerca del hotel o en Haneda, sin alejarse demasiado'],
+   walk:'Baja',dur:'Día flexible + vuelo nocturno',res:'Hotel Tokyo hasta el 2 FEB (uso diurno del 1 FEB) · vuelos a Krabi',lat:35.6812,lng:139.7671},
+
+  {id:'0202',date:'2 FEB',city:'TOKYO → KRABI',emoji:'✈️',title:'Vuelo a Tailandia + llegada a Ao Nang',travel:true,
+   cats:['transport','beach'],time:'00:20 HND → 05:25 BKK · 07:35 BKK → 08:55 KBV · tarde libre',
+   places:['TG661 Tokyo–Bangkok','TG241 Bangkok–Krabi','Traslado aeropuerto Krabi → Ao Nang (30-40 min)','Dejar equipaje / check-in temprano','Costanera de Ao Nang','Cambiar dinero','Organizar los tours de los próximos días'],
+   desc:'Salto nocturno de Japón a Tailandia, con escala corta en Bangkok. Aterrizan en Krabi a las 08:55: furgoneta o taxi a Ao Nang, dejar el equipaje (el check-in suele ser a la tarde), siesta y paseo tranquilo por la costanera. Aprovechar para cambiar dinero y reservar los tours de los días que siguen (hay varios puestos en la costanera).',
+   food:['Teaw@HOME — primera cena recomendada, barato y rico','Comida callejera o restaurante frente al mar en Ao Nang'],
+   walk:'Baja',dur:'Día de traslado + tarde libre',res:'Traslado aeropuerto · Hotel Ao Nang (early check-in o guardar equipaje)',lat:8.0863,lng:98.9063},
+
+  {id:'0203',date:'3 FEB',city:'AO NANG',emoji:'🏖️',title:'Día libre en Ao Nang',
+   cats:['beach'],time:'Día flexible, sin tour',
+   places:['Playa y costanera de Ao Nang','Opcional: Pai Plang Beach (caminata por el Monkey Trail)','Masaje','Confirmar los tours de los próximos días'],
+   desc:'Primer día completo en Krabi sin tour: descansar del viaje, ir a la playa y, si da el cuerpo, caminar por el Monkey Trail hasta Pai Plang Beach, una playa más escondida y copada. También sirve para reacomodar los tours si algún operador avisa de mar movido.',
+   food:['Big Brother — buena onda y buen precio','Family Restaurant — el más barato y rico de todos'],
+   walk:'Baja',dur:'Día libre',res:'—',lat:8.0355,lng:98.8218},
+
+  {id:'0204',date:'4 FEB',city:'KRABI',emoji:'🚤',title:'Excursión clásica a las 4 Islas',
+   cats:['beach','nature'],time:'Día completo en barco',
+   places:['Koh Poda','Koh Kai (Isla del Pollo)','Koh Tup','Phra Nang Beach (Railay)'],
+   desc:'Tour en longtail boat o lancha rápida por las cuatro islas clásicas de Krabi. El plan es snorkel, caminar por el banco de arena que conecta Koh Tup con Koh Poda cuando baja la marea, y disfrutar las paredes de piedra caliza que rodean todo el recorrido.',
+   food:['El almuerzo suele venir incluido en el tour — confirmar si hay opción vegetariana'],
+   walk:'Media',dur:'Día completo',res:'Tour 4 Islas',lat:8.0034,lng:98.7784},
+
+  {id:'0205',date:'5 FEB',city:'HONG ISLANDS',emoji:'🏝️',title:'Paraíso en las Islas Hong',
+   cats:['beach','nature'],time:'Día completo en barco',
+   places:['Laguna interior de Koh Hong','Acantilados de piedra caliza','Playa de arena blanca'],
+   desc:'Excursión de día completo al archipiélago de Koh Hong. Se entra en lancha a una laguna interior rodeada de acantilados altísimos, con aguas color esmeralda ideales para nadar, y se descansa en la playa de arena blanca. Más tranquilo y natural que la excursión del día anterior.',
+   food:['El almuerzo suele venir incluido en el tour de islas'],
+   walk:'Media',dur:'Día completo',res:'Tour Hong Islands',lat:8.1975,lng:98.6425},
+
+  {id:'0206',date:'6 FEB',city:'RAILAY',emoji:'⛰️',title:'Railay + Phra Nang',
+   cats:['beach','nature'],time:'Longtail boat desde Ao Nang (~100 THB, ~15 min)',
+   places:['Railay West — playa amplia, desembarco, restaurantes y atardecer','Railay East — manglares y zona de escalada','Playa Phra Nang — 10-15 min caminando por la selva','Tham Phra Nang Nok — cueva/santuario con ofrendas a la diosa local de la fertilidad'],
+   desc:'Railay es una península sin caminos que la conecten a tierra firme — se llega solo en barco. Railay West tiene la playa principal y buenos atardeceres, Railay East es la zona de manglares y escalada, y caminando un poco por la selva se llega a Phra Nang, con acantilados espectaculares y la curiosa Cueva de la Princesa.',
+   food:['Restaurantes frente a la playa en Railay West — pescado del día a la parrilla'],
+   walk:'Media',dur:'Día completo',res:'Longtail boat Ao Nang → Railay',lat:8.0100,lng:98.8372},
+
+  {id:'0207',date:'7 FEB',city:'PHI PHI',emoji:'🤿',title:'Excursión a Phi Phi Island',
+   cats:['beach','nature'],time:'Día completo en barco',
+   places:['Phi Phi Islands','Bamboo Island (si el tour lo incluye)'],
+   desc:'La excursión más icónica y concurrida de la zona. Tour recomendado: Phiphi Latino — es bueno, bonito y conocido. Confirmar que el itinerario incluya Bamboo Island, que tiene menos gente y mejor snorkel que Phi Phi Don.',
+   food:['El almuerzo suele venir incluido en el tour de islas'],
+   walk:'Media',dur:'Día completo',res:'Tour Phi Phi (Phiphi Latino)',
+   alert:'🌊 Confirmar con el operador que el tour incluya Bamboo Island.',lat:7.7407,lng:98.7784},
+
+  {id:'0208',date:'8 FEB',city:'AO NANG',emoji:'🧘',title:'Día libre / colchón por clima',
+   cats:['culture','beach'],time:'Día flexible',
+   places:['Si el mar estuvo movido: reprogramar acá el tour de Hong Islands o Phi Phi','Opción A: Santuario ético de elefantes (@krabiroamingelephant)','Opción B: Wat Tham Suea — templo en la montaña, buda dorado, 1.260 escalones (2-3 hs)','Opción B: Wat Sai Thai — más cerca de Ao Nang, mucho menos esfuerzo','Opción C: Excursión con Emerald Pool + Blue Pool + hot springs + caminata por la selva'],
+   desc:'Día libre antes del último día. Funciona como colchón: si algún tour de islas se canceló por mar movido, se recupera acá. Si no hizo falta, elegir entre el santuario de elefantes, los templos (Wat Tham Suea tiene 1.260 escalones y un buda dorado arriba, para 2-3hs; Wat Sai Thai es más cercano y con menos esfuerzo) o la excursión de pozas con Emerald Pool + Blue Pool + hot springs + selva.',
+   food:['Teaw@HOME — restaurante local muy recomendado','Big Brother — buena onda y buen precio','Prime Burger — hamburguesa muy buena','Making Street Smash Burger — la smash burger más rica de Ao Nang (un poco más cara)','Pizza Glur y Bistro — la mejor pizza de Ao Nang','Thai Food and Cocktail — smoothies, comida auténtica y rica','Bamboo Beach Club — conviene ir al atardecer por la vista a la playa (muy lindo). A veces cobra entrada ~499 THB que incluye trago de bienvenida + UV body paint. Depende de si hay eventos — confirmar más cerca de la fecha.'],
+   walk:'Media',dur:'Día completo',res:'Tour o santuario según la opción elegida',lat:8.0355,lng:98.8218},
+
+  {id:'0209',date:'9 FEB',city:'KRABI → TOKYO',emoji:'✈️',title:'Último día en Krabi + vuelo nocturno',travel:true,
+   cats:['transport','beach'],time:'Mañana y tarde libres · 20:20 KBV → 21:45 BKK · 23:15 BKK → 06:55 HND (10 FEB)',
+   places:['Late check-out','Brunch en Great Café, Ao Nang','Masaje en Royal Palm Spa o Massage Corner','Opcional: vuelta rápida a Railay en longtail a primera hora (10-15 min desde Ao Nang Longtail Boat Service Club)','Traslado al aeropuerto con buen margen','TG250 Krabi–Bangkok','TG682 Bangkok–Tokyo (llega Terminal 3)'],
+   desc:'Mañana y primera parte de la tarde libres antes del vuelo de las 20:20: brunch, masaje y, si hay ganas, una vuelta rápida a Railay en longtail a primera hora. Pedir late check-out y dejar el traslado al aeropuerto con buen margen. Vuelo nocturno con escala en Bangkok: se aterriza en Haneda temprano a la mañana del 10 de febrero.',
+   food:['Great Café — buen brunch en Ao Nang (recomendado para la mañana)','Family Restaurant — el más barato y rico de todos'],
+   walk:'Baja',dur:'Medio día + noche de vuelo',res:'Late check-out · Royal Palm Spa / Massage Corner (opcional)',lat:8.0863,lng:98.9063},
+
+  {id:'0210',date:'10 FEB',city:'TOKYO → KYOTO',emoji:'🚄',title:'Llegada a Haneda + Shinkansen directo a Kyoto',
+   cats:['transport','culture','food'],time:'Llegada Haneda 06:55 · Shinkansen después de las 10:30 · Kyoto ~12:45',
+   places:['Inmigración / equipaje (~1,5 h)','Keikyu Haneda → Shinagawa (~15 min)','Shinkansen Nozomi Shinagawa → Kyoto (~2 h 10)','Dejar equipaje en el hotel o en lockers de la estación','Check-in a las 15:00','Caminata opcional por Kawaramachi o Gion si hay energía'],
+   desc:'Después de dos vuelos nocturnos vamos directo a Kyoto, sin hotel en Tokyo. Sacar el Shinkansen para después de las 10:30 por si hay demoras en inmigración. El resto del día queda liviano.',
+   food:['Algo simple en Kawaramachi','Nishiki Market solo si los horarios y el cansancio lo permiten'],
+   walk:'Baja',dur:'Medio día',res:'Shinkansen Shinagawa → Kyoto · Hotel Kyoto (10–14 FEB)',lat:35.0116,lng:135.7681},
+
+  {id:'0211',date:'11 FEB',city:'KYOTO',emoji:'⛩️',title:'Fushimi Inari + Higashiyama + Gion',
+   cats:['culture','nature'],time:'Arrancar temprano en Fushimi Inari',
+   places:['Prioridad: Fushimi Inari temprano','Prioridad: Kiyomizu-dera','Prioridad: Sannenzaka / Ninenzaka','Opcional si queda tiempo: Yasaka Shrine','Opcional: Gion / Hanamikoji'],
+   desc:'Núcleo del día: Fushimi Inari temprano, Kiyomizu-dera y las calles tradicionales Sannenzaka/Ninenzaka. Yasaka Shrine y Gion quedan como opcionales según energía y multitudes, para no convertir el día en una carrera.',
+   food:['Yudofu o kaiseki en alguna casa tradicional de Gion','Té y wagashi (dulces típicos) en Hanamikoji'],
+   walk:'Alta',dur:'Día completo',res:'—',alert:'🎌 El 11 FEB es feriado en Japón (Día de la Fundación Nacional): más gente. Ir a Fushimi Inari muy temprano.',lat:34.9671,lng:135.7727},
+
+  {id:'0212',date:'12 FEB',city:'ARASHIYAMA',emoji:'🎋',title:'Bosque de bambú + río',
+   cats:['nature','culture'],time:'Día completo',
+   places:['Bamboo Grove','Tenryu-ji','Togetsukyo Bridge','Río Katsura','Okusaga / Gio-ji (opcional)','Monkey Park (opcional)'],
+   desc:'Día dedicado principalmente a naturaleza: bosque de bambú, río, montaña y templos. Para alejarse de las multitudes, priorizar Okusaga por sobre sumar más templos.',
+   food:['Yudofu (tofu hervido) en algún restaurante junto a Tenryu-ji — especialidad de Arashiyama'],
+   walk:'Media',dur:'Día completo',res:'—',lat:35.0094,lng:135.6675},
+
+  {id:'0213',date:'13 FEB',city:'KYOTO → OSAKA → KYOTO',emoji:'🏯',title:'Excursión a Osaka: castillo + Dotonbori',
+   cats:['city','culture','food'],time:'Día completo · vuelta a dormir a Kyoto',
+   places:['Osaka Castle + parque','Osaka Station / Umeda','Umeda Sky Building','Namba','Dotonbori (de noche)','Tren de vuelta a Kyoto (~30 min)'],
+   desc:'Osaka como excursión de un día desde Kyoto, sin cambiar de hotel. Castillo y parque durante el día, skyline y comida a la noche.',
+   food:['Chibo Okonomiyaki — el clásico panqueque salado de Osaka','Tako Tako King — takoyaki en Amerikamura/Dotonbori'],
+   walk:'Media',dur:'Día completo',res:'—',alert:'🎢 OPCIONAL: reemplazar este día completo por Universal Studios Japan.',lat:34.6873,lng:135.5259},
+
+  {id:'0214',date:'14 FEB',city:'KYOTO → NAGANO',emoji:'🚄',title:'Kyoto → Nagano directo + noche en Nagano',
+   cats:['transport','culture','nature'],time:'Salida de Kyoto por la mañana · ~3 h 15 de viaje',
+   places:['Mandar la valija grande a Tokyo por takkyubin desde el hotel de Kyoto (confirmar con recepción)','Thunderbird Kyoto → Kanazawa (~2 h 10)','Shinkansen Hokuriku Kanazawa → Nagano (~1 h)','Check-in en hotel de Nagano ciudad','Templo Zenko-ji si llegan con luz','Cena cerca de la estación'],
+   desc:'De Kyoto a Nagano sin pasar por Tokyo, con mochila liviana. Ruta más rápida: Thunderbird + Shinkansen Hokuriku (~3 h 15, unos ¥15.000 según Google Maps). Reservar con anticipación. Dormimos en Nagano ciudad (más barato que Shibu Onsen) y salimos temprano a ver a los monos. Muchos hoteles de negocios tienen baño grande tipo onsen.',
+   food:['Soba de Shinshu — la especialidad de Nagano, cerca de Zenko-ji o de la estación','Oyaki — panecillos rellenos al vapor, típicos de la zona'],
+   walk:'Baja',dur:'Día de traslado',res:'Thunderbird + Shinkansen Hokuriku Kyoto → Nagano · Hotel en Nagano ciudad',
+   alert:'❄️ Esta ruta es la más segura con nieve. Alternativa más barata pero más lenta: Shinkansen a Nagoya + Shinano a Nagano.',lat:36.6486,lng:138.1948},
+
+  {id:'0215',date:'15 FEB',city:'NAGANO → TOKYO',emoji:'🐒',title:'Jigokudani Monkey Park + vuelta a Tokyo',
+   cats:['nature','transport'],time:'Mañana temprano en el parque · vuelta a Tokyo por la tarde',
+   places:['Nagaden Nagano → Yudanaka (~45–50 min)','Bus hasta la entrada del sendero','Sendero de acceso (~1,6 km)','Visita al parque','Vuelta a Nagano','Shinkansen Nagano → Tokyo (~1 h 40)','Check-in en el hotel de Tokyo (la valija ya llegó por takkyubin)'],
+   desc:'Salir temprano para ver a los macacos con menos gente. Trenes y buses pueden demorarse con nieve, pero quedan el 16 y el 17 para compras antes del vuelo. Confirmar que la valija enviada por takkyubin esté en el hotel de Tokyo.',
+   food:['Almuerzo simple en la estación de Nagano antes del Shinkansen','Cena en Tokyo al llegar'],
+   walk:'Media',dur:'Mañana de parque + traslado por la tarde',res:'Shinkansen Nagano → Tokyo · Hotel Tokyo (15–18 FEB)',
+   alert:'❄️ Revisar el clima y los trenes el día anterior. El 16 y 17 FEB quedan como colchón antes del vuelo del 18.',lat:36.7326,lng:138.4620},
+
+  {id:'0216',date:'16 FEB',city:'TOKYO',emoji:'🛍️',title:'Compras de ropa y regalos',
+   cats:['shopping','city'],time:'Día completo flexible',
+   places:['Uniqlo / GU','Ropa en Shibuya / Harajuku / Shinjuku','Don Quijote','Regalos y souvenirs'],
+   desc:'Primer día fuerte de compras, con el día completo libre. Si el 15 FEB hubo demoras desde Nagano, este día absorbe el atraso.',
+   food:['Ramen o food hall rápido para no perder tiempo de compras'],
+   walk:'Media',dur:'Día completo',res:'—',lat:35.6938,lng:139.7034},
+
+  {id:'0217',date:'17 FEB',city:'TOKYO',emoji:'🎮',title:'Akihabara + compras pendientes',
+   cats:['gaming','shopping','city'],time:'Día completo flexible',
+   places:['Akihabara — arcades y electrónica','Tiendas libres de impuestos (llevar el pasaporte)','Compras pendientes','Preparar el equipaje para el vuelo'],
+   desc:'Akihabara al final del viaje, para no cargar las compras durante el resto del recorrido, y cierre de compras pendientes. Último día completo en Tokyo.',
+   food:['Cena temprana cerca del hotel'],
+   walk:'Media',dur:'Día completo',res:'—',lat:35.6984,lng:139.7731},
+
+  {id:'0218',date:'18 FEB',city:'TOKYO → BUENOS AIRES',emoji:'🛫',title:'Vuelta a casa',travel:true,
+   cats:['transport'],time:'Mañana libre · vuelo 18:50 HND → Toronto',
+   places:['Mañana libre (compras pendientes solo si hace falta)','Retirar equipaje y traslado a Haneda','AC2 Tokyo–Toronto','AC90 Toronto–Buenos Aires'],
+   desc:'Última mañana libre en Tokyo antes de emprender el regreso, con escala en Toronto rumbo a Buenos Aires. La mañana sirve de margen para compras pendientes o para absorber cualquier demora.',
+   food:['Última comida japonesa en el aeropuerto de Haneda antes de embarcar'],
+   walk:'Baja',dur:'Día de traslado',res:'—',lat:35.5494,lng:139.7798},
+];
+
+const FLIGHTS = [
+ {group:'Buenos Aires → Toronto → Tokyo', badge:'intl', badgeLabel:'International',
+  legs:[
+   {num:'AC91',from:'EZE',to:'YYZ',dep:'16:45',arr:'05:50 (+1)',date:'25 ENE 2027',plane:'Boeing 787-9',dur:'15h 05m'},
+   {num:'AC1',from:'YYZ',to:'HND',dep:'12:40',arr:'16:40 (+1)',date:'26 ENE 2027',plane:'Boeing 777-300ER',dur:'14h 00m'},
+  ]},
+ {group:'Tokyo → Bangkok → Krabi', badge:'th', badgeLabel:'Thailand',
+  legs:[
+   {num:'TG661',from:'HND',to:'BKK',dep:'00:20',arr:'05:25',date:'2 FEB 2027',plane:'Airbus A350-900',dur:'Escala 2h 10m'},
+   {num:'TG241',from:'BKK',to:'KBV',dep:'07:35',arr:'08:55',date:'2 FEB 2027',plane:'Airbus A320',dur:'—'},
+  ]},
+ {group:'Krabi → Bangkok → Tokyo', badge:'th', badgeLabel:'Thailand',
+  legs:[
+   {num:'TG250',from:'KBV',to:'BKK',dep:'20:20',arr:'21:45',date:'9 FEB 2027',plane:'Airbus A320',dur:'Escala 1h 30m'},
+   {num:'TG682',from:'BKK',to:'HND',dep:'23:15',arr:'06:55 (+1)',date:'9 FEB 2027',plane:'Boeing 777-300ER',dur:'Llega Terminal 3'},
+  ]},
+ {group:'Tokyo → Toronto → Buenos Aires', badge:'intl', badgeLabel:'International',
+  legs:[
+   {num:'AC2',from:'HND',to:'YYZ',dep:'18:50',arr:'16:55',date:'18 FEB 2027',plane:'Boeing 777-300ER',dur:'12h 05m'},
+   {num:'AC90',from:'YYZ',to:'EZE',dep:'22:35',arr:'15:05 (+1)',date:'18 FEB 2027',plane:'Boeing 787-9',dur:'14h 30m'},
+  ]},
+];
+
+const RESERVATIONS = [
+ {t:'Hotel Tokyo inicial (27 ENE→2 FEB; usar habitación el 1 FEB hasta salir al aeropuerto)',r:'Japón'},
+ {t:'Shibuya Sky',r:'Japón'},
+ {t:'Transporte Fuji / Kawaguchiko (30 ENE; 31 ENE de repuesto)',r:'Japón'},
+ {t:'teamLab (opcional)',r:'Japón'},
+ {t:'Shinkansen Shinagawa → Kyoto (10 FEB, después de las 10:30)',r:'Japón'},
+ {t:'Hotel Kyoto (10–14 FEB)',r:'Japón'},
+ {t:'Takkyubin valija Kyoto → Tokyo (14 FEB)',r:'Japón'},
+ {t:'Thunderbird Kyoto → Kanazawa + Shinkansen Hokuriku a Nagano (14 FEB)',r:'Japón'},
+ {t:'Hotel Nagano ciudad (14 FEB)',r:'Japón'},
+ {t:'Nagaden + bus a Jigokudani Monkey Park (15 FEB)',r:'Japón'},
+ {t:'Shinkansen Nagano → Tokyo (15 FEB)',r:'Japón'},
+ {t:'Hotel Tokyo (bloque final, 15–18 FEB)',r:'Japón'},
+ {t:'Tour de islas Krabi (Phi Phi / Hong)',r:'Tailandia'},
+ {t:'Hotel / resort Krabi',r:'Tailandia'},
+ {t:'Traslado Railay (barco)',r:'Tailandia'},
+];
+
+const WEATHER = [
+ {city:'Tokyo',ico:'❄️',note:'Enero / Febrero — frío, alrededor de 5–10°C de día.'},
+ {city:'Kyoto',ico:'❄️',note:'Invierno — posibilidad de frío intenso o nieve puntual.'},
+ {city:'Nagano',ico:'🌨️',note:'Zona de montaña — mucho más frío que Tokyo, nieve probable en febrero.'},
+ {city:'Krabi',ico:'☀️',note:'Tropical — temporada seca, calor y sol, ideal para playa.'},
+];
+
+const WEATHER_ALERTS = [
+{t:'Monte Fuji (30 ENE; 31 ENE de repuesto)', d:'Revisar el pronóstico 2–3 días antes. Si el Fuji no se ve el 30 ENE, intercambiarlo con el 31 ENE.'},
+ {t:'Nagano (14–15 FEB)', d:'Puede haber nieve y demoras en trenes y buses. El 16 y 17 FEB quedan libres antes del vuelo del 18 FEB.'},
+ {t:'Excursiones de islas en Krabi (5 y 7 FEB)', d:'El mar puede estar movido según el día — confirmar condiciones con el operador del tour. El 3 y el 8 FEB quedan libres como colchón.'},
+];
+
+/* =======================================================
+   RENDER: RAIL TIMELINE
+======================================================= */
+const RAIL_STOPS = [
+ {ic:'🇦🇷',lbl:'Buenos Aires',target:'flights'},
+ {ic:'🇯🇵',lbl:'Tokyo',target:'0127'},
+ {ic:'🗻',lbl:'Fuji',target:'0130'},
+ {ic:'🇹🇭',lbl:'Krabi',target:'0202',branch:true},
+ {ic:'⛰️',lbl:'Railay',target:'0204',branch:true},
+ {ic:'🏝️',lbl:'Islands',target:'0205',branch:true},
+ {ic:'⛩️',lbl:'Kyoto',target:'0210'},
+ {ic:'🎋',lbl:'Arashiyama',target:'0212'},
+ {ic:'🍜',lbl:'Osaka',target:'0213'},
+ {ic:'🐒',lbl:'Nagano',target:'0214'},
+ {ic:'🛍️',lbl:'Tokyo',target:'0216'},
+ {ic:'🇦🇷',lbl:'Buenos Aires',target:'flights'},
+];
+const railEl = document.getElementById('railStops');
+RAIL_STOPS.forEach(s=>{
+  const btn = document.createElement('button');
+  btn.className='rail-stop';
+  btn.innerHTML = `<span class="ic">${s.ic}</span><span class="dot ${s.branch?'branch':''}"></span><span class="lbl"><b>${s.lbl}</b></span>`;
+  btn.onclick = ()=>{
+    const el = document.getElementById(s.target.length===4?('day-'+s.target):s.target);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
+  };
+  railEl.appendChild(btn);
+});
+
+/* =======================================================
+   RENDER: FILTERS
+======================================================= */
+let activeFilters = new Set();
+const filtersEl = document.getElementById('filters');
+Object.entries(CATS).forEach(([key,val])=>{
+  const chip = document.createElement('button');
+  chip.className='filter-chip';
+  chip.dataset.key = key;
+  chip.innerHTML = `${val.icon} ${val.label}`;
+  chip.onclick = ()=>{
+    if(activeFilters.has(key)){activeFilters.delete(key);chip.classList.remove('on');}
+    else{activeFilters.add(key);chip.classList.add('on');}
+    renderDays();
+  };
+  filtersEl.appendChild(chip);
+});
+
+/* =======================================================
+   RENDER: DAY CARDS
+======================================================= */
+const daysGrid = document.getElementById('daysGrid');
+function tagHTML(cat){
+  const c = CATS[cat]; if(!c) return '';
+  return `<span class="tag ${cat}">${c.icon} ${c.label}</span>`;
+}
+function renderDays(){
+  daysGrid.innerHTML='';
+  const filtered = activeFilters.size===0 ? DAYS : DAYS.filter(d=>d.cats.some(c=>activeFilters.has(c)));
+  filtered.forEach(d=>{
+    const card = document.createElement('div');
+    card.className = 'day-card'+(d.travel?' travel':'');
+    card.id = 'day-'+d.id;
+    card.innerHTML = `
+      <div class="day-top">
+        <div><div class="day-date">${d.date}</div><div class="day-city">${d.city}</div></div>
+        <div class="day-emoji">${d.emoji}</div>
+      </div>
+      <div class="day-title">${d.title}</div>
+      <div class="day-desc">${d.desc}</div>
+      <div class="day-tags">${d.cats.map(tagHTML).join('')}</div>
+      ${d.alert?`<div class="day-alert">${d.alert}</div>`:''}
+      ${d.food?`<div class="day-food-hint">🍜 ${d.food[0]}</div>`:''}
+      <div class="day-meta"><span>🚶 ${d.walk}</span><span>⏱️ ${d.dur}</span></div>
+      <button class="day-btn" data-id="${d.id}">Ver día completo →</button>
+    `;
+    daysGrid.appendChild(card);
+  });
+  document.querySelectorAll('.day-btn').forEach(b=>b.onclick=()=>openModal(b.dataset.id));
+}
+renderDays();
+
+/* =======================================================
+   MODAL
+======================================================= */
+const modalBg = document.getElementById('modalBg');
+const modalContent = document.getElementById('modalContent');
+function openModal(id){
+  const d = DAYS.find(x=>x.id===id); if(!d) return;
+  modalContent.innerHTML = `
+    <button class="modal-close" id="modalCloseBtn">✕</button>
+    <div class="day-date">${d.date} · ${d.city}</div>
+    <h3>${d.emoji} ${d.title}</h3>
+    <div class="day-tags">${d.cats.map(tagHTML).join('')}</div>
+    ${d.alert?`<div class="day-alert" style="margin-top:14px;">${d.alert}</div>`:''}
+    <div class="modal-section"><h4>Descripción</h4><p class="modal-desc">${d.desc}</p></div>
+    <div class="modal-section"><h4>Lugares / plan</h4><div class="modal-places">${d.places.map(p=>`<span>${p}</span>`).join('')}</div></div>
+    ${d.food?`<div class="modal-section"><h4>🍜 Dónde comer</h4><div class="modal-places food-places">${d.food.map(p=>`<span>${p}</span>`).join('')}</div></div>`:''}
+    <div class="modal-section modal-meta-grid">
+      <div><label>Horario</label><b>${d.time}</b></div>
+      <div><label>Nivel de caminata</label><b>${d.walk}</b></div>
+      <div><label>Duración</label><b>${d.dur}</b></div>
+      <div><label>Reservas necesarias</label><b>${d.res}</b></div>
+    </div>
+  `;
+  modalBg.classList.add('open');
+  document.getElementById('modalCloseBtn').onclick = closeModal;
+}
+function closeModal(){modalBg.classList.remove('open');}
+modalBg.addEventListener('click',e=>{if(e.target===modalBg) closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
+
+/* =======================================================
+   MAP
+======================================================= */
+try{
+  const map = L.map('map',{scrollWheelZoom:false}).setView([30,120],3);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution:'&copy; OpenStreetMap contributors', maxZoom:18
+  }).addTo(map);
+
+  const seen = new Set();
+  DAYS.forEach(d=>{
+    if(!d.lat || seen.has(d.city)) return;
+    seen.add(d.city);
+    const isTH = d.city.includes('KRABI')||d.city.includes('RAILAY');
+    const color = isTH ? '#2F6E76' : '#B5433A';
+    const marker = L.circleMarker([d.lat,d.lng],{radius:8,color:'#fff',weight:2,fillColor:color,fillOpacity:1}).addTo(map);
+    marker.bindTooltip(d.city.split('→')[0].trim(), {direction:'top'});
+    marker.on('click',()=>{
+      const el = document.getElementById('day-'+d.id);
+      if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); el.style.boxShadow='0 0 0 3px var(--red)'; setTimeout(()=>el.style.boxShadow='',1400);}
+    });
+  });
+}catch(e){ console.warn('Map failed to init (offline?)', e); }
+
+/* =======================================================
+   FLIGHTS
+======================================================= */
+const flightsWrap = document.getElementById('flightsWrap');
+const badgeClass = {intl:'badge-intl', jp:'badge-jp', th:'badge-th'};
+FLIGHTS.forEach(g=>{
+  const block = document.createElement('div');
+  block.className='flight-group';
+  block.innerHTML = `<h3>${g.group} <span class="fl-badge ${badgeClass[g.badge]}">${g.badgeLabel}</span></h3>`;
+  g.legs.forEach(l=>{
+    const card = document.createElement('div');
+    card.className='flight-card';
+    card.innerHTML = `
+      <div class="flight-num">${l.num}</div>
+      <div class="flight-route">
+        <div class="flight-endpoint"><b>${l.from}</b><span>${l.dep}</span></div>
+        <div class="flight-arrow"></div>
+        <div class="flight-endpoint"><b>${l.to}</b><span>${l.arr}</span></div>
+      </div>
+      <div class="flight-details"><span><b>${l.plane}</b></span><span>${l.dur}</span></div>
+      <div class="flight-date-badge">${l.date}</div>
+    `;
+    block.appendChild(card);
+  });
+  flightsWrap.appendChild(block);
+});
+
+/* =======================================================
+   STAYS (persisted)
+======================================================= */
+const STAYS = [
+ {id:'tokyo1',city:'Tokyo — bloque inicial',ico:'🇯🇵',in:'2027-01-27',out:'2027-02-02',inL:'27 ENE',outL:'2 FEB',q:'Tokyo',
+  tip:'Zonas cómodas para moverse: Shinjuku, Ueno/Asakusa o cerca de Tokyo Station (todo conecta fácil con JR y Metro).',
+  note:'Una sola reserva del 27 ENE al 2 FEB (6 noches): base para Tokyo y el Fuji. El vuelo sale 00:20 del 2 FEB; se paga la noche del 1 FEB aunque no se duerma en la habitación.'},
+ {id:'ao1',city:'Ao Nang / Krabi',ico:'🇹🇭',in:'2027-02-02',out:'2027-02-09',inL:'2 FEB',outL:'9 FEB',q:'Ao Nang Krabi',
+  tip:'Cerca de la costanera o la playa de Ao Nang para resolver tours y comidas a pie.',
+  note:'Llegás 08:55 del 2 FEB (check-in temprano o dejar equipaje). El vuelo de vuelta sale 20:20 del 9 FEB: pedir late check-out.'},
+ {id:'railay',city:'Railay',ico:'⛰️',in:'2027-02-06',out:'2027-02-07',inL:'6 FEB',outL:'7 FEB',q:'Railay Beach Krabi',opt:true,
+  tip:'Solo se llega en barco; evaluar Railay East o West.',
+  note:'Opcional: si dormís en Railay, reemplaza 1 noche del bloque Ao Nang.'},
+ {id:'kyoto',city:'Kyoto',ico:'⛩️',in:'2027-02-10',out:'2027-02-14',inL:'10 FEB',outL:'14 FEB',q:'Kyoto',
+  tip:'Cerca de Kyoto Station (practicidad) o Kawaramachi/Gion (ambiente y caminable).',
+  note:'Llegás ~12:45 desde Haneda: pedir dejar el equipaje temprano. La noche del 9 al 10 FEB la pasás en vuelo. Osaka se hace como excursión de un día.'},
+ {id:'nagano',city:'Nagano ciudad',ico:'❄️',in:'2027-02-14',out:'2027-02-15',inL:'14 FEB',outL:'15 FEB',q:'Nagano station hotel',
+  tip:'Cerca de la estación de Nagano: de ahí salen el Nagaden a Yudanaka y el Shinkansen a Tokyo. Buscar hotel de negocios con baño grande tipo onsen.',
+  note:'Una noche. Llegás sin la valija grande (enviada por takkyubin a Tokyo) y salís temprano al parque de los monos.'},
+ {id:'tokyo2',city:'Tokyo (final)',ico:'🛍️',in:'2027-02-15',out:'2027-02-18',inL:'15 FEB',outL:'18 FEB',q:'Tokyo',
+  tip:'Pensar en las compras y en el acceso a Haneda (Shinagawa y Tokyo Station son prácticas).',
+  note:'El 15 FEB llegás de Nagano y la valija grande llega por takkyubin desde Kyoto. El vuelo sale 18:50 del 18 FEB: late check-out o guardar equipaje.'},
+];
+const STAY_KEY='jpk2027_stays';
+let stayState={};
+let editingStay=null;
+try{ stayState = JSON.parse(localStorage.getItem(STAY_KEY)||'{}'); }catch(e){ stayState={}; }
+var DBX=null, lastSynced={};
+function saveStays(){ try{ localStorage.setItem(STAY_KEY, JSON.stringify(stayState)); localStorage.setItem('jpk2027_dirty','1'); }catch(e){} if(typeof updateSaveBadge==='function') updateSaveBadge(); syncStaysOut(); }
+
+/* Datos guardados dentro del archivo (alojamientos + checklist). El botón "Guardar en el HTML" reescribe solo este bloque y descarga una copia del archivo. Es lo que ve quien reciba el HTML. */
+/*SAVED_DATA_START*/ const SAVED_DATA = {
+ "rev": 1,
+ "savedAt": "",
+ "stays": {
+  "tokyo1": [
+   {
+    "name": "KOMA Hotel",
+    "zone": "Asakusa",
+    "url": "https://www.booking.com/hotel/jp/koma-6-minutes-walk-from-asakusa-sta.html?aid=304142&label=mkt123sc-b97ef3e6-30ed-4210-86c2-b7b7549e6a6f&sid=5bc37a3b98f3dc9f945332553e81d31d&all_sr_blocks=1282731803_438895230_2_0_0&checkin=2027-01-27&checkout=2027-02-02&dist=0&group_adults=2&group_children=0&hapos=1&highlighted_blocks=1282731803_438895230_2_0_0&hpos=1&matching_block_id=1282731803_438895230_2_0_0&nflt=privacy_type%3D3&no_rooms=1&req_adults=2&req_children=0&room1=A%2CA&sb_price_type=total&sr_order=price&sr_pri_blocks=1282731803_438895230_2_0_0__3408390&srepoch=1792502685&srpvid=2bf15d17f98302af&type=total&ucfs=1&#_",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "Tom's Apartment",
+    "zone": "Asakusa",
+    "url": "https://www.airbnb.com/rooms/1659242311695861178?adults=2&check_in=2027-01-27&check_out=2027-02-01&search_mode=regular_search&source_impression_id=p3_1792502626_P30W-vaQpLbAC-um&previous_page_section_name=1001&federated_search_id=7391c03f-5dbc-4b1a-bbb9-6182dce9c2a6&room_origin=room_section&room_id=1659242311695861178",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "Akinobu's apartment",
+    "zone": "Asakusa",
+    "url": "https://www.airbnb.com/rooms/898282801002954707?adults=2&check_in=2027-01-27&check_out=2027-02-01&search_mode=regular_search&source_impression_id=p3_ec25cfcc-d74f-4e6b-9e6b-a4668bf84b9c_68c656d3-c543-4271-a66f-9c22f13a5615_0_898282801002954707_2&previous_page_section_name=1000&federated_search_id=ec25cfcc-d74f-4e6b-9e6b-a4668bf84b9c&guests=1",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "Mori",
+    "zone": "Shibuya",
+    "url": "https://www.airbnb.com/rooms/1452013499179112933/room-details?adults=2&check_in=2027-01-27&check_out=2027-02-01&guests=2&search_mode=regular_search&source_impression_id=p3_643a9e1f-97fc-4a38-82e6-9389ba94e30f_64ad3588-b8d0-4d63-b347-3697e062700e_0_1452013499179112933_15&previous_page_section_name=1000&federated_search_id=643a9e1f-97fc-4a38-82e6-9389ba94e30f&room_id=1452013499179112933&room_origin=room_section",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "Alex Sendagi",
+    "zone": "Bunkyō-ku",
+    "url": "https://www.airbnb.com/rooms/944159407439768641?adults=2&check_in=2027-01-27&check_out=2027-02-01&guests=2&search_mode=regular_search&source_impression_id=p3_643a9e1f-97fc-4a38-82e6-9389ba94e30f_64ad3588-b8d0-4d63-b347-3697e062700e_0_944159407439768641_3&previous_page_section_name=1000&federated_search_id=643a9e1f-97fc-4a38-82e6-9389ba94e30f&room_id=944173734664977395&room_origin=room_section",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "nestay apartment",
+    "zone": "Arakawa-ku",
+    "url": "https://www.airbnb.com/rooms/45511367?adults=2&check_in=2027-01-27&check_out=2027-02-01&guests=2&search_mode=regular_search&source_impression_id=p3_8db9816d-4ed8-4620-84f9-8edb2c0ffc11_a28a2dff-baf5-4dfe-86dc-3ffc8da51bb4_0_45511367_2&previous_page_section_name=1000&federated_search_id=8db9816d-4ed8-4620-84f9-8edb2c0ffc11&room_id=45511367&room_origin=room_section",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "Itsuo's apartment",
+    "zone": "Taitō-ku",
+    "url": "https://www.airbnb.com/rooms/1299065732231675661?adults=2&check_in=2027-01-27&check_out=2027-02-01&search_mode=regular_search&source_impression_id=p3_04bb5e0a-c38b-40cf-9b9e-72889a661dbd_a29aa94b-249c-4d9d-8a10-4d01c265dbd9_0_1299065732231675661_2&previous_page_section_name=1000&federated_search_id=04bb5e0a-c38b-40cf-9b9e-72889a661dbd&room_id=1299069822808447538&room_origin=room_section",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "403 Oshiage (Wi-Fi, ascensor)",
+    "zone": "Sumida",
+    "url": "https://www.booking.com/hotel/jp/403-oshiage-sta-3mins-walk-wi-fi-amp-elevator-3pax.html?checkin=2027-01-27&checkout=2027-02-02&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "SORA Hotel Sasazuka a",
+    "zone": "Shibuya",
+    "url": "https://www.booking.com/hotel/jp/sorahoterusey-zhong-a.html?checkin=2027-01-27&checkout=2027-02-02&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "Real Waseda SJ0261",
+    "zone": "Shinjuku",
+    "url": "https://www.booking.com/hotel/jp/real-waseda.html?checkin=2027-01-27&checkout=2027-02-02&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "THE ONE Kōenji",
+    "zone": "Suginami",
+    "url": "https://www.booking.com/hotel/jp/the-one-kouennji.html?checkin=2027-01-27&checkout=2027-02-02&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "SAKURA HOUSE Asakusa & Skytree",
+    "zone": "Asakusa / Kuramae",
+    "url": "https://www.booking.com/hotel/jp/sakura-house-mo-tian-qu.html?checkin=2027-01-27&checkout=2027-02-02&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 6 noches (27 ENE–2 FEB).",
+    "status": "idea"
+   }
+  ],
+  "ao1": [
+   {
+    "name": "Palm Tree Hideaway",
+    "zone": "Ao Nang",
+    "url": "https://www.booking.com/hotel/th/palm-tree-resort.html?checkin=2027-02-02&checkout=2027-02-09&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "375",
+    "notes": "Booking · casa completa 1 dorm · 9,5 (89) · ~54 USD/noche · 7 noches",
+    "status": "idea"
+   },
+   {
+    "name": "Palm Tian Home A7",
+    "zone": "Ao Nang",
+    "url": "https://www.booking.com/hotel/th/palm-tian-home.html?checkin=2027-02-02&checkout=2027-02-09&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "275",
+    "notes": "Booking · casa completa con pileta privada · 7,7 (7 reseñas) · ~39 USD/noche · 7 noches",
+    "status": "idea"
+   },
+   {
+    "name": "Aonang Private Pink House 8",
+    "zone": "Ao Nang",
+    "url": "https://www.booking.com/hotel/th/aonang-private-house.html?checkin=2027-02-02&checkout=2027-02-09&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "403",
+    "notes": "Booking · casa completa 1 dorm + living · 9,0 (4 reseñas) · ~58 USD/noche · 7 noches",
+    "status": "idea"
+   }
+  ],
+  "kyoto": [
+   {
+    "name": "Ichijyo Ivy",
+    "zone": "Kamigyo",
+    "url": "https://www.booking.com/hotel/jp/weekly-mansion-ichijo-ivy.html?checkin=2027-02-10&checkout=2027-02-14&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "145",
+    "notes": "Booking · apto completo · 8,1 (97) · ~48 USD/noche · 3 noches",
+    "status": "idea"
+   },
+   {
+    "name": "Stay SAKURA Kyoto Nijo Rikyu",
+    "zone": "Nakagyo",
+    "url": "https://www.booking.com/hotel/jp/stay-sakura-jing-du-er-tiao-li-gong.html?checkin=2027-02-10&checkout=2027-02-14&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "179",
+    "notes": "Booking · apto completo · 8,7 (992) · ~60 USD/noche · 3 noches",
+    "status": "idea"
+   },
+   {
+    "name": "Naganoya",
+    "zone": "Nakagyo",
+    "url": "https://www.booking.com/hotel/jp/naganoya-kyoto.html?checkin=2027-02-10&checkout=2027-02-14&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "181",
+    "notes": "Booking · apto completo · 8,7 (270) · ~60 USD/noche · 3 noches",
+    "status": "idea"
+   }
+  ],
+  "osaka": [
+   {
+    "name": "大阪難波ELLY-four",
+    "zone": "Namba / Nippombashi",
+    "url": "https://www.booking.com/hotel/jp/da-ban-nan-bo-elly.html?checkin=2027-02-13&checkout=2027-02-15&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "76",
+    "notes": "Booking · apto completo · 8,3 (85) · ~38 USD/noche · 2 noches",
+    "status": "idea"
+   },
+   {
+    "name": "Fortune House Namba",
+    "zone": "Namba",
+    "url": "https://www.booking.com/hotel/jp/fortunehouse-nan-bo-tu-bu-5fen-guan-xi-kong-gang-zhi-tong-wei-zhi-jue-jia-jiao-t.html?checkin=2027-02-13&checkout=2027-02-15&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "107",
+    "notes": "Booking · apto completo · 8,5 (75) · ~54 USD/noche · 2 noches",
+    "status": "idea"
+   }
+  ],
+  "tokyo2": [
+   {
+    "name": "SAKURA HOUSE Asakusa & Skytree",
+    "zone": "Asakusa / Kuramae",
+    "url": "https://www.booking.com/hotel/jp/sakura-house-mo-tian-qu.html?checkin=2027-02-15&checkout=2027-02-18&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 3 noches (15–18 FEB).",
+    "status": "idea"
+   },
+   {
+    "name": "Kc-III",
+    "zone": "Ōta (cerca de Haneda)",
+    "url": "https://www.booking.com/hotel/jp/kc-iii.html?checkin=2027-02-15&checkout=2027-02-18&no_rooms=1&group_adults=2&selected_currency=USD",
+    "price": "",
+    "total": "",
+    "notes": "Revisar precio y disponibilidad para 3 noches (15–18 FEB).",
+    "status": "idea"
+   }
+  ],
+  "tokyobuffer": []
+ },
+ "reservations": {}
+}; /*SAVED_DATA_END*/
+const SAVE_M1='/*SAVED_'+'DATA_START*/', SAVE_M2='/*SAVED_'+'DATA_END*/';
+const REV_KEY='jpk2027_saved_rev', DIRTY_KEY='jpk2027_dirty';
+const lsGet=k=>{ try{ return localStorage.getItem(k); }catch(e){ return null; } };
+const lsSet=(k,v)=>{ try{ localStorage.setItem(k,v); }catch(e){} };
+const hasCands=st=>Object.keys(st||{}).some(k=>Array.isArray(st[k])&&st[k].length);
+let adoptMode=null; /* 'replace' | 'merge' | null */
+(function loadSaved(){
+  const localRev=Number(lsGet(REV_KEY))||0;
+  if(!(SAVED_DATA.rev>localRev)) return;
+  const dirty=lsGet(DIRTY_KEY)==='1';
+  if(!hasCands(stayState)) adoptMode='replace';
+  else if(localRev===0) adoptMode='merge';   /* navegador con datos de versiones anteriores: se suma lo del archivo sin pisar lo propio */
+  else if(!dirty) adoptMode='replace';
+  else if(confirm('Este archivo trae alojamientos guardados más nuevos.\n\n¿Reemplazar los que tenés cargados en este navegador?\n\nAceptar = usar los del archivo · Cancelar = quedarme con los míos')) adoptMode='replace';
+  if(adoptMode==='replace'){
+    stayState=JSON.parse(JSON.stringify(SAVED_DATA.stays||{}));
+    lsSet(DIRTY_KEY,'0');
+  } else if(adoptMode==='merge'){
+    const sv=SAVED_DATA.stays||{};
+    Object.keys(sv).forEach(id=>{
+      const list=stayState[id]||(stayState[id]=[]);
+      sv[id].forEach(c=>{ if(!list.some(x=>x.name===c.name&&x.zone===c.zone)) list.push(Object.assign({},c)); });
+    });
+    lsSet(DIRTY_KEY,'1');
+  }
+  if(adoptMode) lsSet(STAY_KEY,JSON.stringify(stayState));
+  lsSet(REV_KEY,String(SAVED_DATA.rev));
+})();
+function updateSaveBadge(){
+  const el=document.getElementById('staySaveState'); if(!el) return;
+  const dirty=lsGet(DIRTY_KEY)==='1';
+  el.textContent = dirty ? '● Hay cambios sin guardar en el HTML' : ((Number(lsGet(REV_KEY))||0)>1 ? '✓ Este HTML tiene lo último' : '');
+}
+function buildSavedHtml(srcText,data){
+  const a=srcText.indexOf(SAVE_M1), b=srcText.indexOf(SAVE_M2);
+  if(a<0||b<a) return null;
+  const json=JSON.stringify(data,null,1).replace(/</g,'\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
+  return srcText.slice(0,a)+SAVE_M1+' const SAVED_DATA = '+json+'; '+SAVE_M2+srcText.slice(b+SAVE_M2.length);
+}
+const esc = t=>String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl = u=>{ u=String(u||'').trim(); if(!u) return ''; if(!/^https?:\/\//i.test(u)) u='https://'+u; try{ const x=new URL(u); return /^https?:$/.test(x.protocol)?x.href:''; }catch(e){ return ''; } };
+const nightsOf = s=>Math.round((new Date(s.out)-new Date(s.in))/864e5);
+const num = v=>{ const x=Number(v); return (v!==''&&v!=null&&isFinite(x)&&x>0)?x:0; };
+const stayTotal = (c,n)=> num(c.total) || num(c.price)*n;
+const stayNight = (c,n)=> num(c.price) || (n?num(c.total)/n:0);
+const fmtUSD = x=>Number(x.toFixed(2)).toLocaleString('es-AR');
+const STATUS = {idea:'💡 Idea', short:'⭐ Preseleccionado', booked:'✅ Reservado'};
+
+function renderStays(){
+  const wrap = document.getElementById('stayBlocks');
+  let bookedBlocks=0, cost=0, mainTotal=0, mainBooked=0;
+  wrap.innerHTML = STAYS.map(b=>{
+    const n = nightsOf(b), list = stayState[b.id]||[];
+    const bk = list.find(c=>c.status==='booked');
+    if(!b.opt){ mainTotal++; if(bk) mainBooked++; }
+    if(bk){ bookedBlocks++; cost += stayTotal(bk,n); }
+    const q = encodeURIComponent(b.q);
+    const links = `<a target="_blank" rel="noopener" href="https://www.booking.com/searchresults.html?ss=${q}&checkin=${b.in}&checkout=${b.out}">Booking</a>`+
+      `<a target="_blank" rel="noopener" href="https://www.airbnb.com/s/${q}/homes?checkin=${b.in}&checkout=${b.out}">Airbnb</a>`+
+      `<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/${encodeURIComponent('hoteles en '+b.q)}">Google Maps</a>`;
+    const cands = list.map((c,i)=>{
+      const u = safeUrl(c.url);
+      const name = u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(c.name)}</a>`:esc(c.name);
+      const tot = stayTotal(c,n), night = stayNight(c,n);
+      const price = tot ? `${num(c.price)?'':'≈ '}USD ${fmtUSD(night)}/noche · <b>USD ${fmtUSD(tot)} total</b> (${n} ${n===1?'noche':'noches'})` : 'sin precio';
+      const isEditing=editingStay && editingStay.b===b.id && editingStay.i===i;
+      return `<div class="cand ${c.status==='booked'?'booked':''}">
+        ${isEditing ? `<form class="stay-edit-form" data-edit-form="${b.id}" data-i="${i}">
+          <input class="f-name" name="name" placeholder="Nombre del alojamiento" value="${esc(c.name)}" required>
+          <input class="f-zone" name="zone" placeholder="Zona / barrio" value="${esc(c.zone||'')}">
+          <input class="f-url" name="url" placeholder="Link (opcional)" value="${esc(c.url||'')}">
+          <input class="f-price" name="price" type="number" min="0" placeholder="USD/noche" value="${esc(c.price||'')}">
+          <input class="f-total" name="total" type="number" min="0" placeholder="USD total estadía" value="${esc(c.total||'')}">
+          <input class="f-notes" name="notes" placeholder="Notas (desayuno, cancelación...)" value="${esc(c.notes||'')}">
+          <button type="button" data-act="save-edit" data-b="${b.id}" data-i="${i}">Guardar cambios</button>
+          <button type="button" data-act="cancel-edit" data-b="${b.id}" data-i="${i}">Cancelar</button>
+        </form>` : `<span class="c-name">${name}</span>${c.zone?`<span class="c-zone">📍 ${esc(c.zone)}</span>`:''}<span class="c-price">${price}</span>
+        <select data-act="status" data-b="${b.id}" data-i="${i}">${Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${c.status===k?'selected':''}>${v}</option>`).join('')}</select>
+        <button class="c-edit" type="button" data-act="edit" data-b="${b.id}" data-i="${i}">Editar</button>
+        <button class="c-del" type="button" data-act="del" data-b="${b.id}" data-i="${i}" aria-label="Eliminar">✕</button>
+        ${c.notes?`<span class="c-notes">${esc(c.notes)}</span>`:''}`}</div>`;
+    }).join('');
+    return `<div class="stay-block ${bk?'booked':''}" data-block="${b.id}">
+      <div class="stay-head"><h3>${b.ico} ${esc(b.city)}</h3><span class="stay-dates">${b.inL} → ${b.outL}</span>
+        <span class="stay-badge">${n} ${n===1?'noche':'noches'}</span>
+        ${b.opt?'<span class="stay-badge opt">Opcional</span>':''}${bk?`<span class="stay-badge ok">Reservado${stayTotal(bk,n)?' · USD '+fmtUSD(stayTotal(bk,n)):''}</span>`:''}</div>
+      <p class="stay-note"><b>Zona:</b> ${esc(b.tip)}</p>
+      <p class="stay-note">${esc(b.note)}</p>
+      <div class="stay-links">${links}</div>
+      <div class="stay-cands">${cands}</div>
+      <div class="stay-form" data-form="${b.id}">
+        <input class="f-name" placeholder="Nombre del alojamiento">
+        <input class="f-zone" placeholder="Zona / barrio">
+        <input class="f-url" placeholder="Link (opcional)">
+        <input class="f-price" type="number" min="0" placeholder="USD/noche">
+        <input class="f-total" type="number" min="0" placeholder="USD total estadía">
+        <input class="f-notes" placeholder="Notas (desayuno, cancelación, distancia...)">
+        <button type="button" data-act="add" data-b="${b.id}">Agregar</button>
+      </div></div>`;
+  }).join('');
+  document.getElementById('staySummary').innerHTML =
+    `<div><b>${mainBooked}/${mainTotal}</b><span>bloques principales reservados</span></div>`+
+    `<div><b>${STAYS.filter(b=>!b.opt).reduce((a,b)=>a+nightsOf(b),0)}</b><span>noches de alojamiento</span></div>`+
+    `<div><b>USD ${Math.round(cost).toLocaleString('es-AR')}</b><span>total de lo reservado</span></div>`;
+}
+document.getElementById('stayBlocks').addEventListener('click',e=>{
+  const t=e.target.closest('[data-act]'); if(!t) return;
+  const id=t.dataset.b, list=(stayState[id]=stayState[id]||[]);
+  if(t.dataset.act==='add'){
+    const f=t.closest('.stay-form'); const name=f.querySelector('.f-name').value.trim();
+    if(!name){ f.querySelector('.f-name').focus(); return; }
+    list.push({name,zone:f.querySelector('.f-zone').value.trim(),url:f.querySelector('.f-url').value.trim(),price:f.querySelector('.f-price').value,total:f.querySelector('.f-total').value,notes:f.querySelector('.f-notes').value.trim(),status:'idea'});
+  } else if(t.dataset.act==='edit'){
+    editingStay={b:id,i:+t.dataset.i};
+  } else if(t.dataset.act==='cancel-edit'){
+    editingStay=null;
+  } else if(t.dataset.act==='save-edit'){
+    const i=+t.dataset.i, f=t.closest('.cand').querySelector('.stay-edit-form');
+    const name=f.querySelector('[name="name"]').value.trim();
+    if(!name){ f.querySelector('[name="name"]').focus(); return; }
+    const old=list[i];
+    list[i]={...old,name,zone:f.querySelector('[name="zone"]').value.trim(),url:f.querySelector('[name="url"]').value.trim(),price:f.querySelector('[name="price"]').value,total:f.querySelector('[name="total"]').value,notes:f.querySelector('[name="notes"]').value.trim()};
+    editingStay=null;
+  } else if(t.dataset.act==='del'){ list.splice(+t.dataset.i,1); editingStay=null; }
+  saveStays(); renderStays();
+});
+document.getElementById('stayBlocks').addEventListener('change',e=>{
+  const t=e.target.closest('[data-act="status"]'); if(!t) return;
+  const list=stayState[t.dataset.b]||[], i=+t.dataset.i, v=t.value;
+  if(v==='booked') list.forEach((c,j)=>{ if(j!==i&&c.status==='booked') c.status='short'; });
+  list[i].status=v; saveStays(); renderStays();
+});
+renderStays();
+async function saveFile(name,data){
+  let dl=null;
+  try{ dl=(window.claude&&claude.use)?await claude.use('downloads'):null; }catch(e){ dl=null; }
+  if(dl){ try{ await dl.save({filename:name,data}); }catch(e){} return; }
+  const blob=new Blob([data],{type:name.endsWith('.json')?'application/json':'text/html;charset=utf-8'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+document.getElementById('stayExport').addEventListener('click',()=>{
+  const data={version:1,stays:stayState,reservations:resState};
+  saveFile('japan-krabi-2027-datos.json',JSON.stringify(data,null,2));
+});
+document.getElementById('stayImport').addEventListener('click',()=>document.getElementById('stayImportFile').click());
+document.getElementById('stayImportFile').addEventListener('change',e=>{
+  const file=e.target.files[0]; if(!file) return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(r.result);
+      if(!d||typeof d.stays!=='object'||d.stays===null) throw new Error('formato');
+      if(!confirm('Esto reemplaza los alojamientos y el checklist que tenés cargados en este navegador. ¿Seguir?')) return;
+      stayState=d.stays; saveStays();
+      if(d.reservations&&typeof d.reservations==='object'){ resState=d.reservations; try{ localStorage.setItem(STORE_KEY, JSON.stringify(resState)); }catch(err){} }
+      location.reload();
+    }catch(err){ alert('El archivo no es válido.'); }
+  };
+  r.readAsText(file); e.target.value='';
+});
+
+document.getElementById('staySaveHtml').addEventListener('click',async()=>{
+  const rev=Date.now();
+  const data={rev,savedAt:new Date(rev).toISOString(),stays:stayState,reservations:resState};
+  let text=null;
+  try{
+    const r=await fetch(location.href.split('#')[0],{cache:'no-store'});
+    if(r.ok){ const t=await r.text(); if(t.includes(SAVE_M1)&&t.includes(SAVE_M2)&&/<\/html>\s*$/i.test(t)) text=t; }
+  }catch(e){}
+  if(!text) text=PRISTINE_HTML;
+  const out=buildSavedHtml(text,data);
+  if(!out){ alert('No pude armar el archivo. Usá "Exportar datos" como respaldo.'); return; }
+  const d=new Date(rev), p=n=>String(n).padStart(2,'0');
+  await saveFile('japan-krabi-2027-'+d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate())+'.html',out);
+  lsSet(REV_KEY,String(rev)); lsSet(DIRTY_KEY,'0'); updateSaveBadge();
+});
+updateSaveBadge();
+
+/* =======================================================
+   RESERVATIONS (persisted)
+======================================================= */
+const resList = document.getElementById('resList');
+const STORE_KEY = 'jpk2027_reservations';
+let resState = {};
+try{ resState = JSON.parse(localStorage.getItem(STORE_KEY)||'{}'); }catch(e){ resState = {}; }
+if(adoptMode==='replace'){ resState=Object.assign({},SAVED_DATA.reservations||{}); lsSet(STORE_KEY,JSON.stringify(resState)); }
+else if(adoptMode==='merge'){ Object.keys(SAVED_DATA.reservations||{}).forEach(k=>{ if(SAVED_DATA.reservations[k]) resState[k]=true; }); lsSet(STORE_KEY,JSON.stringify(resState)); }
+RESERVATIONS.forEach((r,i)=>{
+  const item = document.createElement('div');
+  const key = 'r'+i;
+  const done = !!resState[key];
+  item.className='res-item'+(done?' done':'');
+  item.innerHTML = `<div class="res-check">✓</div><span class="txt">${r.t}</span><span class="tag-region">${r.r}</span>`;
+  item.onclick = ()=>{
+    resState[key] = !resState[key];
+    item.classList.toggle('done');
+    try{ localStorage.setItem(STORE_KEY, JSON.stringify(resState)); }catch(e){}
+    syncResOut(key);
+    lsSet(DIRTY_KEY,'1'); updateSaveBadge();
+  };
+  resList.appendChild(item);
+});
+
+/* =======================================================
+   WEATHER
+======================================================= */
+const weatherGrid = document.getElementById('weatherGrid');
+WEATHER.forEach(w=>{
+  const c = document.createElement('div');
+  c.className='weather-card';
+  c.innerHTML = `<div class="wico">${w.ico}</div><h4>${w.city}</h4><p>${w.note}</p>`;
+  weatherGrid.appendChild(c);
+});
+const weatherAlerts = document.getElementById('weatherAlerts');
+WEATHER_ALERTS.forEach(a=>{
+  const el = document.createElement('div');
+  el.className='walert';
+  el.innerHTML = `<span class="ico">⚠️</span><div><b>${a.t}</b><p>${a.d}</p></div>`;
+  weatherAlerts.appendChild(el);
+});
+
+/* =======================================================
+   NAV ACTIVE STATE
+======================================================= */
+const sections = ['home','timeline','days','map-section','flights','stays','reservations','weather'];
+const navA = document.querySelectorAll('.navlinks button, .bottomnav button');
+navA.forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    const target = document.getElementById(a.dataset.nav);
+    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+window.addEventListener('scroll',()=>{
+  let current = sections[0];
+  sections.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el && el.getBoundingClientRect().top < 140) current = id;
+  });
+  navA.forEach(a=>{
+    a.classList.toggle('active', a.dataset.nav === current);
+  });
+},{passive:true});
+
+/* =======================================================
+   SHARED STATE (db): alojamientos y checklist compartidos
+======================================================= */
+function syncStaysOut(){
+  if(!DBX) return;
+  Object.keys(stayState).forEach(id=>{
+    const list=stayState[id]; if(!Array.isArray(list)) return;
+    const str=JSON.stringify(list); if(lastSynced[id]===str) return;
+    lastSynced[id]=str;
+    DBX.doc('stays/'+id).set({list}).catch(()=>{ delete lastSynced[id]; });
+  });
+}
+function syncResOut(key){
+  if(!DBX) return;
+  DBX.doc('reservas/'+key).set({done:!!resState[key]}).catch(()=>{});
+}
+(async function initShared(){
+  let db=null;
+  try{ db = (window.claude && claude.use) ? await claude.use('db') : null; }catch(e){ db=null; }
+  if(!db) return;
+  DBX=db;
+  db.collection('stays').onSnapshot(snap=>{
+    let changed=false;
+    snap.docs.forEach(d=>{
+      const data=d.data()||{}; if(!Array.isArray(data.list)) return;
+      const str=JSON.stringify(data.list);
+      lastSynced[d.id]=str;
+      if(JSON.stringify(stayState[d.id]||[])!==str){ stayState[d.id]=data.list; changed=true; }
+    });
+    if(changed){
+      try{ localStorage.setItem(STAY_KEY, JSON.stringify(stayState)); }catch(e){}
+      if(!editingStay) renderStays();
+    }
+  },()=>{});
+  db.collection('reservas').onSnapshot(snap=>{
+    snap.docs.forEach(d=>{
+      const m=/^r(\d+)$/.exec(d.id); if(!m) return;
+      const data=d.data()||{}; resState[d.id]=!!data.done;
+      const el=resList.children[+m[1]]; if(el) el.classList.toggle('done',!!data.done);
+    });
+  },()=>{});
+})();
+</script>
+</body>
+</html>
