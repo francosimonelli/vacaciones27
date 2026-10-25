@@ -32,14 +32,21 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build production and development sites
+        env:
+          DEPLOY_SOURCE_REF: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           git fetch origin \
-            +refs/heads/main:refs/remotes/origin/main \
-            +refs/heads/dev:refs/remotes/origin/dev
+            +refs/heads/main:refs/remotes/origin/main
+          if [[ "$DEPLOY_SOURCE_REF" == "main" ]]; then
+            dev_source_ref=dev
+          else
+            dev_source_ref="$DEPLOY_SOURCE_REF"
+          fi
+          git fetch origin "+refs/heads/${dev_source_ref}:refs/remotes/origin/dev-build"
           mkdir -p _site/dev
           git archive origin/main | tar -x -C _site
-          git archive origin/dev | tar -x -C _site/dev
+          git archive origin/dev-build | tar -x -C _site/dev
           rm -rf _site/.github _site/dev/.github
           touch _site/.nojekyll
 
