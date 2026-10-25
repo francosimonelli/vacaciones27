@@ -1,0 +1,67 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Build production and development sites
+        env:
+          DEPLOY_SOURCE_REF: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git fetch origin \
+            +refs/heads/main:refs/remotes/origin/main
+          if [[ "$DEPLOY_SOURCE_REF" == "main" ]]; then
+            if git ls-remote --exit-code origin refs/heads/dev >/dev/null 2>&1; then
+              dev_source_ref=dev
+            else
+              dev_source_ref=""
+            fi
+          else
+            dev_source_ref="$DEPLOY_SOURCE_REF"
+          fi
+          mkdir -p _site
+          git archive origin/main | tar -x -C _site
+          if [[ -n "$dev_source_ref" ]]; then
+            git fetch origin "+refs/heads/${dev_source_ref}:refs/remotes/origin/dev-build"
+            mkdir -p _site/dev
+            git archive origin/dev-build | tar -x -C _site/dev
+          fi
+          rm -rf _site/.github _site/dev/.github
+          touch _site/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
