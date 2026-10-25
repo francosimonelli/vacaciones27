@@ -20,7 +20,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ github.ref_name == 'main' && steps.deployment.outputs.page_url || format('{0}dev/', steps.deployment.outputs.page_url) }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
