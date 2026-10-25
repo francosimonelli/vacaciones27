@@ -1767,7 +1767,7 @@ if(!SUPABASE_URL.includes('YOUR_PROJECT_ID')&&!SUPABASE_ANON_KEY.includes('YOUR_
         const {error}=await cloudDb.auth.signInWithPassword({email,password});
         if(error) throw error;
       }catch(error){
-        setStayStorageMessage('No se pudo iniciar sesión. Revisá el email y la contraseña.',true);
+        setStayStorageMessage(`No se pudo iniciar sesión. Supabase respondió: ${error.message||'error desconocido'}`,true);
         console.error('Error al iniciar sesión en Supabase.',error);
       }
     });
@@ -1779,13 +1779,14 @@ if(!SUPABASE_URL.includes('YOUR_PROJECT_ID')&&!SUPABASE_ANON_KEY.includes('YOUR_
         return;
       }
       try{
-        const {data,error}=await cloudDb.auth.signUp({email,password});
+        const emailRedirectTo=`${window.location.origin}${window.location.pathname}`;
+        const {data,error}=await cloudDb.auth.signUp({email,password,options:{emailRedirectTo}});
         if(error) throw error;
         if(!data.session){
-          setStayStorageMessage('Cuenta creada. Revisá tu email para confirmar y luego iniciá sesión.');
+          setStayStorageMessage('Cuenta creada. Confirmá el email que te enviamos y luego volvé a esta página para iniciar sesión.');
         }
       }catch(error){
-        setStayStorageMessage('No se pudo crear la cuenta. Revisá la configuración de Auth en Supabase.',true);
+        setStayStorageMessage(`No se pudo crear la cuenta. Supabase respondió: ${error.message||'error desconocido'}`,true);
         console.error('Error al crear una cuenta de Supabase.',error);
       }
     });

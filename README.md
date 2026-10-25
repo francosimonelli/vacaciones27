@@ -42,8 +42,11 @@ service. This page uses Supabase Auth and a private Postgres row per account.
 3. Enable **Email** under Supabase **Authentication → Providers**. If email
    confirmation is enabled, configure SMTP if needed and confirm the signup
    message before signing in.
-4. In Supabase **Authentication → URL Configuration**, add both the production
-   and development GitHub Pages URLs as allowed redirect URLs.
+4. In Supabase **Authentication → URL Configuration**, add these exact URLs
+   under **Redirect URLs** so email confirmation returns to the environment
+   where signup started:
+   - `https://francosimonelli.github.io/vacaciones27/`
+   - `https://francosimonelli.github.io/vacaciones27/dev/`
 5. Copy the project URL and **publishable/anon** key from the Supabase API
    settings into `SUPABASE_URL` and `SUPABASE_ANON_KEY` near `STAY_KEY` in
    `index.html`. These values are public in a static site; never put a
@@ -51,7 +54,8 @@ service. This page uses Supabase Auth and a private Postgres row per account.
 6. Push and deploy the page. In **Dónde dormir**, create an account, confirm
    its email if prompted, and sign in. Existing lodging options/checklist in
    that browser are copied to the new account the first time. Later logins
-   load the database copy and every edit is saved to Supabase.
+   load the database copy and every edit is saved to Supabase. Signup and login
+   errors are displayed with the message returned by Supabase.
 
 Until the Supabase project is configured and a user signs in, lodging and
 checklist editing is disabled rather than pretending changes were saved.
