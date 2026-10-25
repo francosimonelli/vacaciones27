@@ -3,9 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Itinerario de viaje por Japón y Krabi: día a día, vuelos, alojamientos y checklist.">
+<meta name="theme-color" content="#0B141C">
 <title>日本 + Krabi — 25 Ene – 19 Feb 2027 · v16</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{
   --paper:#0B141C;
@@ -55,6 +58,7 @@ p{margin:0;}
 img,svg{display:block;max-width:100%;}
 button{font-family:inherit;cursor:pointer;}
 a{color:inherit;}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
 ::selection{background:var(--red);color:#fff;}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
 @media(max-width:640px){.wrap{padding:0 18px;}}
@@ -288,8 +292,10 @@ a{color:inherit;}
 .res-item{
   display:flex;align-items:center;gap:13px;background:var(--card);border:1px solid var(--line);
   border-radius:12px;padding:14px 16px;font-size:.9rem;transition:.18s;
+  width:100%;color:var(--ink);font:inherit;text-align:left;cursor:pointer;
 }
 .res-item.done{opacity:.5;}
+.res-item:disabled{cursor:not-allowed;}
 .res-check{
   width:22px;height:22px;border-radius:6px;border:2px solid var(--line-strong);flex-shrink:0;
   display:flex;align-items:center;justify-content:center;font-size:.8rem;color:transparent;transition:.15s;
@@ -337,12 +343,22 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 .stay-summary span{font-size:.76rem;color:var(--ink-soft);}
 @media(max-width:640px){.stay-summary{flex-wrap:wrap;}.stay-summary div{flex:1 1 50%;border-bottom:1px solid var(--line-strong);}}
 .stay-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:22px;}
+.cloud-auth-form{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1 1 100%;padding:12px;background:var(--paper-dim);border:1px solid var(--line);border-radius:12px;}
+.cloud-auth-form[hidden]{display:none;}
+.cloud-auth-form label{font-size:.78rem;color:var(--ink-soft);}
+.cloud-auth-form input{min-width:180px;max-width:240px;background:var(--paper);color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;padding:8px 10px;font:inherit;font-size:.82rem;}
+.cloud-auth-form button{background:var(--card);color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;padding:8px 12px;font-size:.82rem;font-weight:600;}
+.cloud-auth-form button:hover{border-color:var(--red);}
+.cloud-auth-form #cloudUser{font-size:.82rem;color:var(--green);margin-left:auto;}
+.cloud-auth-form [hidden]{display:none!important;}
 .stay-tools button{background:var(--card);color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;padding:7px 14px;font-size:.82rem;font-weight:600;}
 .stay-tools button:hover{border-color:var(--ink);}
 .stay-tools button.primary{background:var(--red);border-color:var(--red);color:#fff;}
 .stay-tools button.primary:hover{filter:brightness(1.1);border-color:var(--red);}
 .stay-tools .note b{color:var(--gold);font-weight:700;display:block;margin-top:2px;}
 .stay-tools .note{font-size:.76rem;color:var(--ink-faint);flex:1 1 220px;}
+.stay-storage-state{flex:1 1 100%;font-size:.8rem;color:var(--green);}
+.stay-storage-state.error{color:var(--red);}
 .stay-block{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px;transition:.18s;}
 .stay-block.booked{border-color:rgba(75,106,87,.75);}
 .stay-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
@@ -509,14 +525,26 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 <section class="section" id="stays">
   <div class="wrap">
     <span class="section-num">05 — ALOJAMIENTOS</span>
-    <div class="section-head"><h2>Dónde dormir</h2><p class="section-sub">Un bloque por zona con las noches ya calculadas. Cargá opciones, marcalas como idea, preseleccionada o reservada. Se guarda en este navegador; para dejarlo dentro del archivo y compartirlo, usá «Guardar en el HTML».</p></div>
+    <div class="section-head"><h2>Dónde dormir</h2><p class="section-sub">Cargá, editá o quitá opciones y marcalas como idea, preseleccionada o reservada. Al iniciar sesión, los cambios y el checklist se guardan en la nube y aparecen en tus otros dispositivos.</p></div>
     <div class="stay-summary" id="staySummary"></div>
     <div class="stay-tools">
+      <form id="cloudAuthForm" class="cloud-auth-form">
+        <label for="cloudEmail">Email</label>
+        <input id="cloudEmail" name="email" type="email" autocomplete="username" required placeholder="tu@email.com">
+        <label for="cloudPassword">Contraseña</label>
+        <input id="cloudPassword" name="password" type="password" autocomplete="current-password" minlength="8" required placeholder="Mínimo 8 caracteres">
+        <button type="submit" id="cloudSignIn">Iniciar sesión</button>
+        <button type="button" id="cloudSignUp">Crear cuenta</button>
+        <button type="button" id="cloudSignOut" hidden>Cerrar sesión</button>
+        <button type="button" id="cloudRetry" hidden>Reintentar guardado</button>
+        <span id="cloudUser" hidden></span>
+      </form>
       <button type="button" id="staySaveHtml" class="primary">💾 Guardar en el HTML</button>
       <button type="button" id="stayExport">Exportar datos</button>
       <button type="button" id="stayImport">Importar datos</button>
       <input type="file" id="stayImportFile" accept=".json,application/json" hidden>
-      <span class="note">«Guardar en el HTML» descarga una copia de este archivo con los alojamientos y el checklist adentro: es la que tenés que compartir (reemplaza a la anterior). Exportar/Importar sirve para pasar los datos a otro navegador. <b id="staySaveState"></b></span>
+      <span class="note">Iniciá sesión para guardar alojamientos y checklist en la nube y acceder desde otros dispositivos. «Guardar en el HTML» descarga una copia independiente. <b id="staySaveState"></b></span>
+      <span class="stay-storage-state" id="stayStorageState" role="status" aria-live="polite">Las modificaciones quedan solo en este navegador hasta configurar la nube e iniciar sesión.</span>
     </div>
     <div id="stayBlocks"></div>
   </div>
@@ -982,11 +1010,34 @@ const STAYS = [
   note:'El 15 FEB llegás de Nagano y la valija grande llega por takkyubin desde Kyoto. El vuelo sale 18:50 del 18 FEB: late check-out o guardar equipaje.'},
 ];
 const STAY_KEY='jpk2027_stays';
+const SUPABASE_URL='https://khmfysuobquauvgxqggc.supabase.co';
+const SUPABASE_ANON_KEY='sb_publishable_9sOQErLQP3dqai69WhkXow_DWdX-auk';
 let stayState={};
 let editingStay=null;
-try{ stayState = JSON.parse(localStorage.getItem(STAY_KEY)||'{}'); }catch(e){ stayState={}; }
-var DBX=null, lastSynced={};
-function saveStays(){ try{ localStorage.setItem(STAY_KEY, JSON.stringify(stayState)); localStorage.setItem('jpk2027_dirty','1'); }catch(e){} if(typeof updateSaveBadge==='function') updateSaveBadge(); syncStaysOut(); }
+let cloudDb=null, cloudUser=null, cloudReady=false, cloudLoadGeneration=0, cloudSaveVersion=0;
+let cloudSaveQueue=Promise.resolve();
+function setStayStorageMessage(message,isError=false){
+  const el=document.getElementById('stayStorageState');
+  if(!el) return;
+  el.textContent=message;
+  el.classList.toggle('error',isError);
+}
+try{
+  const saved=JSON.parse(localStorage.getItem(STAY_KEY)||'{}');
+  if(saved&&typeof saved==='object'&&!Array.isArray(saved)) stayState=saved;
+}catch(e){
+  setStayStorageMessage('No se pudieron leer los alojamientos guardados en este navegador.',true);
+}
+function saveStays(){
+  if(!cloudReady){
+    setStayStorageMessage('Conectá la cuenta y esperá a que carguen los datos antes de editar.',true);
+    return false;
+  }
+  lsSet(DIRTY_KEY,'1');
+  syncStaysOut();
+  if(typeof updateSaveBadge==='function') updateSaveBadge();
+  return true;
+}
 
 /* Datos guardados dentro del archivo (alojamientos + checklist). El botón "Guardar en el HTML" reescribe solo este bloque y descarga una copia del archivo. Es lo que ve quien reciba el HTML. */
 /*SAVED_DATA_START*/ const SAVED_DATA = {
@@ -1272,19 +1323,19 @@ function renderStays(){
       const price = tot ? `${num(c.price)?'':'≈ '}USD ${fmtUSD(night)}/noche · <b>USD ${fmtUSD(tot)} total</b> (${n} ${n===1?'noche':'noches'})` : 'sin precio';
       const isEditing=editingStay && editingStay.b===b.id && editingStay.i===i;
       return `<div class="cand ${c.status==='booked'?'booked':''}">
-        ${isEditing ? `<form class="stay-edit-form" data-edit-form="${b.id}" data-i="${i}">
-          <input class="f-name" name="name" placeholder="Nombre del alojamiento" value="${esc(c.name)}" required>
-          <input class="f-zone" name="zone" placeholder="Zona / barrio" value="${esc(c.zone||'')}">
-          <input class="f-url" name="url" placeholder="Link (opcional)" value="${esc(c.url||'')}">
-          <input class="f-price" name="price" type="number" min="0" placeholder="USD/noche" value="${esc(c.price||'')}">
-          <input class="f-total" name="total" type="number" min="0" placeholder="USD total estadía" value="${esc(c.total||'')}">
-          <input class="f-notes" name="notes" placeholder="Notas (desayuno, cancelación...)" value="${esc(c.notes||'')}">
-          <button type="button" data-act="save-edit" data-b="${b.id}" data-i="${i}">Guardar cambios</button>
+        ${isEditing ? `<form class="stay-edit-form" data-edit-form="${b.id}" data-i="${i}" aria-label="Editar ${esc(c.name)}">
+          <input class="f-name" name="name" aria-label="Nombre del alojamiento" placeholder="Nombre del alojamiento" value="${esc(c.name)}" maxlength="120" required>
+          <input class="f-zone" name="zone" aria-label="Zona o barrio" placeholder="Zona / barrio" value="${esc(c.zone||'')}" maxlength="120">
+          <input class="f-url" name="url" type="url" aria-label="Enlace del alojamiento" placeholder="https://..." value="${esc(c.url||'')}">
+          <input class="f-price" name="price" type="number" min="0" step="0.01" aria-label="Precio por noche en dólares" placeholder="USD/noche" value="${esc(c.price||'')}">
+          <input class="f-total" name="total" type="number" min="0" step="0.01" aria-label="Precio total en dólares" placeholder="USD total estadía" value="${esc(c.total||'')}">
+          <input class="f-notes" name="notes" aria-label="Notas" placeholder="Notas (desayuno, cancelación...)" value="${esc(c.notes||'')}" maxlength="500">
+          <button type="submit" data-b="${b.id}" data-i="${i}">Guardar cambios</button>
           <button type="button" data-act="cancel-edit" data-b="${b.id}" data-i="${i}">Cancelar</button>
         </form>` : `<span class="c-name">${name}</span>${c.zone?`<span class="c-zone">📍 ${esc(c.zone)}</span>`:''}<span class="c-price">${price}</span>
         <select data-act="status" data-b="${b.id}" data-i="${i}">${Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${c.status===k?'selected':''}>${v}</option>`).join('')}</select>
         <button class="c-edit" type="button" data-act="edit" data-b="${b.id}" data-i="${i}">Editar</button>
-        <button class="c-del" type="button" data-act="del" data-b="${b.id}" data-i="${i}" aria-label="Eliminar">✕</button>
+        <button class="c-del" type="button" data-act="del" data-b="${b.id}" data-i="${i}" aria-label="Eliminar ${esc(c.name)}">✕</button>
         ${c.notes?`<span class="c-notes">${esc(c.notes)}</span>`:''}`}</div>`;
     }).join('');
     return `<div class="stay-block ${bk?'booked':''}" data-block="${b.id}">
@@ -1295,60 +1346,119 @@ function renderStays(){
       <p class="stay-note">${esc(b.note)}</p>
       <div class="stay-links">${links}</div>
       <div class="stay-cands">${cands}</div>
-      <div class="stay-form" data-form="${b.id}">
-        <input class="f-name" placeholder="Nombre del alojamiento">
-        <input class="f-zone" placeholder="Zona / barrio">
-        <input class="f-url" placeholder="Link (opcional)">
-        <input class="f-price" type="number" min="0" placeholder="USD/noche">
-        <input class="f-total" type="number" min="0" placeholder="USD total estadía">
-        <input class="f-notes" placeholder="Notas (desayuno, cancelación, distancia...)">
-        <button type="button" data-act="add" data-b="${b.id}">Agregar</button>
-      </div></div>`;
+      <form class="stay-form" data-form="${b.id}" aria-label="Agregar alojamiento para ${esc(b.city)}">
+        <input class="f-name" name="name" aria-label="Nombre del alojamiento" placeholder="Nombre del alojamiento" maxlength="120" required>
+        <input class="f-zone" name="zone" aria-label="Zona o barrio" placeholder="Zona / barrio" maxlength="120">
+        <input class="f-url" name="url" type="url" aria-label="Enlace del alojamiento" placeholder="https://...">
+        <input class="f-price" name="price" type="number" min="0" step="0.01" aria-label="Precio por noche en dólares" placeholder="USD/noche">
+        <input class="f-total" name="total" type="number" min="0" step="0.01" aria-label="Precio total en dólares" placeholder="USD total estadía">
+        <input class="f-notes" name="notes" aria-label="Notas" placeholder="Notas (desayuno, cancelación, distancia...)" maxlength="500">
+        <button type="submit">Agregar</button>
+      </form></div>`;
   }).join('');
   document.getElementById('staySummary').innerHTML =
     `<div><b>${mainBooked}/${mainTotal}</b><span>bloques principales reservados</span></div>`+
     `<div><b>${STAYS.filter(b=>!b.opt).reduce((a,b)=>a+nightsOf(b),0)}</b><span>noches de alojamiento</span></div>`+
     `<div><b>USD ${Math.round(cost).toLocaleString('es-AR')}</b><span>total de lo reservado</span></div>`;
 }
+document.getElementById('stayBlocks').addEventListener('submit',e=>{
+  const form=e.target;
+  if(!form.matches('.stay-form,.stay-edit-form')) return;
+  e.preventDefault();
+  if(!cloudReady){
+    setStayStorageMessage('Iniciá sesión y esperá a que la nube cargue antes de guardar cambios.',true);
+    return;
+  }
+  const id=form.matches('.stay-form')?form.dataset.form:form.dataset.editForm;
+  if(!STAYS.some(stay=>stay.id===id)) return;
+  const list=(stayState[id]=stayState[id]||[]);
+  const fields=new FormData(form);
+  const url=String(fields.get('url')||'').trim();
+  if(url&&!safeUrl(url)){
+    form.elements.namedItem('url').setCustomValidity('Ingresá un enlace http o https válido.');
+    form.elements.namedItem('url').reportValidity();
+    return;
+  }
+  form.elements.namedItem('url').setCustomValidity('');
+  const name=String(fields.get('name')||'').trim();
+  if(!name){ form.elements.namedItem('name').focus(); return; }
+  const candidate={
+    name,
+    zone:String(fields.get('zone')||'').trim(),
+    url:url?safeUrl(url):'',
+    price:String(fields.get('price')||''),
+    total:String(fields.get('total')||''),
+    notes:String(fields.get('notes')||'').trim()
+  };
+  if(form.matches('.stay-form')){
+    list.push({...candidate,status:'idea'});
+  }else{
+    const i=Number(form.dataset.i);
+    if(!Number.isInteger(i)||i<0||i>=list.length) return;
+    list[i]={...list[i],...candidate};
+    editingStay=null;
+  }
+  saveStays();
+  renderStays();
+});
 document.getElementById('stayBlocks').addEventListener('click',e=>{
   const t=e.target.closest('[data-act]'); if(!t) return;
-  const id=t.dataset.b, list=(stayState[id]=stayState[id]||[]);
-  if(t.dataset.act==='add'){
-    const f=t.closest('.stay-form'); const name=f.querySelector('.f-name').value.trim();
-    if(!name){ f.querySelector('.f-name').focus(); return; }
-    list.push({name,zone:f.querySelector('.f-zone').value.trim(),url:f.querySelector('.f-url').value.trim(),price:f.querySelector('.f-price').value,total:f.querySelector('.f-total').value,notes:f.querySelector('.f-notes').value.trim(),status:'idea'});
-  } else if(t.dataset.act==='edit'){
+  if(!cloudReady){
+    setStayStorageMessage('Iniciá sesión para editar alojamientos.',true);
+    return;
+  }
+  const id=t.dataset.b, list=stayState[id]||[];
+  if(t.dataset.act==='edit'){
     editingStay={b:id,i:+t.dataset.i};
   } else if(t.dataset.act==='cancel-edit'){
     editingStay=null;
-  } else if(t.dataset.act==='save-edit'){
-    const i=+t.dataset.i, f=t.closest('.cand').querySelector('.stay-edit-form');
-    const name=f.querySelector('[name="name"]').value.trim();
-    if(!name){ f.querySelector('[name="name"]').focus(); return; }
-    const old=list[i];
-    list[i]={...old,name,zone:f.querySelector('[name="zone"]').value.trim(),url:f.querySelector('[name="url"]').value.trim(),price:f.querySelector('[name="price"]').value,total:f.querySelector('[name="total"]').value,notes:f.querySelector('[name="notes"]').value.trim()};
+  } else if(t.dataset.act==='del'){
+    const i=Number(t.dataset.i);
+    if(!Number.isInteger(i)||i<0||i>=list.length) return;
+    if(!confirm(`¿Eliminar "${list[i].name}" de esta lista?`)) return;
+    list.splice(i,1);
     editingStay=null;
-  } else if(t.dataset.act==='del'){ list.splice(+t.dataset.i,1); editingStay=null; }
-  saveStays(); renderStays();
+    saveStays();
+  }else{
+    return;
+  }
+  renderStays();
 });
 document.getElementById('stayBlocks').addEventListener('change',e=>{
   const t=e.target.closest('[data-act="status"]'); if(!t) return;
-  const list=stayState[t.dataset.b]||[], i=+t.dataset.i, v=t.value;
+  if(!cloudReady){
+    setStayStorageMessage('Iniciá sesión para guardar cambios.',true);
+    renderStays();
+    return;
+  }
+  const list=stayState[t.dataset.b]||[], i=Number(t.dataset.i), v=t.value;
+  if(!Number.isInteger(i)||i<0||i>=list.length||!Object.prototype.hasOwnProperty.call(STATUS,v)) return;
   if(v==='booked') list.forEach((c,j)=>{ if(j!==i&&c.status==='booked') c.status='short'; });
   list[i].status=v; saveStays(); renderStays();
 });
 renderStays();
 async function saveFile(name,data){
   let dl=null;
-  try{ dl=(window.claude&&claude.use)?await claude.use('downloads'):null; }catch(e){ dl=null; }
-  if(dl){ try{ await dl.save({filename:name,data}); }catch(e){} return; }
+  try{ dl=(window.claude&&claude.use)?await claude.use('downloads'):null; }catch(e){ console.error('No se pudo iniciar la descarga integrada.',e); }
+  if(dl){
+    try{ await dl.save({filename:name,data}); return; }
+    catch(e){ console.error('Falló la descarga integrada; se intentará la descarga del navegador.',e); }
+  }
   const blob=new Blob([data],{type:name.endsWith('.json')?'application/json':'text/html;charset=utf-8'});
-  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name;
-  document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  const url=URL.createObjectURL(blob), a=document.createElement('a');
+  a.href=url; a.download=name;
+  try{ document.body.appendChild(a); a.click(); }
+  finally{ a.remove(); setTimeout(()=>URL.revokeObjectURL(url),1000); }
 }
-document.getElementById('stayExport').addEventListener('click',()=>{
+document.getElementById('stayExport').addEventListener('click',async()=>{
   const data={version:1,stays:stayState,reservations:resState};
-  saveFile('japan-krabi-2027-datos.json',JSON.stringify(data,null,2));
+  try{
+    await saveFile('japan-krabi-2027-datos.json',JSON.stringify(data,null,2));
+    setStayStorageMessage('Datos exportados.');
+  }catch(e){
+    setStayStorageMessage('No se pudo exportar el archivo de datos.',true);
+    console.error('No se pudieron exportar los alojamientos.',e);
+  }
 });
 document.getElementById('stayImport').addEventListener('click',()=>document.getElementById('stayImportFile').click());
 document.getElementById('stayImportFile').addEventListener('change',e=>{
@@ -1357,12 +1467,47 @@ document.getElementById('stayImportFile').addEventListener('change',e=>{
   r.onload=()=>{
     try{
       const d=JSON.parse(r.result);
-      if(!d||typeof d.stays!=='object'||d.stays===null) throw new Error('formato');
+      if(!d||!d.stays||typeof d.stays!=='object'||Array.isArray(d.stays)) throw new Error('formato');
+      const importedStays={};
+      Object.entries(d.stays).forEach(([id,list])=>{
+        if(!/^[a-z0-9_-]{1,64}$/i.test(id)||!Array.isArray(list)) throw new Error('formato');
+        importedStays[id]=list.map(c=>{
+          if(!c||typeof c!=='object'||Array.isArray(c)||typeof c.name!=='string'||!c.name.trim()) throw new Error('alojamiento');
+          const url=String(c.url||'').trim();
+          if(url&&!safeUrl(url)) throw new Error('enlace');
+          const price=c.price==null||c.price===''?'':Number(c.price);
+          const total=c.total==null||c.total===''?'':Number(c.total);
+          if((price!==''&&(!Number.isFinite(price)||price<0))||(total!==''&&(!Number.isFinite(total)||total<0))) throw new Error('precio');
+          return {
+            name:c.name.trim().slice(0,120),
+            zone:String(c.zone||'').trim().slice(0,120),
+            url:url?safeUrl(url):'',
+            price:price===''?'':String(price),
+            total:total===''?'':String(total),
+            notes:String(c.notes||'').trim().slice(0,500),
+            status:Object.prototype.hasOwnProperty.call(STATUS,c.status)?c.status:'idea'
+          };
+        });
+      });
+      const importedReservations=d.reservations==null?{}:d.reservations;
+      if(typeof importedReservations!=='object'||Array.isArray(importedReservations)) throw new Error('reservas');
       if(!confirm('Esto reemplaza los alojamientos y el checklist que tenés cargados en este navegador. ¿Seguir?')) return;
-      stayState=d.stays; saveStays();
-      if(d.reservations&&typeof d.reservations==='object'){ resState=d.reservations; try{ localStorage.setItem(STORE_KEY, JSON.stringify(resState)); }catch(err){} }
+      stayState=importedStays;
+      resState=Object.fromEntries(Object.entries(importedReservations).map(([key,value])=>[key,!!value]));
+      if(!saveStays()) return;
+      try{
+        if(!cloudReady) localStorage.setItem(STORE_KEY,JSON.stringify(resState));
+      }catch(err){
+        setStayStorageMessage('Los alojamientos se guardaron, pero no se pudo guardar el checklist.',true);
+        console.error('No se pudo guardar el checklist importado.',err);
+        renderStays();
+        return;
+      }
       location.reload();
-    }catch(err){ alert('El archivo no es válido.'); }
+    }catch(err){
+      setStayStorageMessage('El archivo JSON no es válido o contiene datos incorrectos.',true);
+      console.error('No se pudieron importar los alojamientos.',err);
+    }
   };
   r.readAsText(file); e.target.value='';
 });
@@ -1394,15 +1539,21 @@ try{ resState = JSON.parse(localStorage.getItem(STORE_KEY)||'{}'); }catch(e){ re
 if(adoptMode==='replace'){ resState=Object.assign({},SAVED_DATA.reservations||{}); lsSet(STORE_KEY,JSON.stringify(resState)); }
 else if(adoptMode==='merge'){ Object.keys(SAVED_DATA.reservations||{}).forEach(k=>{ if(SAVED_DATA.reservations[k]) resState[k]=true; }); lsSet(STORE_KEY,JSON.stringify(resState)); }
 RESERVATIONS.forEach((r,i)=>{
-  const item = document.createElement('div');
+  const item = document.createElement('button');
+  item.type='button';
   const key = 'r'+i;
   const done = !!resState[key];
   item.className='res-item'+(done?' done':'');
+  item.setAttribute('aria-pressed',String(done));
   item.innerHTML = `<div class="res-check">✓</div><span class="txt">${r.t}</span><span class="tag-region">${r.r}</span>`;
   item.onclick = ()=>{
+    if(!cloudReady){
+      setStayStorageMessage('Iniciá sesión para guardar cambios en el checklist.',true);
+      return;
+    }
     resState[key] = !resState[key];
     item.classList.toggle('done');
-    try{ localStorage.setItem(STORE_KEY, JSON.stringify(resState)); }catch(e){}
+    item.setAttribute('aria-pressed',String(!!resState[key]));
     syncResOut(key);
     lsSet(DIRTY_KEY,'1'); updateSaveBadge();
   };
@@ -1451,47 +1602,212 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 /* =======================================================
-   SHARED STATE (db): alojamientos y checklist compartidos
+   SUPABASE: persistence shared across devices
 ======================================================= */
-function syncStaysOut(){
-  if(!DBX) return;
-  Object.keys(stayState).forEach(id=>{
-    const list=stayState[id]; if(!Array.isArray(list)) return;
-    const str=JSON.stringify(list); if(lastSynced[id]===str) return;
-    lastSynced[id]=str;
-    DBX.doc('stays/'+id).set({list}).catch(()=>{ delete lastSynced[id]; });
+function updateCloudAuthUI(){
+  const emailInput=document.getElementById('cloudEmail');
+  const passwordInput=document.getElementById('cloudPassword');
+  const signIn=document.getElementById('cloudSignIn');
+  const signUp=document.getElementById('cloudSignUp');
+  const signOut=document.getElementById('cloudSignOut');
+  const retry=document.getElementById('cloudRetry');
+  const userLabel=document.getElementById('cloudUser');
+  const signedIn=!!cloudUser;
+  emailInput.hidden=signedIn;
+  passwordInput.hidden=signedIn;
+  document.querySelector('label[for="cloudEmail"]').hidden=signedIn;
+  document.querySelector('label[for="cloudPassword"]').hidden=signedIn;
+  signIn.hidden=signedIn;
+  signUp.hidden=signedIn;
+  signOut.hidden=!signedIn;
+  if(!signedIn) retry.hidden=true;
+  userLabel.hidden=!signedIn;
+  userLabel.textContent=signedIn?`Sesión: ${cloudUser.email}`:'';
+}
+
+function setCloudControlsEnabled(enabled){
+  document.querySelectorAll('#stayBlocks input,#stayBlocks button,#stayBlocks select').forEach(control=>{
+    control.disabled=!enabled;
+  });
+  document.getElementById('stayImport').disabled=!enabled;
+  document.getElementById('stayImportFile').disabled=!enabled;
+  document.querySelectorAll('#resList .res-item').forEach(item=>{
+    item.disabled=!enabled;
   });
 }
-function syncResOut(key){
-  if(!DBX) return;
-  DBX.doc('reservas/'+key).set({done:!!resState[key]}).catch(()=>{});
+
+function clearLocalTripCache(){
+  try{
+    localStorage.removeItem(STAY_KEY);
+    localStorage.removeItem(STORE_KEY);
+  }catch(error){
+    console.warn('No se pudo eliminar la copia local del itinerario.',error);
+  }
 }
-(async function initShared(){
-  let db=null;
-  try{ db = (window.claude && claude.use) ? await claude.use('db') : null; }catch(e){ db=null; }
-  if(!db) return;
-  DBX=db;
-  db.collection('stays').onSnapshot(snap=>{
-    let changed=false;
-    snap.docs.forEach(d=>{
-      const data=d.data()||{}; if(!Array.isArray(data.list)) return;
-      const str=JSON.stringify(data.list);
-      lastSynced[d.id]=str;
-      if(JSON.stringify(stayState[d.id]||[])!==str){ stayState[d.id]=data.list; changed=true; }
-    });
-    if(changed){
-      try{ localStorage.setItem(STAY_KEY, JSON.stringify(stayState)); }catch(e){}
-      if(!editingStay) renderStays();
+
+function saveCloudSnapshot(){
+  if(!cloudDb||!cloudUser||!cloudReady){
+    setStayStorageMessage('Los cambios no se guardaron. Conectá la base de datos e iniciá sesión.',true);
+    return;
+  }
+  const version=++cloudSaveVersion;
+  const snapshot={
+    user_id:cloudUser.id,
+    stays:JSON.parse(JSON.stringify(stayState)),
+    reservations:JSON.parse(JSON.stringify(resState)),
+    updated_at:new Date().toISOString()
+  };
+  setStayStorageMessage('Guardando cambios en la nube…');
+  cloudSaveQueue=cloudSaveQueue.catch(()=>{}).then(async()=>{
+    if(!cloudReady||!cloudUser||cloudUser.id!==snapshot.user_id) return;
+    const {error}=await cloudDb.from('trip_data').upsert(snapshot,{onConflict:'user_id'});
+    if(error) throw error;
+    if(version===cloudSaveVersion){
+      clearLocalTripCache();
+      document.getElementById('cloudRetry').hidden=true;
+      setStayStorageMessage(`Guardado en la nube · ${new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'})}`);
     }
-  },()=>{});
-  db.collection('reservas').onSnapshot(snap=>{
-    snap.docs.forEach(d=>{
-      const m=/^r(\d+)$/.exec(d.id); if(!m) return;
-      const data=d.data()||{}; resState[d.id]=!!data.done;
-      const el=resList.children[+m[1]]; if(el) el.classList.toggle('done',!!data.done);
+  }).catch(error=>{
+    if(version===cloudSaveVersion){
+      document.getElementById('cloudRetry').hidden=false;
+      setStayStorageMessage('No se pudieron guardar los cambios en la nube. Revisá tu conexión y volvé a intentar.',true);
+    }
+    console.error('No se pudo guardar el itinerario en Supabase.',error);
+  });
+}
+
+function syncStaysOut(){ saveCloudSnapshot(); }
+function syncResOut(){ saveCloudSnapshot(); }
+
+async function loadCloudData(user,generation){
+  cloudUser=user;
+  cloudReady=false;
+  updateCloudAuthUI();
+  setStayStorageMessage('Cargando tus alojamientos guardados en la nube…');
+
+  const {data,error}=await cloudDb.from('trip_data')
+    .select('stays,reservations')
+    .eq('user_id',user.id)
+    .maybeSingle();
+  if(generation!==cloudLoadGeneration) return;
+  if(error){
+    setStayStorageMessage('No se pudieron cargar los datos de la nube. Revisá la configuración de la base de datos.',true);
+    console.error('No se pudieron cargar los datos desde Supabase.',error);
+    return;
+  }
+
+  if(data){
+    stayState=data.stays&&typeof data.stays==='object'&&!Array.isArray(data.stays)?data.stays:{};
+    resState=data.reservations&&typeof data.reservations==='object'&&!Array.isArray(data.reservations)?data.reservations:{};
+    clearLocalTripCache();
+    renderStays();
+    Array.from(resList.children).forEach((item,index)=>{
+      const done=!!resState['r'+index];
+      item.classList.toggle('done',done);
+      item.setAttribute('aria-pressed',String(done));
     });
-  },()=>{});
-})();
+    setStayStorageMessage('Datos cargados desde la nube.');
+  }else{
+    setStayStorageMessage('Cuenta conectada. Guardando tus datos actuales en la nube…');
+  }
+
+  cloudReady=true;
+  setCloudControlsEnabled(true);
+  if(!data) saveCloudSnapshot();
+}
+
+async function handleCloudSession(session){
+  const user=session?.user||null;
+  if(!user){
+    cloudLoadGeneration++;
+    cloudUser=null;
+    cloudReady=false;
+    setCloudControlsEnabled(false);
+    updateCloudAuthUI();
+    if(cloudDb) setStayStorageMessage('Sesión cerrada. Iniciá sesión para habilitar edición y sincronizar.');
+    return;
+  }
+  if(cloudUser?.id===user.id&&cloudReady) return;
+  const generation=++cloudLoadGeneration;
+  try{
+    await loadCloudData(user,generation);
+  }catch(error){
+    if(generation===cloudLoadGeneration) setStayStorageMessage('No se pudieron cargar los datos de la nube. Revisá tu conexión.',true);
+    console.error('Falló la carga de los datos de Supabase.',error);
+  }
+}
+if(!SUPABASE_URL.includes('YOUR_PROJECT_ID')&&!SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY')){
+  if(!window.supabase?.createClient){
+    setStayStorageMessage('No se pudo cargar el cliente de base de datos. Revisá tu conexión.',true);
+    console.error('El SDK de Supabase no está disponible.');
+  }else{
+    cloudDb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    setCloudControlsEnabled(false);
+    cloudDb.auth.onAuthStateChange((_event,session)=>{
+      setTimeout(()=>handleCloudSession(session),0);
+    });
+    cloudDb.auth.getSession().then(({data,error})=>{
+      if(error){
+        setStayStorageMessage('No se pudo verificar la sesión. Volvé a iniciar sesión.',true);
+        console.error('No se pudo verificar la sesión de Supabase.',error);
+        return;
+      }
+      return handleCloudSession(data.session);
+    }).catch(error=>{
+      setStayStorageMessage('No se pudo conectar con la nube. Revisá tu conexión.',true);
+      console.error('Falló la consulta de sesión de Supabase.',error);
+    });
+
+    document.getElementById('cloudAuthForm').addEventListener('submit',async event=>{
+      event.preventDefault();
+      const form=event.currentTarget;
+      const email=form.elements.namedItem('email').value.trim();
+      const password=form.elements.namedItem('password').value;
+      try{
+        const {error}=await cloudDb.auth.signInWithPassword({email,password});
+        if(error) throw error;
+      }catch(error){
+        setStayStorageMessage('No se pudo iniciar sesión. Revisá el email y la contraseña.',true);
+        console.error('Error al iniciar sesión en Supabase.',error);
+      }
+    });
+    document.getElementById('cloudSignUp').addEventListener('click',async()=>{
+      const email=document.getElementById('cloudEmail').value.trim();
+      const password=document.getElementById('cloudPassword').value;
+      if(!email||password.length<8){
+        setStayStorageMessage('Ingresá un email válido y una contraseña de al menos 8 caracteres.',true);
+        return;
+      }
+      try{
+        const {data,error}=await cloudDb.auth.signUp({email,password});
+        if(error) throw error;
+        if(!data.session){
+          setStayStorageMessage('Cuenta creada. Revisá tu email para confirmar y luego iniciá sesión.');
+        }
+      }catch(error){
+        setStayStorageMessage('No se pudo crear la cuenta. Revisá la configuración de Auth en Supabase.',true);
+        console.error('Error al crear una cuenta de Supabase.',error);
+      }
+    });
+    document.getElementById('cloudSignOut').addEventListener('click',async()=>{
+      try{
+        await cloudSaveQueue;
+        const {error}=await cloudDb.auth.signOut();
+        if(error) throw error;
+      }catch(error){
+        setStayStorageMessage('No se pudo cerrar la sesión.',true);
+        console.error('Error al cerrar sesión en Supabase.',error);
+      }
+    });
+    document.getElementById('cloudRetry').addEventListener('click',saveCloudSnapshot);
+    setStayStorageMessage('Base de datos configurada. Iniciá sesión para cargar tus datos.');
+  }
+}else{
+  document.getElementById('cloudAuthForm').hidden=true;
+  setCloudControlsEnabled(false);
+  updateCloudAuthUI();
+  setStayStorageMessage('Configurá Supabase para habilitar la edición y guardar cambios en la nube.',true);
+}
 </script>
 </body>
 </html>

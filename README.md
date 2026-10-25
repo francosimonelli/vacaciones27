@@ -30,3 +30,30 @@ replacing production. Pushes to feature branches do not start deployments.
 For the default GitHub Pages URL, production is served from
 `https://francosimonelli.github.io/vacaciones27/` and development from
 `https://francosimonelli.github.io/vacaciones27/dev/`.
+
+## Cloud-saved lodging and checklist
+
+GitHub Pages only hosts static files, so cross-device saves require a database
+service. This page uses Supabase Auth and a private Postgres row per account.
+
+1. Create a Supabase project.
+2. In **SQL Editor**, run [`supabase/schema.sql`](./supabase/schema.sql).
+   Row-level security limits each account to its own trip data.
+3. Enable **Email** under Supabase **Authentication → Providers**. If email
+   confirmation is enabled, configure SMTP if needed and confirm the signup
+   message before signing in.
+4. In Supabase **Authentication → URL Configuration**, add both the production
+   and development GitHub Pages URLs as allowed redirect URLs.
+5. Copy the project URL and **publishable/anon** key from the Supabase API
+   settings into `SUPABASE_URL` and `SUPABASE_ANON_KEY` near `STAY_KEY` in
+   `index.html`. These values are public in a static site; never put a
+   `service_role` or secret key in the HTML.
+6. Push and deploy the page. In **Dónde dormir**, create an account, confirm
+   its email if prompted, and sign in. Existing lodging options/checklist in
+   that browser are copied to the new account the first time. Later logins
+   load the database copy and every edit is saved to Supabase.
+
+Until the Supabase project is configured and a user signs in, lodging and
+checklist editing is disabled rather than pretending changes were saved.
+Existing browser data can be migrated when the first account is created.
+Export and **Guardar en el HTML** remain available as manual backups.
