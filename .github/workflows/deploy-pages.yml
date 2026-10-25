@@ -39,14 +39,21 @@ jobs:
           git fetch origin \
             +refs/heads/main:refs/remotes/origin/main
           if [[ "$DEPLOY_SOURCE_REF" == "main" ]]; then
-            dev_source_ref=dev
+            if git ls-remote --exit-code origin refs/heads/dev >/dev/null 2>&1; then
+              dev_source_ref=dev
+            else
+              dev_source_ref=""
+            fi
           else
             dev_source_ref="$DEPLOY_SOURCE_REF"
           fi
-          git fetch origin "+refs/heads/${dev_source_ref}:refs/remotes/origin/dev-build"
-          mkdir -p _site/dev
+          mkdir -p _site
           git archive origin/main | tar -x -C _site
-          git archive origin/dev-build | tar -x -C _site/dev
+          if [[ -n "$dev_source_ref" ]]; then
+            git fetch origin "+refs/heads/${dev_source_ref}:refs/remotes/origin/dev-build"
+            mkdir -p _site/dev
+            git archive origin/dev-build | tar -x -C _site/dev
+          fi
           rm -rf _site/.github _site/dev/.github
           touch _site/.nojekyll
 
