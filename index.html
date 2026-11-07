@@ -329,7 +329,10 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 .stay-summary div:last-child{border-right:none;}
 .stay-summary b{display:block;font-family:'Shippori Mincho',serif;font-size:1.5rem;font-weight:800;}
 .stay-summary span{font-size:.76rem;color:var(--ink-soft);}
-@media(max-width:640px){.stay-summary{flex-wrap:wrap;}.stay-summary div{flex:1 1 50%;border-bottom:1px solid var(--line-strong);}}
+.stay-summary .stay-total-summary{background:var(--green-dim);}
+.stay-summary .stay-total-summary b{font-size:1.8rem;color:var(--green);}
+.stay-summary .stay-total-summary span{display:block;max-width:34ch;line-height:1.45;}
+@media(max-width:640px){.stay-summary{flex-wrap:wrap;}.stay-summary div{flex:1 1 50%;border-bottom:1px solid var(--line-strong);}.stay-summary .stay-total-summary{flex-basis:100%;}}
 .stay-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:22px;}
 .cloud-auth-form{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1 1 100%;padding:12px;background:var(--paper-dim);border:1px solid var(--line);border-radius:12px;}
 .cloud-auth-form[hidden]{display:none;}
@@ -515,7 +518,7 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
   <div class="wrap">
     <span class="section-num">05 — ALOJAMIENTOS</span>
     <div class="section-head"><h2>Dónde dormir</h2><p class="section-sub">Cargá, editá o quitá opciones y marcalas como idea, preseleccionada o reservada. Al iniciar sesión, los cambios y el checklist se guardan en la nube y aparecen en tus otros dispositivos.</p></div>
-    <div class="stay-summary" id="staySummary"></div>
+    <div class="stay-summary" id="staySummary" aria-live="polite"></div>
     <div class="stay-tools">
       <form id="cloudAuthForm" class="cloud-auth-form">
         <label for="cloudEmail">Email</label>
@@ -1350,17 +1353,22 @@ const nightsOf = s=>Math.round((new Date(s.out)-new Date(s.in))/864e5);
 const num = v=>{ const x=Number(v); return (v!==''&&v!=null&&isFinite(x)&&x>0)?x:0; };
 const stayTotal = (c,n)=> num(c.total) || num(c.price)*n;
 const stayNight = (c,n)=> num(c.price) || (n?num(c.total)/n:0);
-const fmtUSD = x=>Number(x.toFixed(2)).toLocaleString('es-AR');
+const fmtUSD = x=>Number(x.toFixed(2)).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const STATUS = {idea:'💡 Idea', short:'⭐ Preseleccionado', booked:'✅ Reservado'};
 
 function renderStays(){
   const wrap = document.getElementById('stayBlocks');
-  let bookedBlocks=0, cost=0, mainTotal=0, mainBooked=0;
+  let bookedBlocks=0, unpricedBooked=0, cost=0, mainTotal=0, mainBooked=0;
   wrap.innerHTML = STAYS.map(b=>{
     const n = nightsOf(b), list = stayState[b.id]||[];
     const bk = list.find(c=>c.status==='booked');
     if(!b.opt){ mainTotal++; if(bk) mainBooked++; }
-    if(bk){ bookedBlocks++; cost += stayTotal(bk,n); }
+    if(bk){
+      bookedBlocks++;
+      const total=stayTotal(bk,n);
+      if(total) cost+=total;
+      else unpricedBooked++;
+    }
     const q = encodeURIComponent(b.q);
     const links = `<a target="_blank" rel="noopener" href="https://www.booking.com/searchresults.html?ss=${q}&checkin=${b.in}&checkout=${b.out}">Booking</a>`+
       `<a target="_blank" rel="noopener" href="https://www.airbnb.com/s/${q}/homes?checkin=${b.in}&checkout=${b.out}">Airbnb</a>`+
@@ -1408,7 +1416,7 @@ function renderStays(){
   document.getElementById('staySummary').innerHTML =
     `<div><b>${mainBooked}/${mainTotal}</b><span>bloques principales reservados</span></div>`+
     `<div><b>${STAYS.filter(b=>!b.opt).reduce((a,b)=>a+nightsOf(b),0)}</b><span>noches de alojamiento</span></div>`+
-    `<div><b>USD ${Math.round(cost).toLocaleString('es-AR')}</b><span>total de lo reservado</span></div>`;
+    `<div class="stay-total-summary"><b>USD ${fmtUSD(cost)}</b><span>Total de alojamientos reservados${unpricedBooked?` · ${unpricedBooked} reserva${unpricedBooked===1?'':'s'} sin precio (no incluida${unpricedBooked===1?'':'s'} en la suma)`:bookedBlocks?'':' · Marcá una opción como reservada y cargá su precio para sumarla.'}</span></div>`;
 }
 document.getElementById('stayBlocks').addEventListener('submit',e=>{
   const form=e.target;
