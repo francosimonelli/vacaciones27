@@ -132,43 +132,31 @@ a{color:inherit;}
 .section-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:700;}
 .section-sub{color:var(--ink-soft);font-size:.95rem;max-width:520px;margin-top:6px;}
 
-/* ---------- RAIL TIMELINE (signature element) ---------- */
-.rail-section{background:var(--deep);color:var(--deep-text);border-radius:28px;margin:0 auto;max-width:calc(var(--maxw) + 56px);position:relative;overflow:hidden;}
-.rail-section .wrap{padding:64px 28px 40px;}
-.rail-section .section-num{color:rgba(250,246,239,0.4);}
-.rail-section .section-head h2{color:var(--deep-text);}
-.rail-section .section-sub{color:rgba(250,246,239,0.55);}
-.rail-scroll{overflow-x:auto;padding:30px 0 18px;scrollbar-width:thin;}
-.rail-track{position:relative;min-width:1500px;height:150px;}
-@media(max-width:900px){
-  .rail-scroll{overflow-x:visible;}
-  .rail-track{min-width:0;height:auto;}
+/* ---------- TRIP CALENDAR ---------- */
+#timeline>.wrap{max-width:1500px;}
+.trip-table-wrap{max-width:760px;overflow-x:auto;border:1px solid var(--line-strong);border-radius:var(--radius-sm);background:var(--card);}
+.trip-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+.trip-table thead th{
+  padding:10px 12px;background:var(--deep);color:var(--deep-text);
+  text-align:left;font-family:'Shippori Mincho',serif;font-size:.95rem;font-weight:700;
 }
-.rail-line{position:absolute;top:64px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold) 45%,var(--teal) 55%,var(--red) 100%);border-radius:2px;}
-.rail-stops{display:flex;justify-content:space-between;position:relative;}
-.rail-stop{
-  display:flex;flex-direction:column;align-items:center;width:100px;flex-shrink:0;position:relative;
-  cursor:pointer;background:none;border:none;color:inherit;padding:0;
+.trip-table thead th:first-child{width:58%;}
+.trip-table th,.trip-table td{border:1px solid var(--line-strong);}
+.trip-segment.japan{--trip-fill:var(--red-dim);--trip-accent:var(--red);}
+.trip-segment.thailand{--trip-fill:var(--teal-dim);--trip-accent:var(--teal);}
+.trip-segment.travel{--trip-fill:var(--gold-dim);--trip-accent:var(--gold);}
+.trip-date-cell{padding:0;background:var(--trip-fill);}
+.trip-date-trigger{
+  width:100%;min-height:40px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:6px 12px;border:0;background:transparent;color:var(--ink);text-align:left;
 }
-.rail-stop .dot{
-  width:15px;height:15px;border-radius:50%;background:var(--paper);border:3px solid var(--ink);
-  margin-top:57px;z-index:2;transition:.2s;
-}
-.rail-stop .dot.branch{border-color:var(--teal);}
-.rail-stop:hover .dot{transform:scale(1.3);background:var(--red);}
-.rail-stop .ic{font-size:1.3rem;margin-bottom:2px;}
-.rail-stop .lbl{font-size:.68rem;text-align:center;margin-top:10px;color:rgba(250,246,239,0.72);line-height:1.25;font-weight:500;}
-.rail-stop .lbl b{display:block;color:var(--deep-text);font-weight:700;font-size:.72rem;}
-
-/* mobile vertical rail */
-@media(max-width:900px){
-  .rail-line{display:none;}
-  .rail-stops{flex-direction:column;align-items:flex-start;gap:0;}
-  .rail-stop{flex-direction:row;width:100%;align-items:center;gap:14px;padding:11px 0;text-align:left;}
-  .rail-stop .dot{margin:0;position:relative;}
-  .rail-stop .dot::after{content:"";position:absolute;top:15px;left:6px;width:2px;height:44px;background:rgba(250,246,239,0.25);}
-  .rail-stop:last-child .dot::after{display:none;}
-  .rail-stop .lbl{margin:0;text-align:left;}
+.trip-date-trigger:hover{background:rgba(231,238,242,.07);}
+.trip-date-label{font-family:'JetBrains Mono',monospace;font-size:.9rem;font-weight:600;white-space:nowrap;}
+.trip-date-note{font-size:.76rem;line-height:1.3;text-align:right;color:var(--ink-soft);}
+.trip-place{
+  width:42%;padding:10px;text-align:center;vertical-align:middle;
+  background:var(--trip-fill);color:var(--ink);font-size:.96rem;font-weight:700;
+  box-shadow:inset 4px 0 var(--trip-accent);
 }
 
 /* ---------- FILTERS ---------- */
@@ -399,10 +387,6 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 .stay-form button{background:var(--deep);color:var(--deep-text);border:1px solid var(--line-strong);border-radius:8px;padding:7px 16px;font-size:.82rem;font-weight:700;}
 .stay-form button:hover{background:var(--red);border-color:var(--red);}
 
-/* scrollbars */
-.rail-scroll::-webkit-scrollbar{height:6px;}
-.rail-scroll::-webkit-scrollbar-thumb{background:rgba(250,246,239,0.25);border-radius:3px;}
-
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 /* ---------- MOBILE: compact day cards ---------- */
 @media(max-width:640px){
@@ -416,6 +400,12 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
   .day-alert{font-size:.74rem;padding:6px 10px;}
   .day-meta{font-size:.72rem;gap:12px;}
   .day-btn{font-size:.8rem;}
+  .trip-table thead th{padding:9px 10px;}
+  .trip-table thead th:first-child{width:58%;}
+  .trip-date-trigger{min-height:44px;padding:7px 9px;align-items:flex-start;flex-direction:column;gap:2px;}
+  .trip-date-label{font-size:.82rem;}
+  .trip-date-note{font-size:.68rem;text-align:left;}
+  .trip-place{padding:8px 5px;font-size:.82rem;}
   .filters{flex-wrap:nowrap;overflow-x:auto;margin-bottom:16px;padding-bottom:4px;scrollbar-width:none;}
   .filters::-webkit-scrollbar{display:none;}
   .filter-chip{flex-shrink:0;padding:7px 12px;font-size:.78rem;}
@@ -468,22 +458,21 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
   </div>
 </div>
 
-<!-- ============ RAIL TIMELINE ============ -->
+<!-- ============ TRIP OVERVIEW ============ -->
 <section class="section tight" id="timeline">
   <div class="wrap">
-    <div class="rail-section">
-      <div class="wrap">
-        <span class="section-num">01 — RECORRIDO</span>
-        <div class="section-head"><h2>La línea del viaje</h2></div>
-        <p class="section-sub">Cada parada es clickeable y te lleva a ese tramo del itinerario. La rama celeste marca el desvío a Tailandia.</p>
-        <div class="rail-scroll">
-          <div class="rail-track">
-            <div class="rail-line"></div>
-            <div class="rail-stops" id="railStops"></div>
-          </div>
-        </div>
-      </div>
+    <span class="section-num">01 — RECORRIDO</span>
+    <div class="section-head">
+      <div><h2>El viaje, día por día</h2><p class="section-sub">Fechas y lugares en una sola vista. Tocá un día para abrir su plan.</p></div>
     </div>
+    <div class="trip-table-wrap">
+      <table class="trip-table" id="tripCalendar" aria-label="Itinerario día por día">
+        <thead><tr><th scope="col">Fecha</th><th scope="col">Lugar</th></tr></thead>
+      </table>
+    </div>
+    <noscript>
+      <p class="section-sub">Activá JavaScript para ver el calendario interactivo del viaje.</p>
+    </noscript>
   </div>
 </section>
 
@@ -824,32 +813,95 @@ const WEATHER_ALERTS = [
 ];
 
 /* =======================================================
-   RENDER: RAIL TIMELINE
+   RENDER: TRIP CALENDAR
 ======================================================= */
-const RAIL_STOPS = [
- {ic:'🇦🇷',lbl:'Buenos Aires',target:'flights'},
- {ic:'🇯🇵',lbl:'Tokyo',target:'0127'},
- {ic:'🗻',lbl:'Fuji',target:'0130'},
- {ic:'🇹🇭',lbl:'Krabi',target:'0202',branch:true},
- {ic:'⛰️',lbl:'Railay',target:'0204',branch:true},
- {ic:'🏝️',lbl:'Islands',target:'0205',branch:true},
- {ic:'⛩️',lbl:'Kyoto',target:'0210'},
- {ic:'🎋',lbl:'Arashiyama',target:'0212'},
- {ic:'🍜',lbl:'Osaka',target:'0213'},
- {ic:'🐒',lbl:'Nagano',target:'0214'},
- {ic:'🛍️',lbl:'Tokyo',target:'0216'},
- {ic:'🇦🇷',lbl:'Buenos Aires',target:'flights'},
+const TRIP_EDGE_DAYS = [
+  {date:'2027-01-25',location:'En vuelo',title:'Salida 16:45 · EZE → Toronto'},
+  {date:'2027-01-26',location:'En vuelo',title:'Conexión · Toronto → Tokyo'},
+  {date:'2027-02-19',location:'Buenos Aires',title:'Llegada 15:05 · EZE'}
 ];
-const railEl = document.getElementById('railStops');
-RAIL_STOPS.forEach(s=>{
-  const btn = document.createElement('button');
-  btn.className='rail-stop';
-  btn.innerHTML = `<span class="ic">${s.ic}</span><span class="dot ${s.branch?'branch':''}"></span><span class="lbl"><b>${s.lbl}</b></span>`;
-  btn.onclick = ()=>{
-    const el = document.getElementById(s.target.length===4?('day-'+s.target):s.target);
-    if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
-  };
-  railEl.appendChild(btn);
+const calendarEntries=[
+  ...TRIP_EDGE_DAYS.map(entry=>({...entry,date:new Date(`${entry.date}T00:00:00Z`),country:'travel'})),
+  ...DAYS.map(day=>{
+    const month=Number(day.id.slice(0,2))-1;
+    const date=new Date(Date.UTC(2027,month,Number(day.id.slice(2))));
+    const isThailand=/KRABI|AO NANG|RAILAY|HONG ISLANDS|PHI PHI/.test(day.city);
+    return {
+      date,
+      day,
+      emoji:day.emoji,
+      location:day.city,
+      title:day.title,
+      country:day.travel?'travel':isThailand?'thailand':'japan'
+    };
+  })
+].sort((a,b)=>a.date-b.date);
+const tripCalendar=document.getElementById('tripCalendar');
+const tripSegments=[
+  {from:'2027-01-25',to:'2027-01-26',place:'En vuelo',region:'travel'},
+  {from:'2027-01-27',to:'2027-02-01',place:'Tokyo',region:'japan'},
+  {from:'2027-02-02',to:'2027-02-08',place:'Krabi',region:'thailand'},
+  {from:'2027-02-09',to:'2027-02-09',place:'En vuelo',region:'travel'},
+  {from:'2027-02-10',to:'2027-02-13',place:'Kyoto',region:'japan'},
+  {from:'2027-02-14',to:'2027-02-14',place:'Nagano',region:'japan'},
+  {from:'2027-02-15',to:'2027-02-17',place:'Tokyo',region:'japan'},
+  {from:'2027-02-18',to:'2027-02-18',place:'En vuelo',region:'travel'},
+  {from:'2027-02-19',to:'2027-02-19',place:'Buenos Aires',region:'travel'}
+];
+const tripEntryByDate=new Map(calendarEntries.map(entry=>[
+  entry.date.toISOString().slice(0,10),entry
+]));
+const tripMilestones={
+  '2027-01-25':'Salida 16:45 · EZE → Toronto',
+  '2027-01-26':'Conexión · Toronto → Tokyo',
+  '2027-01-27':'Llegada a Tokyo · 16:40',
+  '2027-02-02':'Vuelo Tokyo → Krabi',
+  '2027-02-09':'Vuelo nocturno · Krabi → Tokyo',
+  '2027-02-10':'Llegada + tren a Kyoto',
+  '2027-02-18':'Salida 18:50 · HND → Toronto',
+  '2027-02-19':'Llegada 15:05 · EZE'
+};
+tripSegments.forEach(segment=>{
+  const tbody=document.createElement('tbody');
+  tbody.className=`trip-segment ${segment.region}`;
+  const start=new Date(`${segment.from}T00:00:00Z`);
+  const end=new Date(`${segment.to}T00:00:00Z`);
+  const rowCount=Math.round((end-start)/86400000)+1;
+  for(let index=0;index<rowCount;index++){
+    const date=new Date(start.getTime()+index*86400000);
+    const dateKey=date.toISOString().slice(0,10);
+    const entry=tripEntryByDate.get(dateKey);
+    if(!entry) throw new Error(`Falta el itinerario para ${dateKey}.`);
+    const row=document.createElement('tr');
+    const dateCell=document.createElement('td');
+    dateCell.className='trip-date-cell';
+    const dateButton=document.createElement('button');
+    dateButton.type='button';
+    dateButton.className='trip-date-trigger';
+    dateButton.setAttribute('aria-label',`${new Intl.DateTimeFormat('es-AR',{dateStyle:'long',timeZone:'UTC'}).format(date)}: ${segment.place}${tripMilestones[dateKey]?`. ${tripMilestones[dateKey]}`:''}. Abrir detalle del día.`);
+    dateButton.innerHTML=`
+      <span class="trip-date-label">${String(date.getUTCDate()).padStart(2,'0')}/${String(date.getUTCMonth()+1).padStart(2,'0')}</span>
+      ${tripMilestones[dateKey]?`<span class="trip-date-note">${tripMilestones[dateKey]}</span>`:''}
+    `;
+    dateButton.addEventListener('click',()=>{
+      if(entry.day) openModal(entry.day.id);
+      else document.getElementById('flights').scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    dateCell.appendChild(dateButton);
+    row.appendChild(dateCell);
+    if(index===0){
+      const placeCell=document.createElement('th');
+      placeCell.className='trip-place';
+      placeCell.scope='rowgroup';
+      placeCell.rowSpan=rowCount;
+      placeCell.textContent=segment.place;
+      tbody.appendChild(row);
+      row.appendChild(placeCell);
+    }else{
+      tbody.appendChild(row);
+    }
+  }
+  tripCalendar.appendChild(tbody);
 });
 
 /* =======================================================
