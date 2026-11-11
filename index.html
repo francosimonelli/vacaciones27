@@ -329,7 +329,10 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 .stay-summary div:last-child{border-right:none;}
 .stay-summary b{display:block;font-family:'Shippori Mincho',serif;font-size:1.5rem;font-weight:800;}
 .stay-summary span{font-size:.76rem;color:var(--ink-soft);}
-@media(max-width:640px){.stay-summary{flex-wrap:wrap;}.stay-summary div{flex:1 1 50%;border-bottom:1px solid var(--line-strong);}}
+.stay-summary .stay-total-summary{background:var(--green-dim);}
+.stay-summary .stay-total-summary b{font-size:1.8rem;color:var(--green);}
+.stay-summary .stay-total-summary span{display:block;max-width:34ch;line-height:1.45;}
+@media(max-width:640px){.stay-summary{flex-wrap:wrap;}.stay-summary div{flex:1 1 50%;border-bottom:1px solid var(--line-strong);}.stay-summary .stay-total-summary{flex-basis:100%;}}
 .stay-tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:22px;}
 .cloud-auth-form{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1 1 100%;padding:12px;background:var(--paper-dim);border:1px solid var(--line);border-radius:12px;}
 .cloud-auth-form[hidden]{display:none;}
@@ -454,7 +457,7 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 <div class="wrap">
   <div class="notice">
     <span class="ico">🛍️</span>
-    <div><b>Compras grandes: dejar para el final del viaje.</b><p>Ropa y regalos, idealmente el 17 de febrero en Tokyo. Si el Fuji se mueve al 17 por clima, repartir compras entre la tarde del 15 y la mañana del 18. Antes de Krabi, solo compras chicas o necesarias.</p></div>
+    <div><b>Compras grandes: dejar para el final del viaje.</b><p>Ropa y regalos, idealmente el 17 de febrero en Tokyo. Si el Fuji se mueve al 17 por clima, repartir compras entre el día 15 y los ratos libres del 18. Antes de Krabi, solo compras chicas o necesarias.</p></div>
   </div>
 </div>
 
@@ -515,7 +518,7 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
   <div class="wrap">
     <span class="section-num">05 — ALOJAMIENTOS</span>
     <div class="section-head"><h2>Dónde dormir</h2><p class="section-sub">Cargá, editá o quitá opciones y marcalas como idea, preseleccionada o reservada. Al iniciar sesión, los cambios y el checklist se guardan en la nube y aparecen en tus otros dispositivos.</p></div>
-    <div class="stay-summary" id="staySummary"></div>
+    <div class="stay-summary" id="staySummary" aria-live="polite"></div>
     <div class="stay-tools">
       <form id="cloudAuthForm" class="cloud-auth-form">
         <label for="cloudEmail">Email</label>
@@ -558,7 +561,7 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
   </div>
 </section>
 
-<footer class="wrap">día a día armado a mano · Buenos Aires → Tokyo/Fuji → Krabi → Kyoto → Nagano → Tokyo → Buenos Aires</footer>
+<footer class="wrap">día a día armado a mano · Buenos Aires → Tokyo/Nagano → Krabi → Kyoto → Fuji/Tokyo → Buenos Aires</footer>
 
 <!-- MODAL -->
 <div class="modal-bg" id="modalBg">
@@ -614,19 +617,19 @@ const DAYS = [
    food:['Uogashi Nihon-Ichi — sushi de pie en Shibuya','Kiwamiya — hamburg steak estilo Fukuoka, cerca de Harajuku/Parco','Negibouzu — izakaya clásico en Harajuku para cerrar el día'],
    walk:'Alta',dur:'Día completo',res:'Shibuya Sky',lat:35.6598,lng:139.7006},
 
-  {id:'0130',date:'30 ENE',city:'TOKYO → KAWAGUCHIKO',emoji:'🗻',title:'Monte Fuji + Lake Kawaguchi',
-   cats:['nature','transport'],time:'Excursión de día completo desde Tokyo · salida temprano',
-   places:['Lake Kawaguchi','Miradores del Monte Fuji','Chureito Pagoda si el acceso y el tiempo lo permiten','Paseo junto al lago'],
-   desc:'Excursión de día completo al Fuji desde la base de Tokyo. Mirar el pronóstico 2–3 días antes: si el Fuji no se ve, intercambiar con el 31 ENE, que queda libre de repuesto.',
-   food:['Houtou Fudou — hoto, el plato de fideos típico de Yamanashi','Fuji Tempura Idaten — tempura'],
-   walk:'Media',dur:'Día completo',res:'Transporte Tokyo ↔ Kawaguchiko',alert:'🗻 Plan A: Fuji el 30 ENE. Plan B: pasarlo al 31 ENE si el pronóstico mejora.',lat:35.5019,lng:138.7636},
+  {id:'0130',date:'30 ENE',city:'TOKYO → NAGANO → YUDANAKA',emoji:'♨️',title:'Viaje a Nagano + onsen en Yudanaka',
+   cats:['transport','onsen'],time:'Salida por la mañana · Shinkansen a Nagano + tren local a Yudanaka',
+   places:['Shinkansen Tokyo → Nagano (~1 h 40)','Nagaden Nagano → Yudanaka (~45–50 min)','Dejar equipaje en el alojamiento','Paseo tranquilo por Yudanaka o Shibu Onsen','Baño termal y cena en el ryokan'],
+   desc:'Adelantamos Nagano para disfrutar el onsen antes de Tailandia. La idea es dormir en Yudanaka o Shibu Onsen, no volver a Tokyo esa noche; confirmar con el alojamiento qué baños están incluidos y sus horarios.',
+   food:['Cena del ryokan si está incluida','Soba u otra comida cerca de Yudanaka si no hay cena'],
+   walk:'Baja',dur:'Día de traslado + onsen',res:'Shinkansen Tokyo → Nagano · Nagaden a Yudanaka · alojamiento con onsen',alert:'♨️ Reservar alojamiento en Yudanaka o Shibu Onsen y confirmar acceso al baño termal.',lat:36.7444,lng:138.4137},
 
-  {id:'0131',date:'31 ENE',city:'TOKYO',emoji:'🌤️',title:'Día de repuesto del Fuji / Tokyo libre',
-   cats:['city','food'],time:'Día flexible',
-   places:['Si el Fuji se movió a hoy: excursión a Kawaguchiko','Si no: Shinjuku Gyoen, Ginza o Tsukiji Outer Market','Opcional: teamLab (reservar)'],
-   desc:'Día de repuesto por clima para el Fuji. Si el 30 ENE salió bien, queda libre para pasear por Tokyo sin apuro.',
-   food:['Tsukiji Outer Market — desayuno de mariscos y tamagoyaki (opcional)'],
-   walk:'Media',dur:'Día flexible',res:'teamLab (opcional)',lat:35.6852,lng:139.7100},
+  {id:'0131',date:'31 ENE',city:'YUDANAKA → JIGOKUDANI → TOKYO',emoji:'🐒',title:'Monos de nieve + regreso a Tokyo',
+   cats:['nature','transport'],time:'Parque temprano · regreso a Tokyo por la tarde/noche',
+   places:['Nagaden Yudanaka → estación más cercana al parque','Bus hasta la entrada del sendero','Sendero de acceso (~1,6 km)','Visita al Jigokudani Monkey Park','Vuelta a Yudanaka y Nagano','Shinkansen Nagano → Tokyo (~1 h 40)'],
+   desc:'Visitamos el parque temprano después de dormir en la zona y volvemos a Tokyo por la tarde. El sendero puede estar nevado o resbaladizo: llevar calzado adecuado y revisar buses y trenes el día anterior.',
+   food:['Desayuno en el alojamiento','Almuerzo simple en Yudanaka o Nagano antes del Shinkansen'],
+   walk:'Media',dur:'Mañana de parque + traslado',res:'Entrada al Jigokudani Monkey Park · Shinkansen Nagano → Tokyo',alert:'❄️ Día largo: salir temprano y dejar margen para nieve o demoras. El 1 FEB queda como colchón en Tokyo.',lat:36.7326,lng:138.4620},
 
   {id:'0201',date:'1 FEB',city:'TOKYO',emoji:'☕',title:'Día colchón en Tokyo antes del vuelo',
    cats:['city','food'],time:'Día libre · salida a Haneda por la noche',
@@ -720,33 +723,31 @@ const DAYS = [
    food:['Chibo Okonomiyaki — el clásico panqueque salado de Osaka','Tako Tako King — takoyaki en Amerikamura/Dotonbori'],
    walk:'Media',dur:'Día completo',res:'—',alert:'🎢 OPCIONAL: reemplazar este día completo por Universal Studios Japan.',lat:34.6873,lng:135.5259},
 
-  {id:'0214',date:'14 FEB',city:'KYOTO → NAGANO',emoji:'🚄',title:'Kyoto → Nagano directo + noche en Nagano',
-   cats:['transport','culture','nature'],time:'Salida de Kyoto por la mañana · ~3 h 15 de viaje',
-   places:['Mandar la valija grande a Tokyo por takkyubin desde el hotel de Kyoto (confirmar con recepción)','Thunderbird Kyoto → Kanazawa (~2 h 10)','Shinkansen Hokuriku Kanazawa → Nagano (~1 h)','Check-in en hotel de Nagano ciudad','Templo Zenko-ji si llegan con luz','Cena cerca de la estación'],
-   desc:'De Kyoto a Nagano sin pasar por Tokyo, con mochila liviana. Ruta más rápida: Thunderbird + Shinkansen Hokuriku (~3 h 15, unos ¥15.000 según Google Maps). Reservar con anticipación. Dormimos en Nagano ciudad (más barato que Shibu Onsen) y salimos temprano a ver a los monos. Muchos hoteles de negocios tienen baño grande tipo onsen.',
-   food:['Soba de Shinshu — la especialidad de Nagano, cerca de Zenko-ji o de la estación','Oyaki — panecillos rellenos al vapor, típicos de la zona'],
-   walk:'Baja',dur:'Día de traslado',res:'Thunderbird + Shinkansen Hokuriku Kyoto → Nagano · Hotel en Nagano ciudad',
-   alert:'❄️ Esta ruta es la más segura con nieve. Alternativa más barata pero más lenta: Shinkansen a Nagoya + Shinano a Nagano.',lat:36.6486,lng:138.1948},
+  {id:'0214',date:'14 FEB',city:'KYOTO → TOKYO',emoji:'🚄',title:'Traslado de Kyoto a Tokyo',
+   cats:['transport'],time:'Salida de Kyoto por la mañana · ~2 h 15 de viaje',
+   places:['Shinkansen Kyoto → Tokyo','Check-in en el hotel de Tokyo','Tarde tranquila y cena cerca del hotel'],
+   desc:'Volvemos directo a Tokyo. Al adelantar Nagano a enero, esta jornada queda como traslado sencillo y se gana margen para descansar antes de las últimas excursiones y el vuelo.',
+   food:['Almuerzo en Kyoto o durante el viaje','Cena cerca del hotel de Tokyo'],
+   walk:'Baja',dur:'Día de traslado',res:'Shinkansen Kyoto → Tokyo · Hotel Tokyo (14–18 FEB)',lat:35.6812,lng:139.7671},
 
-  {id:'0215',date:'15 FEB',city:'NAGANO → TOKYO',emoji:'🐒',title:'Jigokudani Monkey Park + vuelta a Tokyo',
-   cats:['nature','transport'],time:'Mañana temprano en el parque · vuelta a Tokyo por la tarde',
-   places:['Nagaden Nagano → Yudanaka (~45–50 min)','Bus hasta la entrada del sendero','Sendero de acceso (~1,6 km)','Visita al parque','Vuelta a Nagano','Shinkansen Nagano → Tokyo (~1 h 40)','Check-in en el hotel de Tokyo (la valija ya llegó por takkyubin)'],
-   desc:'Salir temprano para ver a los macacos con menos gente. Trenes y buses pueden demorarse con nieve, pero quedan el 16 y el 17 para compras antes del vuelo. Confirmar que la valija enviada por takkyubin esté en el hotel de Tokyo.',
-   food:['Almuerzo simple en la estación de Nagano antes del Shinkansen','Cena en Tokyo al llegar'],
-   walk:'Media',dur:'Mañana de parque + traslado por la tarde',res:'Shinkansen Nagano → Tokyo · Hotel Tokyo (15–18 FEB)',
-   alert:'❄️ Revisar el clima y los trenes el día anterior. El 16 y 17 FEB quedan como colchón antes del vuelo del 18.',lat:36.7326,lng:138.4620},
+  {id:'0215',date:'15 FEB',city:'TOKYO',emoji:'🌿',title:'Tokyo tranquilo + día colchón',
+   cats:['city','food'],time:'Día flexible para descansar o recuperar atrasos',
+   places:['Paseo corto por el barrio','Shinjuku Gyoen, Ginza o Tsukiji según ganas','Compras pendientes si hace falta','Descanso y preparación para el Fuji'],
+   desc:'Día deliberadamente liviano después del traslado desde Kyoto. También funciona como colchón si hubo demoras, antes de la excursión al Fuji.',
+   food:['Comer cerca de la actividad elegida, sin cruzar la ciudad de punta a punta'],
+   walk:'Baja',dur:'Día flexible',res:'Hotel Tokyo',lat:35.6852,lng:139.7100},
 
-  {id:'0216',date:'16 FEB',city:'TOKYO',emoji:'🛍️',title:'Compras de ropa y regalos',
-   cats:['shopping','city'],time:'Día completo flexible',
-   places:['Uniqlo / GU','Ropa en Shibuya / Harajuku / Shinjuku','Don Quijote','Regalos y souvenirs'],
-   desc:'Primer día fuerte de compras, con el día completo libre. Si el 15 FEB hubo demoras desde Nagano, este día absorbe el atraso.',
-   food:['Ramen o food hall rápido para no perder tiempo de compras'],
-   walk:'Media',dur:'Día completo',res:'—',lat:35.6938,lng:139.7034},
+  {id:'0216',date:'16 FEB',city:'TOKYO → KAWAGUCHIKO',emoji:'🗻',title:'Monte Fuji + Lake Kawaguchi',
+   cats:['nature','transport'],time:'Excursión de día completo desde Tokyo · salida temprano',
+   places:['Lake Kawaguchi','Miradores del Monte Fuji','Chureito Pagoda si el acceso y el tiempo lo permiten','Paseo junto al lago'],
+   desc:'Movemos la excursión al Fuji a la segunda estadía en Tokyo. Mirar el pronóstico 2–3 días antes: si el 16 no tiene buena visibilidad, intercambiar con el 17 FEB.',
+   food:['Houtou Fudou — hoto, el plato de fideos típico de Yamanashi','Fuji Tempura Idaten — tempura'],
+   walk:'Media',dur:'Día completo',res:'Transporte Tokyo ↔ Kawaguchiko',alert:'🗻 Plan A: Fuji el 16 FEB. Plan B: pasarlo al 17 FEB según el pronóstico.',lat:35.5019,lng:138.7636},
 
-  {id:'0217',date:'17 FEB',city:'TOKYO',emoji:'🎮',title:'Akihabara + compras pendientes',
+  {id:'0217',date:'17 FEB',city:'TOKYO',emoji:'🛍️',title:'Día de respaldo del Fuji + compras',
    cats:['gaming','shopping','city'],time:'Día completo flexible',
-   places:['Akihabara — arcades y electrónica','Tiendas libres de impuestos (llevar el pasaporte)','Compras pendientes','Preparar el equipaje para el vuelo'],
-   desc:'Akihabara al final del viaje, para no cargar las compras durante el resto del recorrido, y cierre de compras pendientes. Último día completo en Tokyo.',
+   places:['Si el Fuji se movió a hoy: excursión a Kawaguchiko','Si no: Akihabara — arcades y electrónica','Tiendas libres de impuestos (llevar el pasaporte)','Compras pendientes','Preparar el equipaje para el vuelo'],
+   desc:'Día de respaldo por clima para el Fuji. Si la excursión salió el 16, queda para Akihabara y las últimas compras; así no se pierde el margen para ver el Fuji con buena visibilidad.',
    food:['Cena temprana cerca del hotel'],
    walk:'Media',dur:'Día completo',res:'—',lat:35.6984,lng:139.7731},
 
@@ -782,18 +783,18 @@ const FLIGHTS = [
 ];
 
 const RESERVATIONS = [
- {t:'Hotel Tokyo inicial (27 ENE→2 FEB; usar habitación el 1 FEB hasta salir al aeropuerto)',r:'Japón'},
+ {t:'Hotel Tokyo inicial (27–30 ENE y 31 ENE–2 FEB; confirmar noches y equipaje)',r:'Japón'},
+ {t:'Shinkansen Tokyo → Nagano + Nagaden a Yudanaka (30 ENE)',r:'Japón'},
+ {t:'Alojamiento con onsen en Yudanaka o Shibu Onsen (30 ENE)',r:'Japón'},
+ {t:'Nagaden + bus a Jigokudani Monkey Park (31 ENE)',r:'Japón'},
+ {t:'Shinkansen Nagano → Tokyo (31 ENE)',r:'Japón'},
  {t:'Shibuya Sky',r:'Japón'},
- {t:'Transporte Fuji / Kawaguchiko (30 ENE; 31 ENE de repuesto)',r:'Japón'},
+ {t:'Transporte Fuji / Kawaguchiko (16 FEB; 17 FEB de repuesto)',r:'Japón'},
  {t:'teamLab (opcional)',r:'Japón'},
  {t:'Shinkansen Shinagawa → Kyoto (10 FEB, después de las 10:30)',r:'Japón'},
  {t:'Hotel Kyoto (10–14 FEB)',r:'Japón'},
- {t:'Takkyubin valija Kyoto → Tokyo (14 FEB)',r:'Japón'},
- {t:'Thunderbird Kyoto → Kanazawa + Shinkansen Hokuriku a Nagano (14 FEB)',r:'Japón'},
- {t:'Hotel Nagano ciudad (14 FEB)',r:'Japón'},
- {t:'Nagaden + bus a Jigokudani Monkey Park (15 FEB)',r:'Japón'},
- {t:'Shinkansen Nagano → Tokyo (15 FEB)',r:'Japón'},
- {t:'Hotel Tokyo (bloque final, 15–18 FEB)',r:'Japón'},
+ {t:'Shinkansen Kyoto → Tokyo (14 FEB)',r:'Japón'},
+ {t:'Hotel Tokyo (bloque final, 14–18 FEB)',r:'Japón'},
  {t:'Tour de islas Krabi (Phi Phi / Hong)',r:'Tailandia'},
  {t:'Hotel / resort Krabi',r:'Tailandia'},
  {t:'Traslado Railay (barco)',r:'Tailandia'},
@@ -802,13 +803,13 @@ const RESERVATIONS = [
 const WEATHER = [
  {city:'Tokyo',ico:'❄️',note:'Enero / Febrero — frío, alrededor de 5–10°C de día.'},
  {city:'Kyoto',ico:'❄️',note:'Invierno — posibilidad de frío intenso o nieve puntual.'},
- {city:'Nagano',ico:'🌨️',note:'Zona de montaña — mucho más frío que Tokyo, nieve probable en febrero.'},
+ {city:'Nagano',ico:'🌨️',note:'Yudanaka / Jigokudani — zona de montaña; mucho más frío que Tokyo y nieve probable a fines de enero.'},
  {city:'Krabi',ico:'☀️',note:'Tropical — temporada seca, calor y sol, ideal para playa.'},
 ];
 
 const WEATHER_ALERTS = [
-{t:'Monte Fuji (30 ENE; 31 ENE de repuesto)', d:'Revisar el pronóstico 2–3 días antes. Si el Fuji no se ve el 30 ENE, intercambiarlo con el 31 ENE.'},
- {t:'Nagano (14–15 FEB)', d:'Puede haber nieve y demoras en trenes y buses. El 16 y 17 FEB quedan libres antes del vuelo del 18 FEB.'},
+{t:'Nagano / Jigokudani (30–31 ENE)', d:'Puede haber nieve y demoras en trenes y buses. Salir temprano el 31 y revisar el transporte el día anterior.'},
+ {t:'Monte Fuji (16 FEB; 17 FEB de repuesto)', d:'Revisar el pronóstico 2–3 días antes. Si el Fuji no se ve el 16 FEB, intercambiarlo con el 17 FEB.'},
  {t:'Excursiones de islas en Krabi (5 y 7 FEB)', d:'El mar puede estar movido según el día — confirmar condiciones con el operador del tour. El 3 y el 8 FEB quedan libres como colchón.'},
 ];
 
@@ -839,12 +840,13 @@ const calendarEntries=[
 const tripCalendar=document.getElementById('tripCalendar');
 const tripSegments=[
   {from:'2027-01-25',to:'2027-01-26',place:'En vuelo',region:'travel'},
-  {from:'2027-01-27',to:'2027-02-01',place:'Tokyo',region:'japan'},
+  {from:'2027-01-27',to:'2027-01-29',place:'Tokyo',region:'japan'},
+  {from:'2027-01-30',to:'2027-01-31',place:'Yudanaka / Nagano',region:'japan'},
+  {from:'2027-02-01',to:'2027-02-01',place:'Tokyo',region:'japan'},
   {from:'2027-02-02',to:'2027-02-08',place:'Krabi',region:'thailand'},
   {from:'2027-02-09',to:'2027-02-09',place:'En vuelo',region:'travel'},
   {from:'2027-02-10',to:'2027-02-13',place:'Kyoto',region:'japan'},
-  {from:'2027-02-14',to:'2027-02-14',place:'Nagano',region:'japan'},
-  {from:'2027-02-15',to:'2027-02-17',place:'Tokyo',region:'japan'},
+  {from:'2027-02-14',to:'2027-02-17',place:'Tokyo',region:'japan'},
   {from:'2027-02-18',to:'2027-02-18',place:'En vuelo',region:'travel'},
   {from:'2027-02-19',to:'2027-02-19',place:'Buenos Aires',region:'travel'}
 ];
@@ -1042,21 +1044,24 @@ FLIGHTS.forEach(g=>{
    STAYS (persisted)
 ======================================================= */
 const STAYS = [
- {id:'tokyo1',city:'Tokyo — bloque inicial',ico:'🇯🇵',in:'2027-01-27',out:'2027-02-02',inL:'27 ENE',outL:'2 FEB',q:'Tokyo',
+ {id:'tokyo1',city:'Tokyo — bloque inicial',ico:'🇯🇵',in:'2027-01-27',out:'2027-01-30',inL:'27 ENE',outL:'30 ENE',q:'Tokyo',
   tip:'Zonas cómodas para moverse: Shinjuku, Ueno/Asakusa o cerca de Tokyo Station (todo conecta fácil con JR y Metro).',
-  note:'Una sola reserva del 27 ENE al 2 FEB (6 noches): base para Tokyo y el Fuji. El vuelo sale 00:20 del 2 FEB; se paga la noche del 1 FEB aunque no se duerma en la habitación.'},
+  note:'Reservar las noches del 27, 28 y 29 ENE. El 30 ENE salen hacia Nagano; vuelven a Tokyo el 31 y pueden dejar equipaje en el hotel o usar lockers. Confirmar con el hotel si pueden guardar las valijas durante la noche fuera.'},
+ {id:'nagano',city:'Yudanaka / Shibu Onsen',ico:'♨️',in:'2027-01-30',out:'2027-01-31',inL:'30 ENE',outL:'31 ENE',q:'Yudanaka Shibu Onsen',
+  tip:'Elegir alojamiento en Yudanaka o Shibu Onsen con baño termal incluido; confirmar horarios, comidas y acceso antes de reservar.',
+  note:'Una noche antes de Tailandia. Llevar solo una mochila y consultar si el alojamiento guarda el equipaje grande o dejarlo en Tokyo.'},
+ {id:'tokyo1b',city:'Tokyo — noche de regreso',ico:'🇯🇵',in:'2027-01-31',out:'2027-02-02',inL:'31 ENE',outL:'2 FEB',q:'Tokyo',
+  tip:'Puede ser el mismo hotel del bloque inicial si permite dos reservas y guardar equipaje.',
+  note:'Reservar las noches del 31 ENE y 1 FEB. El vuelo sale 00:20 del 2 FEB; confirmar uso de habitación hasta la salida nocturna y guardar las valijas en Tokyo mientras pasan la noche en Nagano.'},
  {id:'ao1',city:'Krabi (base en Ao Nang)',ico:'🇹🇭',in:'2027-02-02',out:'2027-02-09',inL:'2 FEB',outL:'9 FEB',q:'Ao Nang Krabi',
   tip:'Elegir cerca de la costanera o la playa de Ao Nang para resolver tours y comidas a pie.',
   note:'Una sola base para las noches del 2 al 8 FEB; checkout el 9 FEB, antes del vuelo de regreso. Llegás 08:55 del 2 FEB (check-in temprano o dejar equipaje). Pedir late check-out.'},
  {id:'kyoto',city:'Kyoto',ico:'⛩️',in:'2027-02-10',out:'2027-02-14',inL:'10 FEB',outL:'14 FEB',q:'Kyoto',
   tip:'Cerca de Kyoto Station (practicidad) o Kawaramachi/Gion (ambiente y caminable).',
   note:'Llegás ~12:45 desde Haneda: pedir dejar el equipaje temprano. La noche del 9 al 10 FEB la pasás en vuelo. Osaka se hace como excursión de un día.'},
- {id:'nagano',city:'Nagano ciudad',ico:'❄️',in:'2027-02-14',out:'2027-02-15',inL:'14 FEB',outL:'15 FEB',q:'Nagano station hotel',
-  tip:'Cerca de la estación de Nagano: de ahí salen el Nagaden a Yudanaka y el Shinkansen a Tokyo. Buscar hotel de negocios con baño grande tipo onsen.',
-  note:'Una noche. Llegás sin la valija grande (enviada por takkyubin a Tokyo) y salís temprano al parque de los monos.'},
- {id:'tokyo2',city:'Tokyo (final)',ico:'🛍️',in:'2027-02-15',out:'2027-02-18',inL:'15 FEB',outL:'18 FEB',q:'Tokyo',
+ {id:'tokyo2',city:'Tokyo (final)',ico:'🛍️',in:'2027-02-14',out:'2027-02-18',inL:'14 FEB',outL:'18 FEB',q:'Tokyo',
   tip:'Pensar en las compras y en el acceso a Haneda (Shinagawa y Tokyo Station son prácticas).',
-  note:'El 15 FEB llegás de Nagano y la valija grande llega por takkyubin desde Kyoto. El vuelo sale 18:50 del 18 FEB: late check-out o guardar equipaje.'},
+  note:'Llegás desde Kyoto el 14 FEB. El Fuji queda para el 16 o 17 según el pronóstico. El vuelo sale 18:50 del 18 FEB: late check-out o guardar equipaje.'},
 ];
 const STAY_KEY='jpk2027_stays';
 const SUPABASE_URL='https://khmfysuobquauvgxqggc.supabase.co';
@@ -1285,19 +1290,19 @@ function saveStays(){
    {
     "name": "SAKURA HOUSE Asakusa & Skytree",
     "zone": "Asakusa / Kuramae",
-    "url": "https://www.booking.com/hotel/jp/sakura-house-mo-tian-qu.html?checkin=2027-02-15&checkout=2027-02-18&no_rooms=1&group_adults=2&selected_currency=USD",
+    "url": "https://www.booking.com/hotel/jp/sakura-house-mo-tian-qu.html?checkin=2027-02-14&checkout=2027-02-18&no_rooms=1&group_adults=2&selected_currency=USD",
     "price": "",
     "total": "",
-    "notes": "Revisar precio y disponibilidad para 3 noches (15–18 FEB).",
+    "notes": "Revisar precio y disponibilidad para 4 noches (14–18 FEB).",
     "status": "idea"
    },
    {
     "name": "Kc-III",
     "zone": "Ōta (cerca de Haneda)",
-    "url": "https://www.booking.com/hotel/jp/kc-iii.html?checkin=2027-02-15&checkout=2027-02-18&no_rooms=1&group_adults=2&selected_currency=USD",
+    "url": "https://www.booking.com/hotel/jp/kc-iii.html?checkin=2027-02-14&checkout=2027-02-18&no_rooms=1&group_adults=2&selected_currency=USD",
     "price": "",
     "total": "",
-    "notes": "Revisar precio y disponibilidad para 3 noches (15–18 FEB).",
+    "notes": "Revisar precio y disponibilidad para 4 noches (14–18 FEB).",
     "status": "idea"
    }
   ],
@@ -1350,17 +1355,22 @@ const nightsOf = s=>Math.round((new Date(s.out)-new Date(s.in))/864e5);
 const num = v=>{ const x=Number(v); return (v!==''&&v!=null&&isFinite(x)&&x>0)?x:0; };
 const stayTotal = (c,n)=> num(c.total) || num(c.price)*n;
 const stayNight = (c,n)=> num(c.price) || (n?num(c.total)/n:0);
-const fmtUSD = x=>Number(x.toFixed(2)).toLocaleString('es-AR');
+const fmtUSD = x=>Number(x.toFixed(2)).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const STATUS = {idea:'💡 Idea', short:'⭐ Preseleccionado', booked:'✅ Reservado'};
 
 function renderStays(){
   const wrap = document.getElementById('stayBlocks');
-  let bookedBlocks=0, cost=0, mainTotal=0, mainBooked=0;
+  let bookedBlocks=0, unpricedBooked=0, cost=0, mainTotal=0, mainBooked=0;
   wrap.innerHTML = STAYS.map(b=>{
     const n = nightsOf(b), list = stayState[b.id]||[];
     const bk = list.find(c=>c.status==='booked');
     if(!b.opt){ mainTotal++; if(bk) mainBooked++; }
-    if(bk){ bookedBlocks++; cost += stayTotal(bk,n); }
+    if(bk){
+      bookedBlocks++;
+      const total=stayTotal(bk,n);
+      if(total) cost+=total;
+      else unpricedBooked++;
+    }
     const q = encodeURIComponent(b.q);
     const links = `<a target="_blank" rel="noopener" href="https://www.booking.com/searchresults.html?ss=${q}&checkin=${b.in}&checkout=${b.out}">Booking</a>`+
       `<a target="_blank" rel="noopener" href="https://www.airbnb.com/s/${q}/homes?checkin=${b.in}&checkout=${b.out}">Airbnb</a>`+
@@ -1408,7 +1418,7 @@ function renderStays(){
   document.getElementById('staySummary').innerHTML =
     `<div><b>${mainBooked}/${mainTotal}</b><span>bloques principales reservados</span></div>`+
     `<div><b>${STAYS.filter(b=>!b.opt).reduce((a,b)=>a+nightsOf(b),0)}</b><span>noches de alojamiento</span></div>`+
-    `<div><b>USD ${Math.round(cost).toLocaleString('es-AR')}</b><span>total de lo reservado</span></div>`;
+    `<div class="stay-total-summary"><b>USD ${fmtUSD(cost)}</b><span>Total de alojamientos reservados${unpricedBooked?` · ${unpricedBooked} reserva${unpricedBooked===1?'':'s'} sin precio (no incluida${unpricedBooked===1?'':'s'} en la suma)`:bookedBlocks?'':' · Marcá una opción como reservada y cargá su precio para sumarla.'}</span></div>`;
 }
 document.getElementById('stayBlocks').addEventListener('submit',e=>{
   const form=e.target;
