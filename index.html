@@ -381,7 +381,7 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 .stay-edit-form .f-url,.stay-edit-form .f-notes{flex:2 1 200px;}
 .stay-edit-form .f-price{flex:0 1 110px;}
 .stay-edit-form .f-total{flex:0 1 150px;}
-.stay-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.stay-form,.activity-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
 .stay-form input{flex:1 1 130px;min-width:0;}
 .stay-form input.f-url{flex:2 1 200px;}
 .stay-form input.f-price{flex:0 1 110px;}
@@ -389,6 +389,25 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 .stay-form input.f-notes{flex:2 1 200px;}
 .stay-form button{background:var(--deep);color:var(--deep-text);border:1px solid var(--line-strong);border-radius:8px;padding:7px 16px;font-size:.82rem;font-weight:700;}
 .stay-form button:hover{background:var(--red);border-color:var(--red);}
+.activity-form input{background:var(--paper);color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;padding:7px 10px;font-family:inherit;font-size:.82rem;flex:1 1 140px;min-width:0;}
+.activity-form input.f-url,.activity-form input.f-notes{flex:2 1 200px;}
+.activity-form input.f-price{flex:0 1 130px;}
+.activity-form button{background:var(--deep);color:var(--deep-text);border:1px solid var(--line-strong);border-radius:8px;padding:7px 16px;font-size:.82rem;font-weight:700;}
+.activity-form button:hover{background:var(--red);border-color:var(--red);}
+.activity-head{align-items:flex-start;}
+.activity-head h3{flex:1 1 240px;}
+.activity-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.activity-meta span{font-size:.74rem;color:var(--ink-soft);background:var(--paper-dim);border:1px solid var(--line);border-radius:99px;padding:4px 10px;}
+.activity-notes{font-size:.84rem;color:var(--ink-soft);line-height:1.55;margin-top:10px;}
+.activity-notes a{color:var(--ink);text-underline-offset:3px;}
+.activity-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;}
+.activity-actions select{background:var(--paper);color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;padding:7px 10px;font-family:inherit;font-size:.82rem;}
+.activity-actions button{border:1px solid var(--line-strong);background:var(--card);color:var(--ink);border-radius:7px;padding:5px 9px;font-size:.78rem;}
+.activity-actions button:hover{border-color:var(--red);}
+.reservation-checklist{margin-top:24px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px;}
+.reservation-checklist summary{cursor:pointer;font-weight:700;}
+.reservation-checklist .res-list{margin-top:16px;}
+.reservation-checklist .res-item{font-size:.82rem;}
 
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
 /* ---------- MOBILE: compact day cards ---------- */
@@ -517,7 +536,7 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 <section class="section" id="stays">
   <div class="wrap">
     <span class="section-num">05 — ALOJAMIENTOS</span>
-    <div class="section-head"><h2>Dónde dormir</h2><p class="section-sub">Cargá, editá o quitá opciones y marcalas como idea, preseleccionada o reservada. Al iniciar sesión, los cambios y el checklist se guardan en la nube y aparecen en tus otros dispositivos.</p></div>
+    <div class="section-head"><h2>Dónde dormir</h2><p class="section-sub">Cargá, editá o quitá opciones y marcalas como idea, preseleccionada o reservada. Al iniciar sesión, alojamientos, actividades y checklist se guardan en la nube y aparecen en tus otros dispositivos.</p></div>
     <div class="stay-summary" id="staySummary" aria-live="polite"></div>
     <div class="stay-tools">
       <form id="cloudAuthForm" class="cloud-auth-form">
@@ -535,7 +554,7 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
       <button type="button" id="stayExport">Exportar datos</button>
       <button type="button" id="stayImport">Importar datos</button>
       <input type="file" id="stayImportFile" accept=".json,application/json" hidden>
-      <span class="note">Iniciá sesión para guardar alojamientos y checklist en la nube y acceder desde otros dispositivos. «Guardar en el HTML» descarga una copia independiente. <b id="staySaveState"></b></span>
+      <span class="note">Iniciá sesión para guardar alojamientos, actividades y checklist en la nube y acceder desde otros dispositivos. «Guardar en el HTML» descarga una copia independiente. <b id="staySaveState"></b></span>
       <span class="stay-storage-state" id="stayStorageState" role="status" aria-live="polite">Las modificaciones quedan solo en este navegador hasta configurar la nube e iniciar sesión.</span>
     </div>
     <div id="stayBlocks"></div>
@@ -546,8 +565,23 @@ footer{padding:50px 0 30px;text-align:center;color:var(--ink-faint);font-size:.8
 <section class="section" id="reservations">
   <div class="wrap">
     <span class="section-num">06 — RESERVAS</span>
-    <div class="section-head"><h2>Checklist</h2><p class="section-sub">Se guarda automáticamente en este navegador y se incluye al usar «Guardar en el HTML» en Alojamientos.</p></div>
-    <div class="res-list" id="resList"></div>
+    <div class="section-head"><h2>Excursiones y actividades</h2><p class="section-sub">Agregá operadores, enlaces, precios y estado de cada reserva. Se guarda junto con los alojamientos en la nube y en el HTML.</p></div>
+    <div class="stay-summary activity-summary" id="activitySummary" aria-live="polite"></div>
+    <div id="activityBlocks"></div>
+    <form class="stay-form activity-form" id="activityAddForm" aria-label="Agregar excursión o actividad">
+      <input name="title" aria-label="Actividad o excursión" placeholder="Actividad o excursión" maxlength="120" required>
+      <input name="date" aria-label="Fecha prevista" placeholder="Fecha prevista" maxlength="80">
+      <input name="region" aria-label="Zona o país" placeholder="Zona / país" maxlength="120">
+      <input name="provider" aria-label="Operador o sitio" placeholder="Operador o sitio" maxlength="120">
+      <input class="f-url" name="url" type="url" aria-label="Enlace de reserva" placeholder="https://...">
+      <input class="f-price" name="price" type="number" min="0" step="0.01" aria-label="Precio total en dólares" placeholder="Total USD">
+      <input class="f-notes" name="notes" aria-label="Notas" placeholder="Notas (horario, punto de encuentro...)" maxlength="500">
+      <button type="submit">Agregar actividad</button>
+    </form>
+    <details class="reservation-checklist">
+      <summary>Checklist general de reservas y logística</summary>
+      <div class="res-list" id="resList"></div>
+    </details>
   </div>
 </section>
 
@@ -634,9 +668,9 @@ const DAYS = [
   {id:'0201',date:'1 FEB',city:'TOKYO',emoji:'☕',title:'Día colchón en Tokyo antes del vuelo',
    cats:['city','food'],time:'Día libre · salida a Haneda por la noche',
    places:['Descansar y ordenar el equipaje','Paseo corto por el barrio o actividad urbana opcional','Retirar / reorganizar equipaje','Cena temprana','Traslado a Haneda para el vuelo de las 00:20 del 2 FEB'],
-   desc:'Día liviano antes del vuelo nocturno a Tailandia. Pueden pasear por Tokyo, pero no conviene programar una excursión lejana. La reserva de hotel debería permitir usar la habitación durante el día y salir por la noche: por ejemplo, checkout el 2 FEB, aunque no se duerma esa noche.',
+   desc:'Día liviano antes del vuelo nocturno a Tailandia. Checkout del hotel por la mañana; consultar si guardan las valijas durante el día para retirarlas antes de ir a Haneda. No se cuenta con la habitación durante el día.',
    food:['Comer cerca del hotel o en Haneda, sin alejarse demasiado'],
-   walk:'Baja',dur:'Día flexible + vuelo nocturno',res:'Hotel Tokyo hasta el 2 FEB (uso diurno del 1 FEB) · vuelos a Krabi',lat:35.6812,lng:139.7671},
+   walk:'Baja',dur:'Día flexible + vuelo nocturno',res:'Hotel Tokyo: noche del 31 ENE · guardar valijas tras el checkout · vuelos a Krabi',lat:35.6812,lng:139.7671},
 
   {id:'0202',date:'2 FEB',city:'TOKYO → KRABI',emoji:'✈️',title:'Vuelo a Tailandia + llegada a Ao Nang',travel:true,
    cats:['transport','beach'],time:'00:20 HND → 05:25 BKK · 07:35 BKK → 08:55 KBV · tarde libre',
@@ -783,7 +817,7 @@ const FLIGHTS = [
 ];
 
 const RESERVATIONS = [
- {t:'Hotel Tokyo inicial (27–30 ENE y 31 ENE–2 FEB; confirmar noches y equipaje)',r:'Japón'},
+ {t:'Hotel Tokyo (27–30 ENE y noche del 31 ENE; confirmar noches y guardado de equipaje)',r:'Japón'},
  {t:'Shinkansen Tokyo → Nagano + Nagaden a Yudanaka (30 ENE)',r:'Japón'},
  {t:'Alojamiento con onsen en Yudanaka o Shibu Onsen (30 ENE)',r:'Japón'},
  {t:'Nagaden + bus a Jigokudani Monkey Park (31 ENE)',r:'Japón'},
@@ -798,6 +832,18 @@ const RESERVATIONS = [
  {t:'Tour de islas Krabi (Phi Phi / Hong)',r:'Tailandia'},
  {t:'Hotel / resort Krabi',r:'Tailandia'},
  {t:'Traslado Railay (barco)',r:'Tailandia'},
+];
+
+const ACTIVITY_STATE_KEY='__activities';
+const ACTIVITY_DEFAULTS=[
+ {id:'shibuya-sky',title:'Shibuya Sky',region:'Tokyo · Japón',date:'29 ENE',notes:'Entrada con horario. Revisar la fecha de apertura de ventas y elegir una franja al atardecer.',status:'idea'},
+ {id:'teamlab',title:'teamLab (opcional)',region:'Tokyo · Japón',date:'A definir',notes:'Si deciden ir, elegir la sede y comprar entrada con horario; coordinarlo con el día de Tokyo que quede más liviano.',status:'idea'},
+ {id:'jigokudani',title:'Jigokudani Monkey Park',region:'Yudanaka · Japón',date:'31 ENE',notes:'La entrada se compra en el parque, sin reserva anticipada. Revisar el estado del sendero, buses y trenes por nieve.',status:'idea'},
+ {id:'fuji-kawaguchiko',title:'Excursión a Kawaguchiko (Monte Fuji)',region:'Desde Tokyo · Japón',date:'16 FEB (17 FEB de respaldo)',notes:'Revisar el pronóstico 2–3 días antes y definir transporte. Cambiar al 17 FEB si la visibilidad es mejor.',status:'idea'},
+ {id:'four-islands',title:'Tour de las 4 Islas',region:'Krabi · Tailandia',date:'4 FEB',notes:'Confirmar operador, horario de recogida, almuerzo, tasa del parque nacional y política por mal tiempo.',status:'idea'},
+ {id:'hong-islands',title:'Tour Hong Islands',region:'Krabi · Tailandia',date:'5 FEB',notes:'Confirmar operador, horario de recogida, almuerzo, tasa del parque nacional y política por mal tiempo.',status:'idea'},
+ {id:'phi-phi',title:'Tour Phi Phi (incluir Bamboo Island)',region:'Krabi · Tailandia',date:'7 FEB',notes:'Comparar operadores y confirmar si incluye Bamboo Island, equipo de snorkel, almuerzo y traslados.',status:'idea'},
+ {id:'usj',title:'Universal Studios Japan (opcional)',region:'Osaka · Japón',date:'13 FEB',notes:'Solo si reemplazan el plan de Osaka por USJ. Comprar Studio Pass con anticipación; Express Pass es opcional.',status:'idea'}
 ];
 
 const WEATHER = [
@@ -1050,9 +1096,9 @@ const STAYS = [
  {id:'nagano',city:'Yudanaka / Shibu Onsen',ico:'♨️',in:'2027-01-30',out:'2027-01-31',inL:'30 ENE',outL:'31 ENE',q:'Yudanaka Shibu Onsen',
   tip:'Elegir alojamiento en Yudanaka o Shibu Onsen con baño termal incluido; confirmar horarios, comidas y acceso antes de reservar.',
   note:'Una noche antes de Tailandia. Llevar solo una mochila y consultar si el alojamiento guarda el equipaje grande o dejarlo en Tokyo.'},
- {id:'tokyo1b',city:'Tokyo — noche de regreso',ico:'🇯🇵',in:'2027-01-31',out:'2027-02-02',inL:'31 ENE',outL:'2 FEB',q:'Tokyo',
+ {id:'tokyo1b',city:'Tokyo — noche de regreso',ico:'🇯🇵',in:'2027-01-31',out:'2027-02-01',inL:'31 ENE',outL:'1 FEB',q:'Tokyo',
   tip:'Puede ser el mismo hotel del bloque inicial si permite dos reservas y guardar equipaje.',
-  note:'Reservar las noches del 31 ENE y 1 FEB. El vuelo sale 00:20 del 2 FEB; confirmar uso de habitación hasta la salida nocturna y guardar las valijas en Tokyo mientras pasan la noche en Nagano.'},
+  note:'Reservar solo la noche del 31 ENE y hacer checkout el 1 FEB. El vuelo sale 00:20 del 2 FEB; confirmar que guarden las valijas después del checkout para retirarlas antes de ir a Haneda.'},
  {id:'ao1',city:'Krabi (base en Ao Nang)',ico:'🇹🇭',in:'2027-02-02',out:'2027-02-09',inL:'2 FEB',outL:'9 FEB',q:'Ao Nang Krabi',
   tip:'Elegir cerca de la costanera o la playa de Ao Nang para resolver tours y comidas a pie.',
   note:'Una sola base para las noches del 2 al 8 FEB; checkout el 9 FEB, antes del vuelo de regreso. Llegás 08:55 del 2 FEB (check-in temprano o dejar equipaje). Pedir late check-out.'},
@@ -1357,6 +1403,32 @@ const stayTotal = (c,n)=> num(c.total) || num(c.price)*n;
 const stayNight = (c,n)=> num(c.price) || (n?num(c.total)/n:0);
 const fmtUSD = x=>Number(x.toFixed(2)).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const STATUS = {idea:'💡 Idea', short:'⭐ Preseleccionado', booked:'✅ Reservado'};
+function normalizeActivities(value){
+  if(!Array.isArray(value)) throw new Error('actividades');
+  const ids=new Set();
+  return value.map(activity=>{
+    if(!activity||typeof activity!=='object'||Array.isArray(activity)) throw new Error('actividad');
+    const id=String(activity.id||'');
+    const title=String(activity.title||'').trim();
+    const url=String(activity.url||'').trim();
+    const price=activity.price==null||activity.price===''?'':Number(activity.price);
+    if(!/^[a-z0-9_-]{1,80}$/i.test(id)||ids.has(id)||!title||title.length>120) throw new Error('actividad');
+    if(url&&!safeUrl(url)) throw new Error('enlace');
+    if(price!==''&&(!Number.isFinite(price)||price<0)) throw new Error('precio');
+    ids.add(id);
+    return {
+      id,
+      title,
+      region:String(activity.region||'').trim().slice(0,120),
+      date:String(activity.date||'').trim().slice(0,80),
+      provider:String(activity.provider||'').trim().slice(0,120),
+      url:url?safeUrl(url):'',
+      price:price===''?'':String(price),
+      notes:String(activity.notes||'').trim().slice(0,500),
+      status:Object.prototype.hasOwnProperty.call(STATUS,activity.status)?activity.status:'idea'
+    };
+  });
+}
 
 function renderStays(){
   const wrap = document.getElementById('stayBlocks');
@@ -1550,9 +1622,16 @@ document.getElementById('stayImportFile').addEventListener('change',e=>{
       });
       const importedReservations=d.reservations==null?{}:d.reservations;
       if(typeof importedReservations!=='object'||Array.isArray(importedReservations)) throw new Error('reservas');
-      if(!confirm('Esto reemplaza los alojamientos y el checklist que tenés cargados en este navegador. ¿Seguir?')) return;
+      const importedActivities=Object.prototype.hasOwnProperty.call(importedReservations,ACTIVITY_STATE_KEY)
+        ?normalizeActivities(importedReservations[ACTIVITY_STATE_KEY])
+        :normalizeActivities(ACTIVITY_DEFAULTS);
+      if(!confirm('Esto reemplaza los alojamientos, actividades y checklist que tenés cargados en este navegador. ¿Seguir?')) return;
       stayState=importedStays;
-      resState=Object.fromEntries(Object.entries(importedReservations).map(([key,value])=>[key,!!value]));
+      resState=Object.fromEntries(Object.entries(importedReservations)
+        .filter(([key])=>key!==ACTIVITY_STATE_KEY)
+        .map(([key,value])=>[key,!!value]));
+      activityState=importedActivities;
+      resState[ACTIVITY_STATE_KEY]=activityState;
       if(!saveStays()) return;
       try{
         if(!cloudReady) localStorage.setItem(STORE_KEY,JSON.stringify(resState));
@@ -1596,7 +1675,22 @@ const STORE_KEY = 'jpk2027_reservations';
 let resState = {};
 try{ resState = JSON.parse(localStorage.getItem(STORE_KEY)||'{}'); }catch(e){ resState = {}; }
 if(adoptMode==='replace'){ resState=Object.assign({},SAVED_DATA.reservations||{}); lsSet(STORE_KEY,JSON.stringify(resState)); }
-else if(adoptMode==='merge'){ Object.keys(SAVED_DATA.reservations||{}).forEach(k=>{ if(SAVED_DATA.reservations[k]) resState[k]=true; }); lsSet(STORE_KEY,JSON.stringify(resState)); }
+else if(adoptMode==='merge'){
+  Object.entries(SAVED_DATA.reservations||{}).forEach(([key,value])=>{
+    if(key===ACTIVITY_STATE_KEY){ resState[key]=value; return; }
+    if(value) resState[key]=true;
+  });
+  lsSet(STORE_KEY,JSON.stringify(resState));
+}
+let activityState;
+try{
+  activityState=normalizeActivities(Object.prototype.hasOwnProperty.call(resState,ACTIVITY_STATE_KEY)?resState[ACTIVITY_STATE_KEY]:ACTIVITY_DEFAULTS);
+}catch(error){
+  activityState=normalizeActivities(ACTIVITY_DEFAULTS);
+  setStayStorageMessage('No se pudieron leer las actividades guardadas; se cargó la lista inicial.',true);
+  console.error('Los datos guardados de actividades no son válidos.',error);
+}
+resState[ACTIVITY_STATE_KEY]=activityState;
 RESERVATIONS.forEach((r,i)=>{
   const item = document.createElement('button');
   item.type='button';
@@ -1618,6 +1712,159 @@ RESERVATIONS.forEach((r,i)=>{
   };
   resList.appendChild(item);
 });
+
+const activityBlocks=document.getElementById('activityBlocks');
+let editingActivity=null;
+function activityFormMarkup(activity={}){
+  return `<input name="title" aria-label="Actividad o excursión" placeholder="Actividad o excursión" maxlength="120" value="${esc(activity.title||'')}" required>
+    <input name="date" aria-label="Fecha prevista" placeholder="Fecha prevista" maxlength="80" value="${esc(activity.date||'')}">
+    <input name="region" aria-label="Zona o país" placeholder="Zona / país" maxlength="120" value="${esc(activity.region||'')}">
+    <input name="provider" aria-label="Operador o sitio" placeholder="Operador o sitio" maxlength="120" value="${esc(activity.provider||'')}">
+    <input class="f-url" name="url" type="url" aria-label="Enlace de reserva" placeholder="https://..." value="${esc(activity.url||'')}">
+    <input class="f-price" name="price" type="number" min="0" step="0.01" aria-label="Precio total en dólares" placeholder="Total USD" value="${esc(activity.price||'')}">
+    <input class="f-notes" name="notes" aria-label="Notas" placeholder="Notas (horario, punto de encuentro...)" maxlength="500" value="${esc(activity.notes||'')}">`;
+}
+function renderActivities(){
+  const booked=activityState.filter(activity=>activity.status==='booked');
+  const total=booked.reduce((sum,activity)=>sum+num(activity.price),0);
+  document.getElementById('activitySummary').innerHTML=
+    `<div><b>${activityState.length}</b><span>actividades planificadas</span></div>`+
+    `<div><b>${booked.length}/${activityState.length}</b><span>reservadas</span></div>`+
+    `<div class="stay-total-summary"><b>USD ${fmtUSD(total)}</b><span>Total cargado de actividades reservadas</span></div>`;
+  activityBlocks.innerHTML=activityState.map(activity=>{
+    const editing=editingActivity===activity.id;
+    const provider=activity.provider?`<span><b>Operador:</b> ${esc(activity.provider)}</span>`:'';
+    const link=activity.url?`<a href="${esc(safeUrl(activity.url))}" target="_blank" rel="noopener">Abrir reserva</a>`:'';
+    const price=num(activity.price)?`<span><b>USD ${fmtUSD(num(activity.price))}</b> total</span>`:'';
+    return `<article class="stay-block activity-card ${activity.status==='booked'?'booked':''}">
+      <div class="stay-head activity-head">
+        <h3>${esc(activity.title)}</h3>
+        <span class="stay-badge">${esc(activity.date||'Fecha a definir')}</span>
+        <span class="stay-badge opt">${esc(activity.region||'Zona a definir')}</span>
+      </div>
+      ${activity.notes?`<p class="activity-notes">${esc(activity.notes)}</p>`:''}
+      ${editing?`<form class="stay-edit-form activity-form activity-edit-form" data-edit-activity="${esc(activity.id)}" aria-label="Editar ${esc(activity.title)}">
+        ${activityFormMarkup(activity)}
+        <button type="submit">Guardar cambios</button>
+        <button type="button" data-activity-action="cancel" data-activity-id="${esc(activity.id)}">Cancelar</button>
+      </form>`:`<div class="activity-meta">${provider}${price}${link}</div>
+        <div class="activity-actions">
+          <span class="stay-badge ${activity.status==='booked'?'ok':activity.status==='short'?'opt':''}">${STATUS[activity.status]}</span>
+          <select data-activity-status="${esc(activity.id)}" aria-label="Estado de ${esc(activity.title)}">${Object.entries(STATUS).map(([key,label])=>`<option value="${key}" ${activity.status===key?'selected':''}>${label}</option>`).join('')}</select>
+          <button type="button" data-activity-action="edit" data-activity-id="${esc(activity.id)}">Editar</button>
+          <button type="button" data-activity-action="delete" data-activity-id="${esc(activity.id)}" aria-label="Eliminar ${esc(activity.title)}">Eliminar</button>
+        </div>`}
+    </article>`;
+  }).join('');
+  setCloudControlsEnabled(cloudReady);
+}
+function saveActivities(){
+  if(!cloudReady){
+    setStayStorageMessage('Iniciá sesión y esperá a que carguen los datos antes de editar actividades.',true);
+    return false;
+  }
+  resState[ACTIVITY_STATE_KEY]=activityState;
+  return saveStays();
+}
+function activityFromForm(form,id,status='idea'){
+  const fields=new FormData(form);
+  const title=String(fields.get('title')||'').trim();
+  const url=String(fields.get('url')||'').trim();
+  const priceValue=String(fields.get('price')||'').trim();
+  const price=priceValue===''?'':Number(priceValue);
+  if(url&&!safeUrl(url)){
+    form.elements.namedItem('url').setCustomValidity('Ingresá un enlace http o https válido.');
+    form.elements.namedItem('url').reportValidity();
+    return null;
+  }
+  form.elements.namedItem('url').setCustomValidity('');
+  if(!title){ form.elements.namedItem('title').focus(); return null; }
+  if(price!==''&&(!Number.isFinite(price)||price<0)){
+    form.elements.namedItem('price').setCustomValidity('Ingresá un precio válido mayor o igual a cero.');
+    form.elements.namedItem('price').reportValidity();
+    return null;
+  }
+  form.elements.namedItem('price').setCustomValidity('');
+  return {
+    id,
+    title:title.slice(0,120),
+    region:String(fields.get('region')||'').trim().slice(0,120),
+    date:String(fields.get('date')||'').trim().slice(0,80),
+    provider:String(fields.get('provider')||'').trim().slice(0,120),
+    url:url?safeUrl(url):'',
+    price:price===''?'':String(price),
+    notes:String(fields.get('notes')||'').trim().slice(0,500),
+    status
+  };
+}
+document.getElementById('activityAddForm').addEventListener('submit',event=>{
+  event.preventDefault();
+  if(!cloudReady){
+    setStayStorageMessage('Iniciá sesión para agregar actividades.',true);
+    return;
+  }
+  const activity=activityFromForm(event.currentTarget,`activity-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`);
+  if(!activity) return;
+  activityState.push(activity);
+  saveActivities();
+  event.currentTarget.reset();
+  renderActivities();
+});
+activityBlocks.addEventListener('submit',event=>{
+  const form=event.target;
+  if(!form.matches('.activity-edit-form')) return;
+  event.preventDefault();
+  if(!cloudReady){
+    setStayStorageMessage('Iniciá sesión para editar actividades.',true);
+    return;
+  }
+  const index=activityState.findIndex(activity=>activity.id===form.dataset.editActivity);
+  if(index<0) return;
+  const activity=activityFromForm(form,activityState[index].id,activityState[index].status);
+  if(!activity) return;
+  activityState[index]=activity;
+  editingActivity=null;
+  saveActivities();
+  renderActivities();
+});
+activityBlocks.addEventListener('click',event=>{
+  const button=event.target.closest('[data-activity-action]');
+  if(!button) return;
+  if(!cloudReady){
+    setStayStorageMessage('Iniciá sesión para editar actividades.',true);
+    return;
+  }
+  const index=activityState.findIndex(activity=>activity.id===button.dataset.activityId);
+  if(index<0) return;
+  if(button.dataset.activityAction==='edit'){
+    editingActivity=activityState[index].id;
+  }else if(button.dataset.activityAction==='cancel'){
+    editingActivity=null;
+  }else if(button.dataset.activityAction==='delete'){
+    if(!confirm(`¿Eliminar "${activityState[index].title}" de la lista?`)) return;
+    activityState.splice(index,1);
+    editingActivity=null;
+    saveActivities();
+  }else{
+    return;
+  }
+  renderActivities();
+});
+activityBlocks.addEventListener('change',event=>{
+  const select=event.target.closest('[data-activity-status]');
+  if(!select) return;
+  if(!cloudReady){
+    setStayStorageMessage('Iniciá sesión para cambiar el estado de las actividades.',true);
+    renderActivities();
+    return;
+  }
+  const activity=activityState.find(item=>item.id===select.dataset.activityStatus);
+  if(!activity||!Object.prototype.hasOwnProperty.call(STATUS,select.value)) return;
+  activity.status=select.value;
+  saveActivities();
+  renderActivities();
+});
+renderActivities();
 
 /* =======================================================
    WEATHER
@@ -1686,6 +1933,9 @@ function updateCloudAuthUI(){
 
 function setCloudControlsEnabled(enabled){
   document.querySelectorAll('#stayBlocks input,#stayBlocks button,#stayBlocks select').forEach(control=>{
+    control.disabled=!enabled;
+  });
+  document.querySelectorAll('#activityBlocks input,#activityBlocks button,#activityBlocks select,#activityAddForm input,#activityAddForm button').forEach(control=>{
     control.disabled=!enabled;
   });
   document.getElementById('stayImport').disabled=!enabled;
@@ -1758,8 +2008,11 @@ async function loadCloudData(user,generation){
   if(data){
     stayState=data.stays&&typeof data.stays==='object'&&!Array.isArray(data.stays)?data.stays:{};
     resState=data.reservations&&typeof data.reservations==='object'&&!Array.isArray(data.reservations)?data.reservations:{};
+    activityState=normalizeActivities(Object.prototype.hasOwnProperty.call(resState,ACTIVITY_STATE_KEY)?resState[ACTIVITY_STATE_KEY]:ACTIVITY_DEFAULTS);
+    resState[ACTIVITY_STATE_KEY]=activityState;
     clearLocalTripCache();
     renderStays();
+    renderActivities();
     Array.from(resList.children).forEach((item,index)=>{
       const done=!!resState['r'+index];
       item.classList.toggle('done',done);
@@ -1772,7 +2025,7 @@ async function loadCloudData(user,generation){
 
   cloudReady=true;
   setCloudControlsEnabled(true);
-  if(!data) saveCloudSnapshot();
+  if(!data||!Array.isArray(data.reservations?.[ACTIVITY_STATE_KEY])) saveCloudSnapshot();
 }
 
 async function handleCloudSession(session){
